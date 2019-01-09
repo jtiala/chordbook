@@ -4,12 +4,13 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Normalize } from "styled-normalize";
 
-import ChordSheet from "./components/ChordSheet";
+import Song from "./components/Song";
+import { nickelback } from "./data";
 
 ReactDOM.render(
   <>
     <Normalize />
-    <ChordSheet artist="Nickelback" song="How you remind me" />
+    <Song {...nickelback} />
   </>,
   document.getElementById("root")
 );
