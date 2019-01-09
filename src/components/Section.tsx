@@ -8,18 +8,20 @@ export interface IProps {
   name?: string;
   chordChart?: any;
   lyrics?: any;
+  showLyrics: boolean;
 }
 
 const Section: React.SFC<IProps> = ({
   className,
   name,
   chordChart,
-  lyrics
+  lyrics,
+  showLyrics
 }) => (
   <div className={className}>
     {name && <strong>{name}</strong>}
     {chordChart && <ChordChart {...chordChart} />}
-    {lyrics && <Lyrics {...lyrics} />}
+    {showLyrics && lyrics && <Lyrics {...lyrics} />}
   </div>
 );
 

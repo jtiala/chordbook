@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { SettingsConsumer } from "../contexts/Settings";
 import Line from "./ChordChart";
 import Section from "./Section";
 
@@ -11,17 +12,28 @@ export interface IProps {
 }
 
 const Song: React.SFC<IProps> = ({ className, artist, title, sections }) => (
-  <div className={className}>
-    <h2>
-      {artist && `${artist} - `}
-      {title && title}
-    </h2>
+  <SettingsConsumer>
+    {({ showLyrics, toggleLyrics }) => (
+      <div className={className}>
+        <button onClick={toggleLyrics} type="button">
+          {showLyrics ? "Hide lyrics" : "Show lyrics"}
+        </button>
+        <h2>
+          {artist && `${artist} - `}
+          {title && title}
+        </h2>
 
-    {sections &&
-      sections.map((section: any, i: number) => (
-        <Section key={`Section-${i}`} {...section} />
-      ))}
-  </div>
+        {sections &&
+          sections.map((section: any, i: number) => (
+            <Section
+              key={`Section-${i}`}
+              {...section}
+              showLyrics={showLyrics}
+            />
+          ))}
+      </div>
+    )}
+  </SettingsConsumer>
 );
 
 const StyledSong = styled(Song)`
