@@ -8,7 +8,8 @@ export interface IProps {
   name?: string;
   chordChart?: any;
   lyrics?: any;
-  showLyrics: boolean;
+  lyricsVisible: boolean;
+  chordsVisible: boolean;
 }
 
 const Section: React.SFC<IProps> = ({
@@ -16,12 +17,13 @@ const Section: React.SFC<IProps> = ({
   name,
   chordChart,
   lyrics,
-  showLyrics
+  lyricsVisible,
+  chordsVisible
 }) => (
   <div className={className}>
     {name && <strong>{name}</strong>}
-    {chordChart && <ChordChart {...chordChart} />}
-    {showLyrics && lyrics && <Lyrics {...lyrics} />}
+    {chordsVisible && chordChart && <ChordChart {...chordChart} />}
+    {lyricsVisible && lyrics && <Lyrics {...lyrics} />}
   </div>
 );
 
@@ -31,6 +33,7 @@ const StyledSection = styled(Section)`
   margin-bottom: 10px;
   padding: 10px;
   width: 480px;
+  max-width: 90%;
   background: #eee;
 `;
 

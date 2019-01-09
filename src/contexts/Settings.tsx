@@ -7,8 +7,10 @@ interface ISettingsProviderProps {
 }
 
 interface ISettingsProviderState {
-  showLyrics: boolean;
+  lyricsVisible: boolean;
+  chordsVisible: boolean;
   toggleLyrics: () => void;
+  toggleChords: () => void;
 }
 
 export class SettingsProvider extends React.Component<
@@ -19,13 +21,19 @@ export class SettingsProvider extends React.Component<
     super(props);
 
     this.state = {
-      showLyrics: true,
-      toggleLyrics: this.toggleLyrics
+      lyricsVisible: true,
+      chordsVisible: true,
+      toggleLyrics: this.toggleLyrics,
+      toggleChords: this.toggleChords
     };
   }
 
   public toggleLyrics = () => {
-    this.setState({ showLyrics: !this.state.showLyrics });
+    this.setState({ lyricsVisible: !this.state.lyricsVisible });
+  };
+
+  public toggleChords = () => {
+    this.setState({ chordsVisible: !this.state.chordsVisible });
   };
 
   public render() {

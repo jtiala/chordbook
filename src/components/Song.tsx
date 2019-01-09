@@ -13,11 +13,16 @@ export interface IProps {
 
 const Song: React.SFC<IProps> = ({ className, artist, title, sections }) => (
   <SettingsConsumer>
-    {({ showLyrics, toggleLyrics }) => (
+    {({ lyricsVisible, chordsVisible, toggleLyrics, toggleChords }) => (
       <div className={className}>
-        <button onClick={toggleLyrics} type="button">
-          {showLyrics ? "Hide lyrics" : "Show lyrics"}
-        </button>
+        <div>
+          <button onClick={toggleLyrics} type="button">
+            {lyricsVisible ? "Hide lyrics" : "Show lyrics"}
+          </button>
+          <button onClick={toggleChords} type="button">
+            {chordsVisible ? "Hide chords" : "Show chords"}
+          </button>
+        </div>
         <h2>
           {artist && `${artist} - `}
           {title && title}
@@ -28,7 +33,8 @@ const Song: React.SFC<IProps> = ({ className, artist, title, sections }) => (
             <Section
               key={`Section-${i}`}
               {...section}
-              showLyrics={showLyrics}
+              lyricsVisible={lyricsVisible}
+              chordsVisible={chordsVisible}
             />
           ))}
       </div>
@@ -42,6 +48,7 @@ const StyledSong = styled(Song)`
   flex-wrap: wrap;
   align-items: center;
   font-family: monospace;
+  margin-top: 5px;
 `;
 
 export default StyledSong;
