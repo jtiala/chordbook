@@ -1,11 +1,11 @@
 {
   "name": "chordbook",
   "version": "0.1.0",
-  "description": "Create and display chord sheets",
+  "description": "Chords, tabs and lyrics viewer ideal for band practices",
   "keywords": [
     "chords",
-    "typescript",
-    "react"
+    "tabs",
+    "lyrics"
   ],
   "author": {
     "name": "Joonas Tiala",
@@ -45,8 +45,8 @@
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/styled-components": "^4.1.5",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.0-alpha.0",
+    "react-dom": "^16.8.0-alpha.0",
     "styled-components": "^4.1.3",
     "styled-normalize": "^8.0.4"
   }
