@@ -25,11 +25,14 @@
     "start": "NODE_ENV=development webpack-dev-server --hot --watch --watch-content-base --mode development",
     "build": "NODE_ENV=production webpack --mode production",
     "lint": "tslint -p .",
-    "lint:fix": "tslint --fix -p ."
+    "lint:fix": "tslint --fix -p .",
+    "data:export": "firestore-export -a ./data/credentials.json -b ./data/songs.json -p",
+    "data:import": "firestore-import -a ./data/credentials.json -b ./data/songs.json -y"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "node-firestore-import-export": "^0.12.1",
     "prettier": "^1.15.3",
     "ts-loader": "^5.3.3",
     "tslint": "^5.12.0",

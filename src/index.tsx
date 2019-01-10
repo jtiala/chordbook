@@ -11,7 +11,7 @@ import Song from "./components/Song";
 ReactDOM.render(
   <SettingsProvider>
     <Normalize />
-    <Song songRef="songs/nickel" />
+    <Song songRef="songs/nickelback-how-you-remind-me" />
   </SettingsProvider>,
   document.getElementById("root")
 );

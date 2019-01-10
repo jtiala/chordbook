@@ -33,3 +33,7 @@ coverage
 .vscode
 .idea
 *.swp
+
+# Data
+data/credentials.json
+data/songs.json

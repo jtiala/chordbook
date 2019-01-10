@@ -8,40 +8,45 @@ export interface IProps {
   repeat?: number;
 }
 
-const ChordLine: React.SFC<IProps> = ({ className, bars, repeat }) => (
-  <div className={className}>
-    {bars &&
-      bars.map((bar, i) => {
-        const elems = [];
+const ChordLine: React.SFC<IProps> = ({ className, bars, repeat }) => {
+  const barCount = Object.keys(bars).length;
 
-        if (i === 0 && repeat > 1) {
-          elems.push(<span>|:</span>);
-        } else if (i === 0) {
-          elems.push(<span>|&nbsp;</span>);
-        }
+  return (
+    <div className={className}>
+      {barCount &&
+        Object.keys(bars).map((key: any, i: number) => {
+          const bar = bars[key];
+          const elems = [];
 
-        elems.push(
-          <ChordBar key={`ChordBar-${i}`} chords={bar} barCount={bars.length} />
-        );
+          if (i === 0 && repeat > 1) {
+            elems.push(<span key={`BarLine-${i}-0`}>|:</span>);
+          } else if (i === 0) {
+            elems.push(<span key={`BarLine-${i}-0`}>|&nbsp;</span>);
+          }
 
-        if (i === bars.length - 1 && repeat > 1) {
           elems.push(
-            <span>
-              :|<sup>{repeat}</sup>
-            </span>
+            <ChordBar key={`ChordBar-${i}`} chords={bar} barCount={barCount} />
           );
-        } else {
-          elems.push(
-            <span>
-              &nbsp;|<sup>&nbsp;</sup>
-            </span>
-          );
-        }
 
-        return elems;
-      })}
-  </div>
-);
+          if (i === barCount - 1 && repeat > 1) {
+            elems.push(
+              <span key={`BarLine-${i}-1`}>
+                :|<sup>{repeat}</sup>
+              </span>
+            );
+          } else {
+            elems.push(
+              <span key={`BarLine-${i}-1`}>
+                &nbsp;|<sup>&nbsp;</sup>
+              </span>
+            );
+          }
+
+          return elems;
+        })}
+    </div>
+  );
+};
 
 const StyledChordLine = styled(ChordLine)`
   display: flex;
