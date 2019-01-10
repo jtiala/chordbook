@@ -12,8 +12,7 @@ const plugins = [
   new CleanWebpackPlugin(["dist"]),
   new HtmlWebpackPlugin({
     template: "./src/index.html"
-  }),
-  new Dotenv()
+  })
 ];
 
 if (env === "production") {
@@ -27,6 +26,8 @@ if (env === "production") {
       parallel: 4
     })
   );
+} else {
+  plugins.push(new Dotenv());
 }
 
 module.exports = {
