@@ -22,8 +22,8 @@
   "homepage": "https://jtiala.github.io/chordbook",
   "main": "src/index.tsx",
   "scripts": {
-    "start": "webpack-dev-server --hot --watch --watch-content-base --mode development",
-    "build": "webpack --mode production",
+    "start": "NODE_ENV=development webpack-dev-server --hot --watch --watch-content-base --mode development",
+    "build": "NODE_ENV=production webpack --mode production",
     "lint": "tslint -p .",
     "lint:fix": "tslint --fix -p ."
   },
@@ -36,7 +36,6 @@
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.2.2",
-    "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "^4.28.1",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"

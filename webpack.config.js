@@ -3,32 +3,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-
-const env = process.env.NODE_ENV;
-
-const plugins = [
-  new CleanWebpackPlugin(["dist"]),
-  new HtmlWebpackPlugin({
-    template: "./src/index.html"
-  })
-];
-
-if (env === "production") {
-  plugins.push(
-    new UglifyJsPlugin({
-      sourceMap: true,
-      cache: true,
-      uglifyOptions: {
-        compress: true
-      },
-      parallel: 4
-    })
-  );
-} else {
-  plugins.push(new Dotenv());
-}
 
 module.exports = {
   entry: {
@@ -61,7 +36,15 @@ module.exports = {
     filename: "[name].[hash].js",
     path: path.resolve(__dirname, "dist")
   },
-  plugins,
+  plugins: [
+    new CleanWebpackPlugin(["dist"]),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html"
+    }),
+    new Dotenv({
+      systemvars: true
+    })
+  ],
   devServer: {
     host: "0.0.0.0",
     contentBase: __dirname,
