@@ -1,16 +1,19 @@
 // @ts-check
 
 const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
+
 const env = process.env.NODE_ENV;
 
 const plugins = [
   new CleanWebpackPlugin(["dist"]),
-  new HtmlWebPackPlugin({
+  new HtmlWebpackPlugin({
     template: "./src/index.html"
-  })
+  }),
+  new Dotenv()
 ];
 
 if (env === "production") {

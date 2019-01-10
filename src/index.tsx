@@ -4,14 +4,14 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Normalize } from "styled-normalize";
 
-import Song from "./components/Song";
 import { SettingsProvider } from "./contexts/Settings";
-import { nickelback } from "./data";
+
+import Song from "./components/Song";
 
 ReactDOM.render(
   <SettingsProvider>
     <Normalize />
-    <Song {...nickelback} />
+    <Song songRef="songs/nickel" />
   </SettingsProvider>,
   document.getElementById("root")
 );

@@ -1,6 +1,7 @@
 {
   "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
   "rules": {
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "no-submodule-imports": [true, "firebase", "react-firebase-hooks"]
   }
 }

@@ -45,8 +45,11 @@
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/styled-components": "^4.1.5",
+    "dotenv-webpack": "^1.6.0",
+    "firebase": "^5.7.2",
     "react": "^16.8.0-alpha.0",
     "react-dom": "^16.8.0-alpha.0",
+    "react-firebase-hooks": "^0.4.0",
     "styled-components": "^4.1.3",
     "styled-normalize": "^8.0.4"
   }
