@@ -52,7 +52,8 @@ module.exports = {
       template: "./public/index.html"
     }),
     new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, "src/sw.js")
+      entry: path.join(__dirname, "src/sw.js"),
+      publicPath: process.env.PUBLIC_PATH
     }),
     new Dotenv({
       systemvars: true
