@@ -6,12 +6,12 @@ import { Normalize } from "styled-normalize";
 
 import { SettingsProvider } from "./contexts/Settings";
 
-import Song from "./components/Song";
+import App from "./components/App";
 
 ReactDOM.render(
   <SettingsProvider>
     <Normalize />
-    <Song songRef="songs/nickelback-how-you-remind-me" />
+    <App />
   </SettingsProvider>,
   document.getElementById("root")
 );

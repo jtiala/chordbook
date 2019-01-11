@@ -71,8 +71,6 @@ const StyledSong = styled(Song)`
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  font-family: monospace;
-  margin-top: 5px;
 `;
 
 export default StyledSong;
