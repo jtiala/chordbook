@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
+require("dotenv").config();
+
 module.exports = {
   entry: {
     main: path.resolve(__dirname, "src/index.tsx")
@@ -35,7 +37,7 @@ module.exports = {
   output: {
     filename: "[name].[hash].js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/"
+    publicPath: process.env.PUBLIC_PATH
   },
   plugins: [
     new CleanWebpackPlugin(["dist"]),
