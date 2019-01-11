@@ -2,21 +2,18 @@ import * as React from "react";
 
 const SettingsContext = React.createContext(null);
 
-interface ISettingsProviderProps {
+interface IProps {
   children?: React.ReactNode;
 }
 
-interface ISettingsProviderState {
+interface IState {
   lyricsVisible: boolean;
   chordsVisible: boolean;
   toggleLyrics: () => void;
   toggleChords: () => void;
 }
 
-export class SettingsProvider extends React.Component<
-  ISettingsProviderProps,
-  ISettingsProviderState
-> {
+export class SettingsProvider extends React.Component<IProps, IState> {
   constructor(props: any) {
     super(props);
 
