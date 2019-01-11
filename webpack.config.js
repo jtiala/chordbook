@@ -3,6 +3,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 require("dotenv").config();
@@ -41,8 +42,13 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(["dist"]),
+    new CopyWebpackPlugin([
+      {
+        from: "src/static"
+      }
+    ]),
     new HtmlWebpackPlugin({
-      template: "./src/index.html"
+      template: "./src/static/index.html"
     }),
     new Dotenv({
       systemvars: true
