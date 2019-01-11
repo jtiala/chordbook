@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { firestore } from "../firebase";
@@ -10,11 +11,13 @@ import Section from "./Section";
 
 export interface IProps {
   className?: string;
-  songRef?: string;
+  match: any;
 }
 
-const Song: React.SFC<IProps> = ({ className, songRef }) => {
-  const { error, loading, value } = useDocument(firestore.doc(songRef));
+const Song: React.SFC<IProps> = ({ className, match }) => {
+  const { error, loading, value } = useDocument(
+    firestore.doc(`songs/${match.params.songId}`)
+  );
 
   if (loading) {
     return (
@@ -32,6 +35,7 @@ const Song: React.SFC<IProps> = ({ className, songRef }) => {
         {({ lyricsVisible, chordsVisible, toggleLyrics, toggleChords }) => (
           <div className={className}>
             <div>
+              <Link to="/">Back to song list</Link>&nbsp;
               <button onClick={toggleLyrics} type="button">
                 {lyricsVisible ? "Hide lyrics" : "Show lyrics"}
               </button>
