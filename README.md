@@ -1,4 +1,7 @@
-# Chordbook
+# 🎵📒 Chordbook
+
+[![Build Status][build-status-badge]][build-status]
+[![License][license-badge]](license)
 
 Chords, tabs and lyrics viewer ideal for band practices.
 
@@ -28,3 +31,8 @@ Edit `.env`. If your app is not running in the root of the url, add the path to 
 6. Save the generated data as `data/credentials.json`
 
 `data/songs.json.sample` contains example song data.
+
+[build-status]: https://travis-ci.com/jtiala/chordbook
+[build-status-badge]: https://travis-ci.com/jtiala/chordbook.svg?branch=master
+[license]: https://github.com/jtiala/chordbook/blob/master/LICENSE
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
