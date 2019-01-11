@@ -37,3 +37,4 @@ coverage
 # Data
 data/credentials.json
 data/songs.json
+data/songs.json.backup
