@@ -1,4 +1,4 @@
-# 🎵📒 Chordbook
+# 🎵 Chordbook
 
 [![Build Status][build-status-badge]][build-status]
 [![License][license-badge]](license)

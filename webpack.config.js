@@ -44,11 +44,11 @@ module.exports = {
     new CleanWebpackPlugin(["dist"]),
     new CopyWebpackPlugin([
       {
-        from: "src/static"
+        from: "public"
       }
     ]),
     new HtmlWebpackPlugin({
-      template: "./src/static/index.html"
+      template: "./public/index.html"
     }),
     new Dotenv({
       systemvars: true
