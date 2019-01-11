@@ -10,7 +10,7 @@ export interface IProps {
 }
 
 const App: React.SFC<IProps> = ({ className }) => (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <div className={className}>
       <Route path="/" exact={true} component={SongList} />
       <Route path="/songs/:songId" component={Song} />

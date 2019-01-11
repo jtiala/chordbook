@@ -5,7 +5,8 @@ Chords, tabs and lyrics viewer ideal for band practices.
 ## Config
 
     cp .env.sample .env
-    # insert your firebase details
+
+Edit `.env`. If your app is not running in the root of the url, add the path to `PUBLIC_URL`, f.ex `PUBLIC_URL=chordbook/`. Also insert your Firebase details, found in the [Firebase project settings](https://console.firebase.google.com/).
 
 ## Dev
 
