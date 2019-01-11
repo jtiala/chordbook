@@ -2,11 +2,11 @@ import * as React from "react";
 
 const SettingsContext = React.createContext(null);
 
-interface IProps {
+export interface IProps {
   children?: React.ReactNode;
 }
 
-interface IState {
+export interface IState {
   lyricsVisible: boolean;
   chordsVisible: boolean;
   toggleLyrics: () => void;
