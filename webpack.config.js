@@ -53,7 +53,7 @@ module.exports = {
     }),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, "src/sw.js"),
-      publicPath: process.env.PUBLIC_PATH
+      publicPath: process.env.PUBLIC_PATH + "/"
     }),
     new Dotenv({
       systemvars: true
