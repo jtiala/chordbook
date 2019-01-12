@@ -9,6 +9,9 @@ const Dotenv = require("dotenv-webpack");
 
 require("dotenv").config();
 
+const appName = "Chordbook";
+const appColor = "#ff6347";
+
 module.exports = {
   entry: {
     main: path.resolve(__dirname, "src/index.tsx")
@@ -42,21 +45,20 @@ module.exports = {
     publicPath: process.env.PUBLIC_PATH
   },
   plugins: [
-    new CleanWebpackPlugin(["dist"]),
-    new CopyWebpackPlugin([
-      {
-        from: "public"
-      }
-    ]),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html"
+    new Dotenv({
+      systemvars: true
     }),
+    new CleanWebpackPlugin(["dist"]),
+    new CopyWebpackPlugin([{ from: "public" }]),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, "src/sw.js"),
       publicPath: process.env.PUBLIC_PATH + "/"
     }),
-    new Dotenv({
-      systemvars: true
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+      publicPath: process.env.PUBLIC_PATH,
+      appName,
+      appColor
     })
   ],
   devServer: {
