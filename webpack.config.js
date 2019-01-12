@@ -52,14 +52,11 @@ module.exports = {
     new CopyWebpackPlugin([{ from: "public" }]),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, "src/sw.js"),
-      publicPath: process.env.PUBLIC_PATH + "/"
+      publicPath: process.env.PUBLIC_PATH
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      publicPath:
-        process.env.PUBLIC_PATH === "/"
-          ? process.env.PUBLIC_PATH
-          : `${process.env.PUBLIC_PATH}/`,
+      publicPath: process.env.PUBLIC_PATH,
       appName,
       appColor
     })

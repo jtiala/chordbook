@@ -9,7 +9,7 @@ Chords, tabs and lyrics viewer ideal for band practices.
 
     cp .env.sample .env
 
-Edit `.env`. If your app is not running in the root of the url, add the path to `PUBLIC_PATH`, f.ex `PUBLIC_PATH=/chordbook`. Also insert your Firebase details, found in the [Firebase project settings](https://console.firebase.google.com/).
+Edit `.env`. If your app is not running in the root of the url, add the path to `PUBLIC_PATH`, f.ex `PUBLIC_PATH=/chordbook/`. Also insert your Firebase details, found in the [Firebase project settings](https://console.firebase.google.com/).
 
 ## Dev
 
