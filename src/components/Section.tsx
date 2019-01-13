@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import ChordChart from "./ChordChart";
+import Chords from "./Chords";
 import Lyrics from "./Lyrics";
 
 export interface IProps {
   className?: string;
   name?: string;
-  chordChart?: any;
+  chords?: any;
   lyrics?: any;
   lyricsVisible: boolean;
   chordsVisible: boolean;
@@ -15,14 +15,14 @@ export interface IProps {
 const Section: React.SFC<IProps> = ({
   className,
   name,
-  chordChart,
+  chords,
   lyrics,
   lyricsVisible,
   chordsVisible
 }) => (
   <div className={className}>
     {name && <strong>{name}</strong>}
-    {chordsVisible && chordChart && <ChordChart {...chordChart} />}
+    {chordsVisible && chords && <Chords {...chords} />}
     {lyricsVisible && lyrics && <Lyrics {...lyrics} />}
   </div>
 );

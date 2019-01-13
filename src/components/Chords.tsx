@@ -7,7 +7,7 @@ export interface IProps {
   lines?: any[];
 }
 
-const ChordChart: React.SFC<IProps> = ({ className, lines }) => (
+const Chords: React.SFC<IProps> = ({ className, lines }) => (
   <div className={className}>
     {lines &&
       lines.map((line: any, i: number) => (
@@ -16,9 +16,9 @@ const ChordChart: React.SFC<IProps> = ({ className, lines }) => (
   </div>
 );
 
-const StyledChordChart = styled(ChordChart)`
+const StyledChords = styled(Chords)`
   display: flex;
   flex-direction: column;
 `;
 
-export default StyledChordChart;
+export default StyledChords;
