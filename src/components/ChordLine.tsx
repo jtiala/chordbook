@@ -9,12 +9,15 @@ export interface IProps {
 }
 
 const ChordLine: React.SFC<IProps> = ({ className, bars, repeat }) => {
-  const barCount = Object.keys(bars).length;
+  const barKeys = Object.keys(bars)
+    .map(key => parseInt(key, 10))
+    .sort((a: any, b: any) => a - b);
+  const barCount = barKeys.length;
 
   return (
     <div className={className}>
       {barCount &&
-        Object.keys(bars).map((key: any, i: number) => {
+        barKeys.map((key: number, i: number) => {
           const bar = bars[key];
           const elems = [];
 
