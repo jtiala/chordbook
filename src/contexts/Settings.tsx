@@ -42,4 +42,4 @@ export class SettingsProvider extends React.Component<IProps, IState> {
   }
 }
 
-export const SettingsConsumer = SettingsContext.Consumer;
+export default SettingsContext;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { firestore } from "../firebase";
 
-import { SettingsConsumer } from "../contexts/Settings";
+import SettingsContext from "../contexts/Settings";
 
 import Section from "./Section";
 
@@ -28,39 +28,42 @@ const Song: React.SFC<IProps> = ({ className, songId }) => {
   }
 
   if (value) {
+    const {
+      lyricsVisible,
+      chordsVisible,
+      toggleLyrics,
+      toggleChords
+    } = React.useContext(SettingsContext);
+
     const { artist, title, sections } = value.data();
 
     return (
-      <SettingsConsumer>
-        {({ lyricsVisible, chordsVisible, toggleLyrics, toggleChords }) => (
-          <div className={className}>
-            <div>
-              <Link to="/">Back to song list</Link>&nbsp;
-              <button onClick={toggleLyrics} type="button">
-                {lyricsVisible ? "Hide lyrics" : "Show lyrics"}
-              </button>
-              <button onClick={toggleChords} type="button">
-                {chordsVisible ? "Hide chords" : "Show chords"}
-              </button>
-            </div>
+      <div className={className}>
+        <div>
+          <Link to="/">Back to song list</Link>&nbsp;
+          <button onClick={toggleLyrics} type="button">
+            {lyricsVisible ? "Hide lyrics" : "Show lyrics"}
+          </button>
+          <button onClick={toggleChords} type="button">
+            {chordsVisible ? "Hide chords" : "Show chords"}
+          </button>
+        </div>
 
-            <h2>
-              {artist && `${artist} - `}
-              {title && title}
-            </h2>
+        <h2>
+          {artist && `${artist} - `}
+          {title && title}
+        </h2>
 
-            {sections &&
-              sections.map((section: any, i: number) => (
-                <Section
-                  key={`Section-${i}`}
-                  {...section}
-                  lyricsVisible={lyricsVisible}
-                  chordsVisible={chordsVisible}
-                />
-              ))}
-          </div>
-        )}
-      </SettingsConsumer>
+        {sections &&
+          sections.map((section: any, i: number) => (
+            <Section
+              key={`Section-${i}`}
+              {...section}
+              lyricsVisible={lyricsVisible}
+              chordsVisible={chordsVisible}
+            />
+          ))}
+      </div>
     );
   }
 
