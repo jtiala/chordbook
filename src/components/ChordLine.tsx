@@ -56,7 +56,8 @@ const StyledChordLine = styled(ChordLine)`
   flex-direction: row;
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 28px;
+  font-family: "Caveat Brush", cursive;
 `;
 
 export default StyledChordLine;

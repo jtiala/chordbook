@@ -11,7 +11,7 @@ const Chord: React.SFC<IProps> = ({ className, children }) => (
 );
 
 const StyledChord = styled(Chord)`
-  font-size: 20px;
+  padding: 0 10px;
 `;
 
 export default StyledChord;
