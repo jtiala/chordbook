@@ -9,10 +9,10 @@ import styled from "styled-components";
 import Song from "./Song";
 import SongList from "./SongList";
 
-const renderHome = (props: RouteComponentProps) => (
+const renderHome = () => (
   <React.Fragment>
     <h1>Chordbook</h1>
-    <SongList {...props} />
+    <SongList />
   </React.Fragment>
 );
 
@@ -43,7 +43,7 @@ const StyledApp = styled(App)`
   flex-wrap: wrap;
   align-items: center;
   margin-top: 5px;
-  font-family: monospace;
+  font-family: "Ubuntu Mono", monospace;
 `;
 
 export default StyledApp;
