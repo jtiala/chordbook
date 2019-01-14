@@ -20,7 +20,7 @@ if (module.hot) {
   module.hot.accept();
 }
 
-if ("serviceWorker" in navigator) {
+if (process.env.NODE_ENV !== "development" && "serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register(`${process.env.PUBLIC_PATH}sw.js`);
   });
