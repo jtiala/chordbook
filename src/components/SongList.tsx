@@ -5,44 +5,61 @@ import styled from "styled-components";
 
 import { firestore } from "../firebase";
 
-interface IProps {
-  className?: string;
-}
+import Error from "./Error";
+import Pulse from "./Pulse";
 
-const SongList: React.SFC<IProps> = ({ className }) => {
+const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
+
+const ListItem = styled.li`
+  flex-grow: 1;
+  padding: 10px 5px;
+  color: tomato;
+
+  &:nth-child(2n) {
+    background-color: whitesmoke;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+
+  :hover {
+    color: tomato;
+  }
+`;
+
+const SongList: React.SFC = () => {
   const { error, loading, value } = useCollection(
     firestore.collection("songs")
   );
 
   if (loading) {
-    return (
-      <div className={className}>
-        <p>Loading...</p>
-      </div>
-    );
+    return <Pulse />;
   }
 
   if (value) {
     return (
-      <ul className={className}>
+      <List>
         {value.docs.map(doc => (
-          <li key={`Song-${doc.id}`}>
-            <Link to={`/songs/${doc.id}`}>
+          <ListItem key={`Song-${doc.id}`}>
+            <StyledLink to={`/songs/${doc.id}`}>
               {doc.data().artist} - {doc.data().title}
-            </Link>
-          </li>
+            </StyledLink>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     );
   }
 
-  return (
-    <div className={className}>
-      <p>Error{error && `: ${error}`}</p>
-    </div>
-  );
+  return <Error>Error{error && `: ${error}`}</Error>;
 };
 
-const StyledSongList = styled(SongList)``;
-
-export default StyledSongList;
+export default SongList;

@@ -9,9 +9,16 @@ import styled from "styled-components";
 import Song from "./Song";
 import SongList from "./SongList";
 
+const Title = styled.h1`
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  font-family: "Caveat Brush", cursive;
+  color: tomato;
+`;
+
 const renderHome = () => (
   <React.Fragment>
-    <h1>Chordbook</h1>
+    <Title>Chordbook</Title>
     <SongList />
   </React.Fragment>
 );
@@ -29,12 +36,12 @@ interface IProps {
 }
 
 const App: React.SFC<IProps> = ({ className }) => (
-  <Router basename={process.env.PUBLIC_PATH}>
-    <div className={className}>
+  <div className={className}>
+    <Router basename={process.env.PUBLIC_PATH}>
       <Route path="/" exact={true} render={renderHome} />
       <Route path="/songs/:songId" render={renderSong} />
-    </div>
-  </Router>
+    </Router>
+  </div>
 );
 
 const StyledApp = styled(App)`
@@ -42,7 +49,9 @@ const StyledApp = styled(App)`
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: 5px;
+  margin: 10px auto;
+  width: 90%;
+  max-width: 640px;
   font-family: "Ubuntu Mono", monospace;
 `;
 

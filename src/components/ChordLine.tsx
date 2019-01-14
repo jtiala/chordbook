@@ -2,6 +2,10 @@ import * as React from "react";
 import styled from "styled-components";
 import ChordBar from "./ChordBar";
 
+const BarLine = styled.span`
+  color: tomato;
+`;
+
 interface IProps {
   className?: string;
   bars?: string[][];
@@ -22,9 +26,9 @@ const ChordLine: React.SFC<IProps> = ({ className, bars, repeat }) => {
           const elems = [];
 
           if (i === 0 && repeat > 1) {
-            elems.push(<span key={`BarLine-${i}-0`}>|:</span>);
+            elems.push(<BarLine key={`BarLine-${i}-0`}>|:</BarLine>);
           } else if (i === 0) {
-            elems.push(<span key={`BarLine-${i}-0`}>|&nbsp;</span>);
+            elems.push(<BarLine key={`BarLine-${i}-0`}>|&nbsp;</BarLine>);
           }
 
           elems.push(
@@ -33,15 +37,15 @@ const ChordLine: React.SFC<IProps> = ({ className, bars, repeat }) => {
 
           if (i === barCount - 1 && repeat > 1) {
             elems.push(
-              <span key={`BarLine-${i}-1`}>
+              <BarLine key={`BarLine-${i}-1`}>
                 :|<sup>{repeat}</sup>
-              </span>
+              </BarLine>
             );
           } else {
             elems.push(
-              <span key={`BarLine-${i}-1`}>
+              <BarLine key={`BarLine-${i}-1`}>
                 &nbsp;|<sup>&nbsp;</sup>
-              </span>
+              </BarLine>
             );
           }
 
@@ -54,8 +58,7 @@ const ChordLine: React.SFC<IProps> = ({ className, bars, repeat }) => {
 const StyledChordLine = styled(ChordLine)`
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
   font-size: 28px;
   font-family: "Caveat Brush", cursive;
 `;

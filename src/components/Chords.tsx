@@ -3,12 +3,11 @@ import styled from "styled-components";
 import ChordLine from "./ChordLine";
 
 interface IProps {
-  className?: string;
   lines?: any[];
 }
 
-const Chords: React.SFC<IProps> = ({ className, lines }) => (
-  <div className={className}>
+const Chords: React.SFC<IProps> = ({ lines }) => (
+  <div>
     {lines &&
       lines.map((line: any, i: number) => (
         <ChordLine key={`ChordLine-${i}`} {...line} />
@@ -16,9 +15,4 @@ const Chords: React.SFC<IProps> = ({ className, lines }) => (
   </div>
 );
 
-const StyledChords = styled(Chords)`
-  display: flex;
-  flex-direction: column;
-`;
-
-export default StyledChords;
+export default Chords;

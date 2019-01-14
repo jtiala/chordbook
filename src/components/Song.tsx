@@ -7,24 +7,31 @@ import { firestore } from "../firebase";
 
 import SettingsContext from "../contexts/Settings";
 
+import Error from "./Error";
+import Pulse from "./Pulse";
 import Section from "./Section";
 
+const Title = styled.h2`
+  font-size: 28px;
+  font-family: "Caveat Brush", cursive;
+  text-align: center;
+  color: tomato;
+`;
+
+const Separator = styled.span`
+  color: black;
+`;
 interface IProps {
-  className?: string;
   songId: string;
 }
 
-const Song: React.SFC<IProps> = ({ className, songId }) => {
+const Song: React.SFC<IProps> = ({ songId }) => {
   const { error, loading, value } = useDocument(
     firestore.doc(`songs/${songId}`)
   );
 
   if (loading) {
-    return (
-      <div className={className}>
-        <p>Loading...</p>
-      </div>
-    );
+    return <Pulse />;
   }
 
   if (value) {
@@ -38,7 +45,7 @@ const Song: React.SFC<IProps> = ({ className, songId }) => {
     const { artist, title, sections } = value.data();
 
     return (
-      <div className={className}>
+      <div>
         <div>
           <Link to="/">Back to song list</Link>&nbsp;
           <button onClick={toggleLyrics} type="button">
@@ -49,10 +56,11 @@ const Song: React.SFC<IProps> = ({ className, songId }) => {
           </button>
         </div>
 
-        <h2>
-          {artist && `${artist} - `}
+        <Title>
+          {artist && artist}
+          <Separator> - </Separator>
           {title && title}
-        </h2>
+        </Title>
 
         {sections &&
           sections.map((section: any, i: number) => (
@@ -67,13 +75,7 @@ const Song: React.SFC<IProps> = ({ className, songId }) => {
     );
   }
 
-  return (
-    <div className={className}>
-      <p>Error{error && `: ${error}`}</p>
-    </div>
-  );
+  return <Error>Error{error && `: ${error}`}</Error>;
 };
 
-const StyledSong = styled(Song)``;
-
-export default StyledSong;
+export default Song;

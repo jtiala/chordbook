@@ -1,6 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import Chord from "./Chord";
+
+const Chord = styled.span`
+  padding: 0 10px;
+`;
 
 interface IProps {
   className?: string;

@@ -1,14 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
-import LyricsLine from "./LyricsLine";
+
+const LyricsLine = styled.p`
+  margin: 0 0 5px 0;
+`;
 
 interface IProps {
-  className?: string;
   lines?: any[];
 }
 
-const Lyrics: React.SFC<IProps> = ({ className, lines }) => (
-  <div className={className}>
+const Lyrics: React.SFC<IProps> = ({ lines }) => (
+  <div>
     {lines &&
       lines.map((line: any, i: number) => (
         <LyricsLine key={`LyricsLine-${i}`}>{line}</LyricsLine>
@@ -16,9 +18,4 @@ const Lyrics: React.SFC<IProps> = ({ className, lines }) => (
   </div>
 );
 
-const StyledLyrics = styled(Lyrics)`
-  display: flex;
-  flex-direction: column;
-`;
-
-export default StyledLyrics;
+export default Lyrics;

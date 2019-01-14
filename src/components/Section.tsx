@@ -3,6 +3,11 @@ import styled from "styled-components";
 import Chords from "./Chords";
 import Lyrics from "./Lyrics";
 
+const Title = styled.h3`
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: black;
+`;
 interface IProps {
   className?: string;
   name?: string;
@@ -21,7 +26,7 @@ const Section: React.SFC<IProps> = ({
   chordsVisible
 }) => (
   <div className={className}>
-    {name && <strong>{name}</strong>}
+    {name && <Title>{name}</Title>}
     {chordsVisible && chords && <Chords {...chords} />}
     {lyricsVisible && lyrics && <Lyrics {...lyrics} />}
   </div>
@@ -30,11 +35,9 @@ const Section: React.SFC<IProps> = ({
 const StyledSection = styled(Section)`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin: 10px 0;
   padding: 10px;
-  width: 480px;
-  max-width: 90%;
-  background: #eee;
+  background: whitesmoke;
 `;
 
 export default StyledSection;
