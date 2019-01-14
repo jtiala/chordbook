@@ -9,14 +9,14 @@ import { SettingsConsumer } from "../contexts/Settings";
 
 import Section from "./Section";
 
-export interface IProps {
+interface IProps {
   className?: string;
-  match: any;
+  songId: string;
 }
 
-const Song: React.SFC<IProps> = ({ className, match }) => {
+const Song: React.SFC<IProps> = ({ className, songId }) => {
   const { error, loading, value } = useDocument(
-    firestore.doc(`songs/${match.params.songId}`)
+    firestore.doc(`songs/${songId}`)
   );
 
   if (loading) {
@@ -43,6 +43,7 @@ const Song: React.SFC<IProps> = ({ className, match }) => {
                 {chordsVisible ? "Hide chords" : "Show chords"}
               </button>
             </div>
+
             <h2>
               {artist && `${artist} - `}
               {title && title}
@@ -70,11 +71,6 @@ const Song: React.SFC<IProps> = ({ className, match }) => {
   );
 };
 
-const StyledSong = styled(Song)`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-`;
+const StyledSong = styled(Song)``;
 
 export default StyledSong;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { firestore } from "../firebase";
 
-export interface IProps {
+interface IProps {
   className?: string;
 }
 
@@ -24,18 +24,15 @@ const SongList: React.SFC<IProps> = ({ className }) => {
 
   if (value) {
     return (
-      <div className={className}>
-        <h1>Chordbook</h1>
-        <ul>
-          {value.docs.map(doc => (
-            <li key={`Song-${doc.id}`}>
-              <Link to={`/songs/${doc.id}`}>
-                {doc.data().artist} - {doc.data().title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className={className}>
+        {value.docs.map(doc => (
+          <li key={`Song-${doc.id}`}>
+            <Link to={`/songs/${doc.id}`}>
+              {doc.data().artist} - {doc.data().title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     );
   }
 
@@ -46,11 +43,6 @@ const SongList: React.SFC<IProps> = ({ className }) => {
   );
 };
 
-const StyledSongList = styled(SongList)`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-`;
+const StyledSongList = styled(SongList)``;
 
 export default StyledSongList;
