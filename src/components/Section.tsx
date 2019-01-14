@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Chords from "./Chords";
 import Lyrics from "./Lyrics";
 
-export interface IProps {
+interface IProps {
   className?: string;
   name?: string;
   chords?: any;

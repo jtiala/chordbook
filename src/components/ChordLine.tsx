@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import ChordBar from "./ChordBar";
 
-export interface IProps {
+interface IProps {
   className?: string;
   bars?: string[][];
   repeat?: number;

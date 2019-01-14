@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import ChordLine from "./ChordLine";
 
-export interface IProps {
+interface IProps {
   className?: string;
   lines?: any[];
 }

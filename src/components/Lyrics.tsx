@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import LyricsLine from "./LyricsLine";
 
-export interface IProps {
+interface IProps {
   className?: string;
   lines?: any[];
 }

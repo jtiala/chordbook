@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-export interface IProps {
+interface IProps {
   className?: string;
   children?: React.ReactNode;
 }
