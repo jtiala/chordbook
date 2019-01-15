@@ -29,7 +29,7 @@ const StyledLink = styled(Link)`
   padding: 10px 5px;
   color: black;
   text-decoration: none;
-  -webkit-tap-highlight-color: #ffe2dd;
+  -webkit-tap-highlight-color: transparent;
 
   :hover {
     color: tomato;
