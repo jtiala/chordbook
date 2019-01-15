@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ChordBar from "./ChordBar";
 
 const BarLine = styled.span`
+  flex-grow: 0;
   color: tomato;
 `;
 

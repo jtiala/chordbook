@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 const Chord = styled.span`
-  padding: 0 10px;
+  padding: 0 3px;
 `;
 
 interface IProps {
@@ -21,8 +21,9 @@ const ChordBar: React.SFC<IProps> = ({ className, chords }) => (
 const StyledChordBar = styled(ChordBar)`
   display: flex;
   flex-direction: row;
+  flex-grow: 1;
   flex-basis: ${props => 100 / props.barCount}%;
-  justify-content: space-evenly;
+  justify-content: space-around;
 `;
 
 export default StyledChordBar;
