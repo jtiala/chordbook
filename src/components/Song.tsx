@@ -21,6 +21,7 @@ const Title = styled.h2`
 const Separator = styled.span`
   color: black;
 `;
+
 interface IProps {
   songId: string;
 }

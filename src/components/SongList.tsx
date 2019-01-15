@@ -11,14 +11,12 @@ import Pulse from "./Pulse";
 const List = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
 `;
 
 const ListItem = styled.li`
-  flex-grow: 1;
   color: tomato;
 
   &:nth-child(2n) {

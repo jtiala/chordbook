@@ -13,6 +13,7 @@ const Title = styled.h1`
   margin: 0 0 20px 0;
   font-size: 28px;
   font-family: "Caveat Brush", cursive;
+  text-align: center;
   color: tomato;
 `;
 
@@ -48,10 +49,10 @@ const StyledApp = styled(App)`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
-  margin: 10px auto;
+  align-items: stretch;
   width: 90%;
-  max-width: 640px;
+  max-width: 768px;
+  margin: 10px auto;
   font-family: "Ubuntu Mono", monospace;
 `;
 
