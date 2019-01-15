@@ -19,7 +19,6 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   flex-grow: 1;
-  padding: 10px 5px;
   color: tomato;
 
   &:nth-child(2n) {
@@ -28,11 +27,18 @@ const ListItem = styled.li`
 `;
 
 const StyledLink = styled(Link)`
+  display: block;
+  padding: 10px 5px;
   color: black;
   text-decoration: none;
 
   :hover {
     color: tomato;
+  }
+
+  :active {
+    color: tomato;
+    background-color: #ffe2dd;
   }
 `;
 
