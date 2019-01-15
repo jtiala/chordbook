@@ -8,19 +8,16 @@ assetsToCache = assetsToCache.map(path => {
   return new URL(path, global.location).toString();
 });
 
+// Cache assets on install
 self.addEventListener("install", event => {
   event.waitUntil(
-    global.caches
-      .open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(assetsToCache);
-      })
-      .catch(error => {
-        throw error;
-      })
+    global.caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(assetsToCache);
+    })
   );
 });
 
+// Delete old caches on activate
 self.addEventListener("activate", event => {
   event.waitUntil(
     global.caches.keys().then(cacheNames => {
@@ -59,37 +56,51 @@ self.addEventListener("fetch", event => {
 
   const requestUrl = new URL(request.url);
 
-  if (requestUrl.origin !== location.origin) {
+  if (requestUrl.origin !== global.location.origin) {
     return;
   }
 
-  const resource = global.caches.match(request).then(response => {
-    if (response) {
-      return response;
-    }
+  var resource = fromNetwork(request, 400)
+    .catch(function() {
+      return fromCache(request);
+    })
+    .catch(function() {
+      if (event.request.mode === "navigate") {
+        return global.caches.match("./");
+      }
 
-    return fetch(request)
-      .then(responseNetwork => {
-        if (!responseNetwork || !responseNetwork.ok) {
-          return responseNetwork;
-        }
-
-        const responseCache = responseNetwork.clone();
-
-        global.caches.open(CACHE_NAME).then(cache => {
-          return cache.put(request, responseCache);
-        });
-
-        return responseNetwork;
-      })
-      .catch(() => {
-        if (event.request.mode === "navigate") {
-          return global.caches.match("./");
-        }
-
-        return null;
-      });
-  });
+      return null;
+    });
 
   event.respondWith(resource);
 });
+
+function fromNetwork(request, timeout) {
+  return new Promise(function(fulfill, reject) {
+    var timeoutId = setTimeout(reject, timeout);
+
+    fetch(request).then(function(response) {
+      clearTimeout(timeoutId);
+
+      if (!response || !response.ok) {
+        return reject(response);
+      }
+
+      var cacheRepsonse = response.clone();
+
+      global.caches.open(CACHE_NAME).then(function(cache) {
+        return cache.put(request, cacheRepsonse);
+      });
+
+      fulfill(response);
+    }, reject);
+  });
+}
+
+function fromCache(request) {
+  return caches.open(CACHE_NAME).then(function(cache) {
+    return cache.match(request).then(function(matching) {
+      return matching || Promise.reject("no-match");
+    });
+  });
+}
