@@ -1,5 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
+
+import SettingsContext from "../contexts/Settings";
+
 import Chords from "./Chords";
 import Lyrics from "./Lyrics";
 
@@ -8,29 +11,25 @@ const Title = styled.h3`
   font-size: 16px;
   color: black;
 `;
+
 interface IProps {
   className?: string;
   name?: string;
   chords?: any;
   lyrics?: any;
-  lyricsVisible: boolean;
-  chordsVisible: boolean;
 }
 
-const Section: React.SFC<IProps> = ({
-  className,
-  name,
-  chords,
-  lyrics,
-  lyricsVisible,
-  chordsVisible
-}) => (
-  <div className={className}>
-    {name && <Title>{name}</Title>}
-    {chordsVisible && chords && <Chords {...chords} />}
-    {lyricsVisible && lyrics && <Lyrics {...lyrics} />}
-  </div>
-);
+const Section: React.SFC<IProps> = ({ className, name, chords, lyrics }) => {
+  const { lyricsVisible, chordsVisible } = React.useContext(SettingsContext);
+
+  return (
+    <div className={className}>
+      {name && <Title>{name}</Title>}
+      {chordsVisible && chords && <Chords {...chords} />}
+      {lyricsVisible && lyrics && <Lyrics {...lyrics} />}
+    </div>
+  );
+};
 
 const StyledSection = styled(Section)`
   display: flex;

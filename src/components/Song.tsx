@@ -1,15 +1,13 @@
 import * as React from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { firestore } from "../firebase";
 
-import SettingsContext from "../contexts/Settings";
-
 import Error from "./Error";
 import Pulse from "./Pulse";
 import Section from "./Section";
+import SettingsBar from "./SettingsBar";
 
 const Title = styled.h2`
   font-size: 28px;
@@ -36,43 +34,23 @@ const Song: React.SFC<IProps> = ({ songId }) => {
   }
 
   if (value) {
-    const {
-      lyricsVisible,
-      chordsVisible,
-      toggleLyrics,
-      toggleChords
-    } = React.useContext(SettingsContext);
-
     const { artist, title, sections } = value.data();
 
     return (
-      <div>
-        <div>
-          <Link to="/">Back to song list</Link>&nbsp;
-          <button onClick={toggleLyrics} type="button">
-            {lyricsVisible ? "Hide lyrics" : "Show lyrics"}
-          </button>
-          <button onClick={toggleChords} type="button">
-            {chordsVisible ? "Hide chords" : "Show chords"}
-          </button>
-        </div>
-
+      <React.Fragment>
         <Title>
           {artist && artist}
           <Separator> - </Separator>
           {title && title}
         </Title>
 
+        <SettingsBar />
+
         {sections &&
           sections.map((section: any, i: number) => (
-            <Section
-              key={`Section-${i}`}
-              {...section}
-              lyricsVisible={lyricsVisible}
-              chordsVisible={chordsVisible}
-            />
+            <Section key={`Section-${i}`} {...section} />
           ))}
-      </div>
+      </React.Fragment>
     );
   }
 
