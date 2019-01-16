@@ -10,6 +10,7 @@ script:
   - yarn lint
   - yarn build
 deploy:
+  edge: true
   provider: firebase
   project: $FIREBASE_PROJECT
   token:
