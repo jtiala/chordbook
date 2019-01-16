@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "stable"
+  - stable
 cache:
   directories:
     - node_modules
@@ -10,10 +10,6 @@ script:
   - yarn lint
   - yarn build
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  local-dir: dist
-  on:
-    branch: master
+  provider: firebase
+  token:
+    secure: iiqci7v2K6WiBb1y1XIVL26t87pE1xdSfC6TuHB6NJwUpK1KrMCvqEOHNcCxFHf5uPRYPVSUUtNBPEhGzuj17AqASTA4boXPtTibXYvlitoZ7I6ukhuBHuTwWi0qVssrj4odGIScMblFxzEjOYHjjRMmda5lLABGJVFQI24lrloq/lFvSXH/gELHbrcHOi8T+8a+uOXIAavpBdtq85P5NtsJSx8BOIGZb3BxUBD71oIx0LzeS9eJVCRKbL1bJhDGNCF+3aApk2VV36jyLTIwoKElknGT9vFkQwrG0QBeSlbMsfyrCbx6bnsVOnvCO8R6sPpZRQ4g4dduBAzdxw97ILUKZSryMNtrscp12ccCqylor2ALATOQ1RSY7exIVmlPCliHn1RcOuAUiwNVI00X9raspxzijoeK3QPvOMr3pm6ORpk7d+wvaO+kKw00kax1Z3WFkCSEiDOd3b0zrsI26NcBbJmm6hS7z/UZ3sfQIk8jDDT0CsozkUeBetuu43O4+QOoxCqlNp0ztuWBuegZJI3RxUHki7yAGPe/ZIBAQ5ZKjVfkB+iIMV0HAEN3PIH1JuPoG/RB+Y09wzvLHdsa9t+3VflczxW6r/9sqlHtB/caMQhwTU1WrpPCIgBWATac+kBPizokfq116MRZ8K7I+SNkJdu9yjxNmUxgTd/iUck=
