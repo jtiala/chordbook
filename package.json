@@ -24,7 +24,7 @@
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --hot --watch --watch-content-base --mode development",
     "build": "NODE_ENV=production webpack --mode production",
-    "deploy": "yarn firebase deploy --only hosting --token $FIREBASE_TOKEN",
+    "deploy": "yarn firebase deploy --only hosting --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT",
     "lint": "tslint -p .",
     "lint:fix": "tslint --fix -p .",
     "data:export": "yarn data:backup && firestore-export -a ./data/credentials.json -b ./data/songs.json -p",
