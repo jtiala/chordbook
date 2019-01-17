@@ -19,11 +19,12 @@
   "bugs": {
     "url": "https://github.com/jtiala/chordbook/issues"
   },
-  "homepage": "https://jtiala.github.io/chordbook",
+  "homepage": "https://chordbook.jtia.la/",
   "main": "src/index.tsx",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --hot --watch --watch-content-base --mode development",
     "build": "NODE_ENV=production webpack --mode production",
+    "deploy": "firebase deploy --only hosting --token $FIREBASE_TOKEN",
     "lint": "tslint -p .",
     "lint:fix": "tslint --fix -p .",
     "data:export": "yarn data:backup && firestore-export -a ./data/credentials.json -b ./data/songs.json -p",
@@ -36,7 +37,7 @@
     "dotenv": "^6.2.0",
     "dotenv-webpack": "^1.6.0",
     "html-webpack-plugin": "^3.2.0",
-    "node-firestore-import-export": "^0.12.1",
+    "node-firestore-import-export": "^0.13.0",
     "prettier": "^1.15.3",
     "serviceworker-webpack-plugin": "^1.0.1",
     "ts-loader": "^5.3.3",
