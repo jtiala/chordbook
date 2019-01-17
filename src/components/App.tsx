@@ -10,7 +10,7 @@ import Song from "./Song";
 import SongList from "./SongList";
 
 const Title = styled.h1`
-  margin: 0 0 20px 0;
+  margin: 10px auto 20px auto;
   font-size: 28px;
   font-family: "Caveat Brush", cursive;
   text-align: center;

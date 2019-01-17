@@ -39,6 +39,10 @@ const StyledLink = styled(Link)`
     color: tomato;
     background-color: #ffe2dd;
   }
+
+  :focus {
+    outline: tomato auto 5px;
+  }
 `;
 
 const SongList: React.SFC = () => {

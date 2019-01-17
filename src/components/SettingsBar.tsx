@@ -6,24 +6,28 @@ import SettingsContext from "../contexts/Settings";
 
 const LinkStyle = css`
   flex-grow: 1;
-  margin: 10px;
-  padding: 15px 32px;
-
+  margin: 10px 0 10px 10px;
+  padding: 10px;
   background-color: tomato;
   border: none;
   color: white;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
-
+  font-size: 12px;
   -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 
-  :hover {
-    color: black;
+  :last-child {
+    margin: 10px;
   }
 
+  :hover,
   :active {
-    color: black;
+    background-color: #ff8d79;
+  }
+
+  :focus {
+    outline: tomato auto 5px;
   }
 `;
 

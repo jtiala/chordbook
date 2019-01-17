@@ -9,7 +9,8 @@ import Pulse from "./Pulse";
 import Section from "./Section";
 import SettingsBar from "./SettingsBar";
 
-const Title = styled.h2`
+const Title = styled.h1`
+  margin: 10px auto 20px auto;
   font-size: 28px;
   font-family: "Caveat Brush", cursive;
   text-align: center;

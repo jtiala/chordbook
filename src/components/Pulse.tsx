@@ -14,6 +14,7 @@ const scaleOut = keyframes`
 const Pulse = styled.div`
   height: 40px;
   width: 40px;
+  margin: 10px auto;
   background-color: tomato;
   border-radius: 100%;
   animation: ${scaleOut} 1s ease-in-out infinite;
