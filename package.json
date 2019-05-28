@@ -27,8 +27,8 @@
     "deploy": "yarn firebase deploy --only hosting --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT",
     "lint": "tslint -p .",
     "lint:fix": "tslint --fix -p .",
-    "data:export": "yarn data:backup && firestore-export -a ./data/credentials.json -b ./data/songs.json -p",
-    "data:import": "yarn data:backup && firestore-import -a ./data/credentials.json -b ./data/songs.json -y",
+    "data:export": "yarn data:backup ; firestore-export -a ./data/credentials.json -b ./data/songs.json -p",
+    "data:import": "yarn data:backup ; firestore-import -a ./data/credentials.json -b ./data/songs.json -y",
     "data:backup": "cp ./data/songs.json ./data/songs.json.backup"
   },
   "devDependencies": {
