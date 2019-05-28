@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+
 import ChordLine from "./ChordLine";
 
 interface IProps {

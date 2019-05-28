@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+
 import { auth } from "../firebase";
+
+import Heading from "./Heading";
 
 const LoginForm: React.SFC = () => {
   const [email, setEmail] = React.useState("");
@@ -13,16 +14,21 @@ const LoginForm: React.SFC = () => {
   };
 
   return (
+    // tslint:disable-next-line
     <form onSubmit={e => handleSubmit(e)}>
-      <h2>Login</h2>
+      <Heading level={1} variant="primary">
+        Login
+      </Heading>
       <input
         type="email"
         placeholder="email"
+        // tslint:disable-next-line
         onChange={e => setEmail(e.target.value)}
       />
       <input
         type="password"
         placeholder="password"
+        // tslint:disable-next-line
         onChange={e => setPassword(e.target.value)}
       />
       <button type="submit">Log in</button>

@@ -6,23 +6,18 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 
-import Song from "./Song";
-import SongList from "./SongList";
-import Footer from "./Footer";
 import Admin from "./Admin";
 import CreateSong from "./CreateSong";
-
-const Title = styled.h1`
-  margin: 10px auto 20px auto;
-  font-size: 28px;
-  font-family: "Caveat Brush", cursive;
-  text-align: center;
-  color: tomato;
-`;
+import Footer from "./Footer";
+import Heading from "./Heading";
+import Song from "./Song";
+import SongList from "./SongList";
 
 const renderHome = () => (
   <React.Fragment>
-    <Title>Chordbook</Title>
+    <Heading level={1} variant="primary">
+      Chordbook
+    </Heading>
     <SongList />
     <Footer />
   </React.Fragment>

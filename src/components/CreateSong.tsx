@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { useAuthState } from "react-firebase-hooks/auth";
+
 import { auth, firestore } from "../firebase";
 import { songIdFromArtistAndTitle } from "../utils";
-import Pulse from "./Pulse";
+
 import Error from "./Error";
+import Heading from "./Heading";
+import Pulse from "./Pulse";
 
 const LoginForm: React.SFC = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -47,11 +48,11 @@ const LoginForm: React.SFC = () => {
         title,
         sections
       })
-      .then(function() {
-        console.log("Document successfully written!");
+      .then(() => {
+        console.log("Document successfully written!"); // tslint:disable-line
       })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
+      .catch((err: string) => {
+        console.error("Error writing document: ", err); // tslint:disable-line
       });
   };
 
@@ -61,22 +62,28 @@ const LoginForm: React.SFC = () => {
 
   if (user) {
     return (
+      // tslint:disable-next-line
       <form onSubmit={e => handleSubmit(e)}>
-        <h2>Create Song</h2>
+        <Heading level={1} variant="primary">
+          Create Song
+        </Heading>
         <input
           type="text"
           placeholder="Artist"
+          // tslint:disable-next-line
           onChange={e => setArtist(e.target.value)}
           value={artist}
         />
         <input
           type="text"
           placeholder="Title"
+          // tslint:disable-next-line
           onChange={e => setTitle(e.target.value)}
           value={title}
         />
         <textarea
           rows={20}
+          // tslint:disable-next-line
           onChange={e => setSections(JSON.parse(e.target.value))}
           value={JSON.stringify(sections, null, 2)}
         />

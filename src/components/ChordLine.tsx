@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+
 import ChordBar from "./ChordBar";
 
 const BarLine = styled.span`

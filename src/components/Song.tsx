@@ -5,17 +5,10 @@ import styled from "styled-components";
 import { firestore } from "../firebase";
 
 import Error from "./Error";
+import Heading from "./Heading";
 import Pulse from "./Pulse";
 import Section from "./Section";
 import SettingsBar from "./SettingsBar";
-
-const Title = styled.h1`
-  margin: 10px auto 20px auto;
-  font-size: 28px;
-  font-family: "Caveat Brush", cursive;
-  text-align: center;
-  color: tomato;
-`;
 
 const Separator = styled.span`
   color: black;
@@ -37,11 +30,11 @@ const Song: React.SFC<IProps> = ({ songId }) => {
 
     return (
       <React.Fragment>
-        <Title>
+        <Heading level={1} variant="primary">
           {artist && artist}
           <Separator> - </Separator>
           {title && title}
-        </Title>
+        </Heading>
 
         <SettingsBar />
 

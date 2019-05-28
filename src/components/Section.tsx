@@ -4,13 +4,8 @@ import styled from "styled-components";
 import SettingsContext from "../contexts/Settings";
 
 import Chords from "./Chords";
+import Heading from "./Heading";
 import Lyrics from "./Lyrics";
-
-const Title = styled.h3`
-  margin: 0 0 10px 0;
-  font-size: 16px;
-  color: black;
-`;
 
 interface IProps {
   className?: string;
@@ -24,7 +19,7 @@ const Section: React.SFC<IProps> = ({ className, name, chords, lyrics }) => {
 
   return (
     <div className={className}>
-      {name && <Title>{name}</Title>}
+      {name && <Heading level={3}>{name}</Heading>}
       {chordsVisible && chords && <Chords {...chords} />}
       {lyricsVisible && lyrics && <Lyrics {...lyrics} />}
     </div>
