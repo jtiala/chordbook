@@ -8,6 +8,9 @@ import styled from "styled-components";
 
 import Song from "./Song";
 import SongList from "./SongList";
+import Footer from "./Footer";
+import Admin from "./Admin";
+import CreateSong from "./CreateSong";
 
 const Title = styled.h1`
   margin: 10px auto 20px auto;
@@ -21,6 +24,21 @@ const renderHome = () => (
   <React.Fragment>
     <Title>Chordbook</Title>
     <SongList />
+    <Footer />
+  </React.Fragment>
+);
+
+const renderAdmin = () => (
+  <React.Fragment>
+    <Admin />
+    <Footer />
+  </React.Fragment>
+);
+
+const renderCreateSong = () => (
+  <React.Fragment>
+    <CreateSong />
+    <Footer />
   </React.Fragment>
 );
 
@@ -29,7 +47,10 @@ interface IRenderSongMatchParams {
 }
 
 const renderSong = (props: RouteComponentProps<IRenderSongMatchParams>) => (
-  <Song songId={props.match.params.songId} />
+  <React.Fragment>
+    <Song songId={props.match.params.songId} />
+    <Footer />
+  </React.Fragment>
 );
 
 interface IProps {
@@ -41,6 +62,8 @@ const App: React.SFC<IProps> = ({ className }) => (
     <Router basename={process.env.PUBLIC_PATH}>
       <Route path="/" exact={true} render={renderHome} />
       <Route path="/songs/:songId" render={renderSong} />
+      <Route path="/admin" exact={true} render={renderAdmin} />
+      <Route path="/admin/createSong" exact={true} render={renderCreateSong} />
     </Router>
   </div>
 );
