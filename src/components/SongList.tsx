@@ -46,9 +46,7 @@ const StyledLink = styled(Link)`
 `;
 
 const SongList: React.SFC = () => {
-  const { error, loading, value } = useCollection(
-    firestore.collection("songs")
-  );
+  const [value, loading, error] = useCollection(firestore.collection("songs"));
 
   if (loading) {
     return <Pulse />;

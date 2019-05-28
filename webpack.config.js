@@ -48,7 +48,7 @@ module.exports = {
     new Dotenv({
       systemvars: true
     }),
-    new CleanWebpackPlugin(["dist"]),
+    new CleanWebpackPlugin(),
     new CopyWebpackPlugin([{ from: "public" }]),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, "src/sw.js"),

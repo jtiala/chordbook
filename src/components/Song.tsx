@@ -26,9 +26,7 @@ interface IProps {
 }
 
 const Song: React.SFC<IProps> = ({ songId }) => {
-  const { error, loading, value } = useDocument(
-    firestore.doc(`songs/${songId}`)
-  );
+  const [value, loading, error] = useDocument(firestore.doc(`songs/${songId}`));
 
   if (loading) {
     return <Pulse />;
