@@ -19,4 +19,9 @@ firebase.firestore().enablePersistence();
 
 const auth = firebase.auth();
 
-export { firebase, firestore, auth };
+interface IAuthError {
+  code: number;
+  message: string;
+}
+
+export { firebase, firestore, auth, IAuthError };

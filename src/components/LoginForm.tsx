@@ -1,39 +1,85 @@
 import * as React from "react";
+import styled from "styled-components";
 
-import { auth } from "../firebase";
+import { auth, IAuthError } from "../firebase";
 
+import Button from "./Button";
+import Error from "./Error";
+import Form from "./Form";
 import Heading from "./Heading";
+import Input from "./Input";
+import Pulse from "./Pulse";
 
-const LoginForm: React.SFC = () => {
+interface IProps {
+  className?: string;
+}
+
+const LoginForm: React.SFC<IProps> = ({ className }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    auth.signInWithEmailAndPassword(email, password);
+
+    setLoading(true);
+    setError(null);
+
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((err: IAuthError) => {
+        setError(err.message);
+        setLoading(false);
+      });
   };
 
   return (
-    // tslint:disable-next-line
-    <form onSubmit={e => handleSubmit(e)}>
+    <div className={className}>
       <Heading level={1} variant="primary">
         Login
       </Heading>
-      <input
-        type="email"
-        placeholder="email"
-        // tslint:disable-next-line
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        // tslint:disable-next-line
-        onChange={e => setPassword(e.target.value)}
-      />
-      <button type="submit">Log in</button>
-    </form>
+      {error !== null && <Error>{error}</Error>}
+      {loading ? (
+        <Pulse />
+      ) : (
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <Input
+            type="password"
+            placeholder="password"
+            defaultValue={password}
+            onChange={handlePasswordChange}
+          />
+          <Button type="submit" variant="primary">
+            Login
+          </Button>
+        </Form>
+      )}
+    </div>
   );
 };
 
-export default LoginForm;
+const StyledLoginForm = styled(LoginForm)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export default StyledLoginForm;

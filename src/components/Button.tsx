@@ -8,7 +8,7 @@ interface IStyledProps {
 
 const CommonStyles = css<IStyledProps>`
   flex-grow: 1;
-  margin: 10px 0 10px 10px;
+  margin: 10px;
   padding: 10px;
   background-color: ${props =>
     props.variant === "primary" ? "tomato" : "dimgray"};
@@ -19,10 +19,6 @@ const CommonStyles = css<IStyledProps>`
   font-size: 12px;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
-
-  :last-child {
-    margin: 10px;
-  }
 
   :focus {
     outline: ${props => (props.variant === "primary" ? "tomato" : "dimgray")}

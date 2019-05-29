@@ -6,6 +6,8 @@ const Error = styled.div`
   margin: 10px auto;
   background-color: red;
   color: white;
+  max-width: 480px;
+  box-sizing: border-box;
 `;
 
 export default Error;
