@@ -4,11 +4,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, firestore } from "../firebase";
 import { songIdFromArtistAndTitle } from "../utils";
 
-import Error from "./Error";
 import Heading from "./Heading";
+import Message from "./Message";
 import Pulse from "./Pulse";
 
-const LoginForm: React.SFC = () => {
+const CreateSong: React.SFC = () => {
   const [user, loading, error] = useAuthState(auth);
   const [artist, setArtist] = React.useState("");
   const [title, setTitle] = React.useState("");
@@ -92,7 +92,7 @@ const LoginForm: React.SFC = () => {
     );
   }
 
-  return <Error>Error{error && `: ${error}`}</Error>;
+  return <Message variant="error">Error{error && `: ${error}`}</Message>;
 };
 
-export default LoginForm;
+export default CreateSong;

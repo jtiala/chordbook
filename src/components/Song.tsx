@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 import { firestore } from "../firebase";
 
-import Error from "./Error";
 import Heading from "./Heading";
+import Message from "./Message";
 import Pulse from "./Pulse";
 import Section from "./Section";
 import SettingsBar from "./SettingsBar";
@@ -46,7 +46,7 @@ const Song: React.SFC<IProps> = ({ songId }) => {
     );
   }
 
-  return <Error>Error{error && `: ${error}`}</Error>;
+  return <Message variant="error">Error{error && `: ${error}`}</Message>;
 };
 
 export default Song;

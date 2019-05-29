@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { auth, IAuthError } from "../firebase";
 
 import Button from "./Button";
-import Error from "./Error";
 import Form from "./Form";
 import Heading from "./Heading";
 import Input from "./Input";
+import Message from "./Message";
 import Pulse from "./Pulse";
 
 interface IProps {
@@ -50,7 +50,7 @@ const LoginForm: React.SFC<IProps> = ({ className }) => {
       <Heading level={1} variant="primary">
         Login
       </Heading>
-      {error !== null && <Error>{error}</Error>}
+      {error !== null && <Message variant="error">{error}</Message>}
       {loading ? (
         <Pulse />
       ) : (

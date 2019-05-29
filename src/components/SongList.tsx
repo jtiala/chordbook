@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { firestore } from "../firebase";
 
-import Error from "./Error";
+import Message from "./Message";
 import Pulse from "./Pulse";
 
 const List = styled.ul`
@@ -66,7 +66,7 @@ const SongList: React.SFC = () => {
     );
   }
 
-  return <Error>Error{error && `: ${error}`}</Error>;
+  return <Message variant="error">Error{error && `: ${error}`}</Message>;
 };
 
 export default SongList;
