@@ -6,6 +6,7 @@ import { firestore } from "../firebase";
 
 import Heading from "./Heading";
 import Message from "./Message";
+import Page from "./Page";
 import Pulse from "./Pulse";
 import Section from "./Section";
 import SettingsBar from "./SettingsBar";
@@ -18,18 +19,22 @@ interface IProps {
   songId: string;
 }
 
-const Song: React.SFC<IProps> = ({ songId }) => {
+const SongPage: React.SFC<IProps> = ({ songId }) => {
   const [value, loading, error] = useDocument(firestore.doc(`songs/${songId}`));
 
   if (loading) {
-    return <Pulse />;
+    return (
+      <Page>
+        <Pulse />
+      </Page>
+    );
   }
 
   if (value) {
     const { artist, title, sections } = value.data();
 
     return (
-      <React.Fragment>
+      <Page variant="stretch">
         <Heading level={1} variant="primary">
           {artist && artist}
           <Separator> - </Separator>
@@ -42,11 +47,15 @@ const Song: React.SFC<IProps> = ({ songId }) => {
           sections.map((section: any, i: number) => (
             <Section key={`Section-${i}`} {...section} />
           ))}
-      </React.Fragment>
+      </Page>
     );
   }
 
-  return <Message variant="error">Error{error && `: ${error}`}</Message>;
+  return (
+    <Page>
+      <Message variant="error">Error{error && `: ${error}`}</Message>
+    </Page>
+  );
 };
 
-export default Song;
+export default SongPage;

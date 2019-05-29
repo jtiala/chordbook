@@ -2,11 +2,17 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-interface IStyledProps {
+interface IProps {
+  as?: string;
   variant?: string;
+  children?: React.ReactNode;
+  href?: string;
+  to?: string;
+  onClick?: () => void;
+  type?: "button" | "reset" | "submit";
 }
 
-const CommonStyles = css<IStyledProps>`
+const CommonStyles = css<IProps>`
   flex-grow: 1;
   margin: 10px;
   padding: 10px;
@@ -47,16 +53,6 @@ const StyledLink = styled(Link)`
 const StyledButton = styled.button`
   ${CommonStyles}
 `;
-
-interface IProps {
-  as?: string;
-  variant?: string;
-  children?: React.ReactNode;
-  href?: string;
-  to?: string;
-  onClick?: () => void;
-  type?: "button" | "reset" | "submit";
-}
 
 const Button: React.SFC<IProps> = ({
   as,

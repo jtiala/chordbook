@@ -1,11 +1,10 @@
-import * as React from "react";
 import styled from "styled-components";
 
-interface IStyledProps {
+interface IProps {
   variant?: string;
 }
 
-const Message = styled.div<IStyledProps>`
+const Message = styled.div<IProps>`
   padding: 10px;
   margin: 10px auto;
   background-color: ${props => {

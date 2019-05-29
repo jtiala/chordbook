@@ -6,47 +6,19 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 
-import Admin from "./Admin";
-import CreateSong from "./CreateSong";
-import Footer from "./Footer";
-import Heading from "./Heading";
-import Song from "./Song";
-import SongList from "./SongList";
+import AdminPage from "./AdminPage";
+import HomePage from "./HomePage";
+import LoginPage from "./LoginPage";
+import NewSongPage from "./NewSongPage";
+import SongPage from "./SongPage";
 
-const renderHome = () => (
-  <React.Fragment>
-    <Heading level={1} variant="primary">
-      Chordbook
-    </Heading>
-    <SongList />
-    <Footer />
-  </React.Fragment>
-);
-
-const renderAdmin = () => (
-  <React.Fragment>
-    <Admin />
-    <Footer />
-  </React.Fragment>
-);
-
-const renderCreateSong = () => (
-  <React.Fragment>
-    <CreateSong />
-    <Footer />
-  </React.Fragment>
-);
-
-interface IRenderSongMatchParams {
+interface IRenderSongIdMatchParams {
   songId: string;
 }
 
-const renderSong = (props: RouteComponentProps<IRenderSongMatchParams>) => (
-  <React.Fragment>
-    <Song songId={props.match.params.songId} />
-    <Footer />
-  </React.Fragment>
-);
+const renderSongPage = (
+  props: RouteComponentProps<IRenderSongIdMatchParams>
+) => <SongPage songId={props.match.params.songId} />;
 
 interface IProps {
   className?: string;
@@ -55,19 +27,16 @@ interface IProps {
 const App: React.SFC<IProps> = ({ className }) => (
   <div className={className}>
     <Router basename={process.env.PUBLIC_PATH}>
-      <Route path="/" exact={true} render={renderHome} />
-      <Route path="/songs/:songId" render={renderSong} />
-      <Route path="/admin" exact={true} render={renderAdmin} />
-      <Route path="/admin/createSong" exact={true} render={renderCreateSong} />
+      <Route path="/" exact={true} component={HomePage} />
+      <Route path="/login" exact={true} component={LoginPage} />
+      <Route path="/admin" exact={true} component={AdminPage} />
+      <Route path="/songs/:songId" render={renderSongPage} />
+      <Route path="/admin/createSong" exact={true} component={NewSongPage} />
     </Router>
   </div>
 );
 
 const StyledApp = styled(App)`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: stretch;
   width: 90%;
   max-width: 768px;
   margin: 10px auto;

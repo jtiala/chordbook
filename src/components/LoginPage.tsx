@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 import { auth, IAuthError } from "../firebase";
@@ -8,17 +9,15 @@ import Form from "./Form";
 import Heading from "./Heading";
 import Input from "./Input";
 import Message from "./Message";
+import Page from "./Page";
 import Pulse from "./Pulse";
 
-interface IProps {
-  className?: string;
-}
-
-const LoginForm: React.SFC<IProps> = ({ className }) => {
+const LoginPage: React.SFC = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -38,6 +37,7 @@ const LoginForm: React.SFC<IProps> = ({ className }) => {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         setLoading(false);
+        setLoggedIn(true);
       })
       .catch((err: IAuthError) => {
         setError(err.message);
@@ -45,12 +45,18 @@ const LoginForm: React.SFC<IProps> = ({ className }) => {
       });
   };
 
+  if (loggedIn) {
+    return <Redirect to="/admin" />;
+  }
+
   return (
-    <div className={className}>
+    <Page>
       <Heading level={1} variant="primary">
         Login
       </Heading>
+
       {error !== null && <Message variant="error">{error}</Message>}
+
       {loading ? (
         <Pulse />
       ) : (
@@ -72,14 +78,8 @@ const LoginForm: React.SFC<IProps> = ({ className }) => {
           </Button>
         </Form>
       )}
-    </div>
+    </Page>
   );
 };
 
-const StyledLoginForm = styled(LoginForm)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export default StyledLoginForm;
+export default LoginPage;

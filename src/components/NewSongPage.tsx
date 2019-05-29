@@ -1,15 +1,14 @@
 import * as React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 
-import { auth, firestore } from "../firebase";
+import { firestore } from "../firebase";
 import { songIdFromArtistAndTitle } from "../utils";
 
+import AuthenticatedPage from "./AuthenticatedPage";
 import Heading from "./Heading";
 import Message from "./Message";
 import Pulse from "./Pulse";
 
-const CreateSong: React.SFC = () => {
-  const [user, loading, error] = useAuthState(auth);
+const NewSongPage: React.SFC = () => {
   const [artist, setArtist] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [sections, setSections] = React.useState([
@@ -56,14 +55,9 @@ const CreateSong: React.SFC = () => {
       });
   };
 
-  if (loading) {
-    return <Pulse />;
-  }
-
-  if (user) {
-    return (
-      // tslint:disable-next-line
-      <form onSubmit={e => handleSubmit(e)}>
+  return (
+    <AuthenticatedPage>
+      <form onSubmit={handleSubmit}>
         <Heading level={1} variant="primary">
           Create Song
         </Heading>
@@ -89,10 +83,8 @@ const CreateSong: React.SFC = () => {
         />
         <button type="submit">Create</button>
       </form>
-    );
-  }
-
-  return <Message variant="error">Error{error && `: ${error}`}</Message>;
+    </AuthenticatedPage>
+  );
 };
 
-export default CreateSong;
+export default NewSongPage;
