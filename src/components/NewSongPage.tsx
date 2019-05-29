@@ -4,9 +4,13 @@ import { firestore } from "../firebase";
 import { songIdFromArtistAndTitle } from "../utils";
 
 import AuthenticatedPage from "./AuthenticatedPage";
+import Button from "./Button";
+import Form from "./Form";
 import Heading from "./Heading";
+import Input from "./Input";
 import Message from "./Message";
 import Pulse from "./Pulse";
+import Textarea from "./Textarea";
 
 const NewSongPage: React.SFC = () => {
   const [artist, setArtist] = React.useState("");
@@ -36,6 +40,18 @@ const NewSongPage: React.SFC = () => {
     }
   ]);
 
+  const handleArtistChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setArtist(e.target.value);
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const handleSectionsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setSections(JSON.parse(e.target.value));
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -57,32 +73,31 @@ const NewSongPage: React.SFC = () => {
 
   return (
     <AuthenticatedPage>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Heading level={1} variant="primary">
           Create Song
         </Heading>
-        <input
+        <Input
           type="text"
           placeholder="Artist"
-          // tslint:disable-next-line
-          onChange={e => setArtist(e.target.value)}
+          onChange={handleArtistChange}
           value={artist}
         />
-        <input
+        <Input
           type="text"
           placeholder="Title"
-          // tslint:disable-next-line
-          onChange={e => setTitle(e.target.value)}
+          onChange={handleTitleChange}
           value={title}
         />
-        <textarea
+        <Textarea
           rows={20}
-          // tslint:disable-next-line
-          onChange={e => setSections(JSON.parse(e.target.value))}
+          onChange={handleSectionsChange}
           value={JSON.stringify(sections, null, 2)}
         />
-        <button type="submit">Create</button>
-      </form>
+        <Button type="submit" variant="primary">
+          Create
+        </Button>
+      </Form>
     </AuthenticatedPage>
   );
 };

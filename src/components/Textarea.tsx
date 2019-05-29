@@ -3,32 +3,21 @@ import styled from "styled-components";
 
 interface IProps {
   className?: string;
-  type?: string;
-  placeholder?: string;
   value?: string;
-  defaultValue?: string;
   onChange?: (e: React.FormEvent) => void;
+  rows?: number;
 }
 
-const Input: React.SFC<IProps> = ({
-  className,
-  type,
-  placeholder,
-  value,
-  defaultValue,
-  onChange
-}) => (
-  <input
+const Textarea: React.SFC<IProps> = ({ className, value, onChange, rows }) => (
+  <textarea
     className={className}
-    type={type}
-    placeholder={placeholder}
     value={value}
-    defaultValue={defaultValue}
     onChange={onChange}
+    rows={rows}
   />
 );
 
-const StyledInput = styled(Input)`
+const StyledTextarea = styled(Textarea)`
   flex-grow: 1;
   margin: 10px;
   padding: 10px;
@@ -59,4 +48,4 @@ const StyledInput = styled(Input)`
   }
 `;
 
-export default StyledInput;
+export default StyledTextarea;
