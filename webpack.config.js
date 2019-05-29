@@ -49,7 +49,11 @@ module.exports = {
       systemvars: true
     }),
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([{ from: "public" }]),
+    new CopyWebpackPlugin([
+      {
+        from: "public"
+      }
+    ]),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, "src/sw.js"),
       publicPath: process.env.PUBLIC_PATH
