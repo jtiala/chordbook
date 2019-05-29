@@ -4,40 +4,7 @@ import styled, { css } from "styled-components";
 
 import SettingsContext from "../contexts/Settings";
 
-const LinkStyle = css`
-  flex-grow: 1;
-  margin: 10px 0 10px 10px;
-  padding: 10px;
-  background-color: tomato;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 12px;
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
-
-  :last-child {
-    margin: 10px;
-  }
-
-  :hover,
-  :active {
-    background-color: #ff8d79;
-  }
-
-  :focus {
-    outline: tomato auto 5px;
-  }
-`;
-
-const Button = styled.button`
-  ${LinkStyle}
-`;
-
-const StyledLink = styled(Link)`
-  ${LinkStyle}
-`;
+import Button from "./Button";
 
 interface IProps {
   className?: string;
@@ -53,11 +20,13 @@ const SettingsBar: React.SFC<IProps> = ({ className }) => {
 
   return (
     <div className={className}>
-      <StyledLink to="/">&#9668; Back to song list</StyledLink>
-      <Button onClick={toggleLyrics} type="button">
+      <Button as="Link" to="/" variant="primary">
+        &#9668; Back to song list
+      </Button>
+      <Button onClick={toggleLyrics}>
         {lyricsVisible ? "Hide lyrics" : "Show lyrics"}
       </Button>
-      <Button onClick={toggleChords} type="button">
+      <Button onClick={toggleChords}>
         {chordsVisible ? "Hide chords" : "Show chords"}
       </Button>
     </div>
