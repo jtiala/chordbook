@@ -11,7 +11,7 @@ import Heading from "./Heading";
 import Input from "./Input";
 import Message from "./Message";
 import Pulse from "./Pulse";
-import Textarea from "./Textarea";
+import SectionEditor from "./SectionEditor";
 
 const NewSongPage: React.SFC = () => {
   const [artist, setArtist] = React.useState("");
@@ -99,11 +99,7 @@ const NewSongPage: React.SFC = () => {
           onChange={handleTitleChange}
           value={title}
         />
-        <Textarea
-          rows={20}
-          onChange={handleSectionsChange}
-          value={JSON.stringify(sections, null, 2)}
-        />
+        <SectionEditor sections={sections} onChange={handleSectionsChange} />
         <Button type="submit" variant="primary">
           Create
         </Button>
