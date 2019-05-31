@@ -12,6 +12,13 @@ import LoginPage from "./LoginPage";
 import NewSongPage from "./NewSongPage";
 import SongPage from "./SongPage";
 
+const StyledApp = styled.div`
+  width: 90%;
+  max-width: 768px;
+  margin: 10px auto;
+  font-family: "Ubuntu Mono", monospace;
+`;
+
 interface IRenderSongIdMatchParams {
   songId: string;
 }
@@ -20,12 +27,8 @@ const renderSongPage = (
   props: RouteComponentProps<IRenderSongIdMatchParams>
 ) => <SongPage songId={props.match.params.songId} />;
 
-interface IProps {
-  className?: string;
-}
-
-const App: React.SFC<IProps> = ({ className }) => (
-  <div className={className}>
+const App: React.SFC = () => (
+  <StyledApp>
     <Router basename={process.env.PUBLIC_PATH}>
       <Route path="/" exact={true} component={HomePage} />
       <Route path="/login" exact={true} component={LoginPage} />
@@ -33,14 +36,7 @@ const App: React.SFC<IProps> = ({ className }) => (
       <Route path="/songs/:songId" render={renderSongPage} />
       <Route path="/admin/createSong" exact={true} component={NewSongPage} />
     </Router>
-  </div>
+  </StyledApp>
 );
 
-const StyledApp = styled(App)`
-  width: 90%;
-  max-width: 768px;
-  margin: 10px auto;
-  font-family: "Ubuntu Mono", monospace;
-`;
-
-export default StyledApp;
+export default App;

@@ -11,13 +11,13 @@ import Pulse from "./Pulse";
 import Section from "./Section";
 import SettingsBar from "./SettingsBar";
 
-const Separator = styled.span`
-  color: black;
-`;
-
 interface IProps {
   songId: string;
 }
+
+const Separator = styled.span`
+  color: black;
+`;
 
 const SongPage: React.SFC<IProps> = ({ songId }) => {
   const [value, loading, error] = useDocument(firestore.doc(`songs/${songId}`));

@@ -6,11 +6,15 @@ import SettingsContext from "../contexts/Settings";
 
 import Button from "./Button";
 
-interface IProps {
-  className?: string;
-}
+const StyledSettingsBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-items: space-between;
+  margin: 10px 0;
+  background: whitesmoke;
+`;
 
-const SettingsBar: React.SFC<IProps> = ({ className }) => {
+const SettingsBar: React.SFC = () => {
   const {
     lyricsVisible,
     chordsVisible,
@@ -19,7 +23,7 @@ const SettingsBar: React.SFC<IProps> = ({ className }) => {
   } = React.useContext(SettingsContext);
 
   return (
-    <div className={className}>
+    <StyledSettingsBar>
       <Button as="Link" to="/" variant="primary">
         &#9668; Back to song list
       </Button>
@@ -29,16 +33,8 @@ const SettingsBar: React.SFC<IProps> = ({ className }) => {
       <Button onClick={toggleChords}>
         {chordsVisible ? "Hide chords" : "Show chords"}
       </Button>
-    </div>
+    </StyledSettingsBar>
   );
 };
 
-const StyledSettingsBar = styled(SettingsBar)`
-  display: flex;
-  flex-direction: row;
-  justify-items: space-between;
-  margin: 10px 0;
-  background: whitesmoke;
-`;
-
-export default StyledSettingsBar;
+export default SettingsBar;

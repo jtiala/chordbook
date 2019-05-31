@@ -2,7 +2,6 @@ import * as React from "react";
 import styled from "styled-components";
 
 interface IProps {
-  className?: string;
   type?: string;
   placeholder?: string;
   value?: string;
@@ -10,25 +9,7 @@ interface IProps {
   onChange?: (e: React.FormEvent) => void;
 }
 
-const Input: React.SFC<IProps> = ({
-  className,
-  type,
-  placeholder,
-  value,
-  defaultValue,
-  onChange
-}) => (
-  <input
-    className={className}
-    type={type}
-    placeholder={placeholder}
-    value={value}
-    defaultValue={defaultValue}
-    onChange={onChange}
-  />
-);
-
-const StyledInput = styled(Input)`
+const StyledInput = styled.input`
   flex-grow: 1;
   margin: 10px;
   padding: 10px;
@@ -59,4 +40,6 @@ const StyledInput = styled(Input)`
   }
 `;
 
-export default StyledInput;
+const Input: React.SFC<IProps> = props => <StyledInput {...props} />;
+
+export default Input;

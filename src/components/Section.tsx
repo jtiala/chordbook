@@ -8,25 +8,12 @@ import Heading from "./Heading";
 import Lyrics from "./Lyrics";
 
 interface IProps {
-  className?: string;
   name?: string;
   chords?: any;
   lyrics?: any;
 }
 
-const Section: React.SFC<IProps> = ({ className, name, chords, lyrics }) => {
-  const { lyricsVisible, chordsVisible } = React.useContext(SettingsContext);
-
-  return (
-    <div className={className}>
-      {name && <Heading level={3}>{name}</Heading>}
-      {chordsVisible && chords && <Chords {...chords} />}
-      {lyricsVisible && lyrics && <Lyrics {...lyrics} />}
-    </div>
-  );
-};
-
-const StyledSection = styled(Section)`
+const StyledSection = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 0;
@@ -34,4 +21,16 @@ const StyledSection = styled(Section)`
   background: whitesmoke;
 `;
 
-export default StyledSection;
+const Section: React.SFC<IProps> = ({ name, chords, lyrics }) => {
+  const { lyricsVisible, chordsVisible } = React.useContext(SettingsContext);
+
+  return (
+    <StyledSection>
+      {name && <Heading level={3}>{name}</Heading>}
+      {chordsVisible && chords && <Chords {...chords} />}
+      {lyricsVisible && lyrics && <Lyrics {...lyrics} />}
+    </StyledSection>
+  );
+};
+
+export default Section;

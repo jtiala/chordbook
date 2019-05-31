@@ -2,22 +2,12 @@ import * as React from "react";
 import styled from "styled-components";
 
 interface IProps {
-  className?: string;
   value?: string;
   onChange?: (e: React.FormEvent) => void;
   rows?: number;
 }
 
-const Textarea: React.SFC<IProps> = ({ className, value, onChange, rows }) => (
-  <textarea
-    className={className}
-    value={value}
-    onChange={onChange}
-    rows={rows}
-  />
-);
-
-const StyledTextarea = styled(Textarea)`
+const StyledTextarea = styled.textarea`
   flex-grow: 1;
   margin: 10px;
   padding: 10px;
@@ -48,4 +38,12 @@ const StyledTextarea = styled(Textarea)`
   }
 `;
 
-export default StyledTextarea;
+interface IProps {
+  value?: string;
+  onChange?: (e: React.FormEvent) => void;
+  rows?: number;
+}
+
+const Textarea: React.SFC<IProps> = props => <StyledTextarea {...props} />;
+
+export default Textarea;

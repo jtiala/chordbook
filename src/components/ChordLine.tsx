@@ -3,25 +3,32 @@ import styled from "styled-components";
 
 import ChordBar from "./ChordBar";
 
+interface IProps {
+  bars?: string[][];
+  repeat?: number;
+}
+
+const StyledChordLine = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 10px 0;
+  font-size: 28px;
+  font-family: "Caveat Brush", cursive;
+`;
+
 const BarLine = styled.span`
   flex-grow: 0;
   color: tomato;
 `;
 
-interface IProps {
-  className?: string;
-  bars?: string[][];
-  repeat?: number;
-}
-
-const ChordLine: React.SFC<IProps> = ({ className, bars, repeat }) => {
+const ChordLine: React.SFC<IProps> = ({ bars, repeat }) => {
   const barKeys = Object.keys(bars)
     .map(key => parseInt(key, 10))
     .sort((a: any, b: any) => a - b);
   const barCount = barKeys.length;
 
   return (
-    <div className={className}>
+    <StyledChordLine>
       {barCount &&
         barKeys.map((key: number, i: number) => {
           const bar = bars[key];
@@ -53,16 +60,8 @@ const ChordLine: React.SFC<IProps> = ({ className, bars, repeat }) => {
 
           return elems;
         })}
-    </div>
+    </StyledChordLine>
   );
 };
 
-const StyledChordLine = styled(ChordLine)`
-  display: flex;
-  flex-direction: row;
-  margin: 0 0 10px 0;
-  font-size: 28px;
-  font-family: "Caveat Brush", cursive;
-`;
-
-export default StyledChordLine;
+export default ChordLine;

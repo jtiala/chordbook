@@ -9,11 +9,10 @@ import Page from "./Page";
 import Pulse from "./Pulse";
 
 interface IProps {
-  className?: string;
   children?: React.ReactNode;
 }
 
-const AuthenticatedPage: React.SFC<IProps> = ({ className, children }) => {
+const AuthenticatedPage: React.SFC<IProps> = ({ children }) => {
   const [user, loading, error] = useAuthState(auth);
 
   if (!loading && !error && !user) {

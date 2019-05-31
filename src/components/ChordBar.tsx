@@ -1,24 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
 
-const Chord = styled.span`
-  padding: 0 3px;
-`;
-
 interface IProps {
-  className?: string;
   chords?: string[];
   barCount: number;
 }
 
-const ChordBar: React.SFC<IProps> = ({ className, chords }) => (
-  <div className={className}>
-    {chords &&
-      chords.map((chord, i) => <Chord key={`Chord-${i}`}>{chord}</Chord>)}
-  </div>
-);
-
-const StyledChordBar = styled(ChordBar)`
+const StyledChordBar = styled.div<IProps>`
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -26,4 +14,15 @@ const StyledChordBar = styled(ChordBar)`
   justify-content: space-around;
 `;
 
-export default StyledChordBar;
+const Chord = styled.span`
+  padding: 0 3px;
+`;
+
+const ChordBar: React.SFC<IProps> = ({ chords, barCount }) => (
+  <StyledChordBar barCount={barCount}>
+    {chords &&
+      chords.map((chord, i) => <Chord key={`Chord-${i}`}>{chord}</Chord>)}
+  </StyledChordBar>
+);
+
+export default ChordBar;
