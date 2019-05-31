@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Redirect } from "react-router-dom";
 
 import { firestore } from "../firebase";
 import { songIdFromArtistAndTitle } from "../utils";
@@ -39,6 +40,8 @@ const NewSongPage: React.SFC = () => {
       name: "Verse 1"
     }
   ]);
+  const [error, setError] = React.useState(null);
+  const [redirect, setRedirect] = React.useState(null);
 
   const handleArtistChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setArtist(e.target.value);
@@ -55,21 +58,27 @@ const NewSongPage: React.SFC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const id = songIdFromArtistAndTitle(artist, title);
+
     firestore
       .collection("songs")
-      .doc(songIdFromArtistAndTitle(artist, title))
+      .doc(id)
       .set({
         artist,
         title,
         sections
       })
       .then(() => {
-        console.log("Document successfully written!"); // tslint:disable-line
+        setRedirect(`/songs/${id}`);
       })
       .catch((err: string) => {
-        console.error("Error writing document: ", err); // tslint:disable-line
+        setError(err);
       });
   };
+
+  if (redirect) {
+    return <Redirect to={redirect} />;
+  }
 
   return (
     <AuthenticatedPage>
@@ -77,6 +86,7 @@ const NewSongPage: React.SFC = () => {
         <Heading level={1} variant="primary">
           Create Song
         </Heading>
+        {error && <Message variant="error">error</Message>}
         <Input
           type="text"
           placeholder="Artist"
