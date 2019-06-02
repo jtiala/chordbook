@@ -31,7 +31,7 @@ const AuthenticatedPage: React.SFC<IProps> = ({ children, variant }) => {
   if (error) {
     return (
       <Page>
-        <Message variant="error">{error}</Message>
+        <Message variant="error">{error.message}</Message>
       </Page>
     );
   }
