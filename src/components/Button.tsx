@@ -8,8 +8,9 @@ interface IProps {
   children?: React.ReactNode;
   href?: string;
   to?: string;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   type?: "button" | "reset" | "submit";
+  value?: string | number;
 }
 
 const CommonStyles = css<IProps>`
@@ -61,7 +62,8 @@ const Button: React.SFC<IProps> = ({
   href,
   to,
   onClick,
-  type
+  type,
+  value
 }) => {
   switch (as) {
     case "a":
@@ -82,6 +84,7 @@ const Button: React.SFC<IProps> = ({
           variant={variant}
           onClick={onClick}
           type={type ? type : "button"}
+          value={value}
         >
           {children}
         </StyledButton>
