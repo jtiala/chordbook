@@ -9,8 +9,8 @@ interface IProps {
 
 const StyledTextarea = styled.textarea`
   flex-grow: 1;
-  margin: 10px;
   padding: 10px;
+  margin-bottom: 10px;
   border: 2px solid;
   border-color: dimgray;
   color: dimgray;
