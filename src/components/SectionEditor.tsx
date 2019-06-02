@@ -85,7 +85,11 @@ const SectionEditor: React.SFC<IProps> = ({
   };
 
   const handleSectionDelete = () => {
-    onDelete(index);
+    const confirmed = confirm("Really?");
+
+    if (confirmed) {
+      onDelete(index);
+    }
   };
 
   return (

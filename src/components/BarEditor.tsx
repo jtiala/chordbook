@@ -48,7 +48,11 @@ const BarEditor: React.SFC<IProps> = ({
   };
 
   const handleDelete = () => {
-    onDelete(lineIndex, barIndex);
+    const confirmed = confirm("Really?");
+
+    if (confirmed) {
+      onDelete(lineIndex, barIndex);
+    }
   };
 
   return (

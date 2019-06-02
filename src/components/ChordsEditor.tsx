@@ -145,8 +145,12 @@ const ChordsEditor: React.SFC<IProps> = ({
   };
 
   const handleChordLineDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const lineIndex = parseInt(e.currentTarget.value, 10);
-    onChordLineDelete(lineIndex);
+    const confirmed = confirm("Really?");
+
+    if (confirmed) {
+      const lineIndex = parseInt(e.currentTarget.value, 10);
+      onChordLineDelete(lineIndex);
+    }
   };
 
   const lineElems: React.ReactElement[] = [];
