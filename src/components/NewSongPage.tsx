@@ -2,6 +2,7 @@ import * as React from "react";
 import { Redirect } from "react-router-dom";
 
 import { firestore } from "../firebase";
+import { ISection } from "../types";
 import { songIdFromArtistAndTitle } from "../utils";
 
 import AuthenticatedPage from "./AuthenticatedPage";
@@ -9,6 +10,7 @@ import Button from "./Button";
 import Form from "./Form";
 import Heading from "./Heading";
 import Input from "./Input";
+import Label from "./Label";
 import Message from "./Message";
 import Pulse from "./Pulse";
 import SectionEditor from "./SectionEditor";
@@ -16,28 +18,18 @@ import SectionEditor from "./SectionEditor";
 const NewSongPage: React.SFC = () => {
   const [artist, setArtist] = React.useState("");
   const [title, setTitle] = React.useState("");
-  const [sections, setSections] = React.useState([
+  const [sections, setSections] = React.useState<ISection[]>([
     {
+      name: "Verse 1",
       chords: {
         lines: [
           {
-            bars: {
-              "1": ["Fm", "G#"],
-              "2": ["D#", "A#"]
-            },
-            repeat: 2
+            repeat: 1,
+            bars: { "1": ["A", "Bm"], "2": ["C#", "Dsus4"] }
           }
         ]
       },
-      lyrics: {
-        lines: [
-          "I walk a lonely road",
-          "The only one that I have ever known",
-          "Don't know where it goes",
-          "But it's home to me, and I walk alone"
-        ]
-      },
-      name: "Verse 1"
+      lyrics: { lines: [] }
     }
   ]);
   const [error, setError] = React.useState(null);
@@ -51,8 +43,10 @@ const NewSongPage: React.SFC = () => {
     setTitle(e.target.value);
   };
 
-  const handleSectionsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setSections(JSON.parse(e.target.value));
+  const handleSectionChange = (index: number, newSection: ISection) => {
+    setSections(
+      sections.map((section, i) => (i === index ? newSection : sections[i]))
+    );
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -76,30 +70,57 @@ const NewSongPage: React.SFC = () => {
       });
   };
 
+  const addSection = () => {
+    const newSection: ISection = {
+      name: "Chorus",
+      chords: {
+        lines: [
+          {
+            repeat: 1,
+            bars: { "1": ["A", "Bm"], "2": ["C#", "Dsus4"] }
+          }
+        ]
+      },
+      lyrics: { lines: [] }
+    };
+
+    setSections([...sections, newSection]);
+  };
+
   if (redirect) {
     return <Redirect to={redirect} />;
   }
 
+  const sectionEditors: React.ReactElement[] = [];
+
+  sections.forEach((section, index) => {
+    sectionEditors.push(
+      <SectionEditor
+        key={`section-editor-${index}`}
+        section={section}
+        index={index}
+        onChange={handleSectionChange}
+      />
+    );
+  });
+
   return (
-    <AuthenticatedPage>
-      <Form onSubmit={handleSubmit}>
+    <AuthenticatedPage variant="stretch">
+      <Form onSubmit={handleSubmit} variant="stretch">
         <Heading level={1} variant="primary">
           Create Song
         </Heading>
         {error && <Message variant="error">error</Message>}
-        <Input
-          type="text"
-          placeholder="Artist"
-          onChange={handleArtistChange}
-          value={artist}
-        />
-        <Input
-          type="text"
-          placeholder="Title"
-          onChange={handleTitleChange}
-          value={title}
-        />
-        <SectionEditor sections={sections} onChange={handleSectionsChange} />
+        <Heading level={2}>Details</Heading>
+        <Label label="Artist">
+          <Input type="text" onChange={handleArtistChange} value={artist} />
+        </Label>
+        <Label label="Title">
+          <Input type="text" onChange={handleTitleChange} value={title} />
+        </Label>
+        <Heading level={2}>Sections</Heading>
+        {sectionEditors}
+        <Button onClick={addSection}>Add section</Button>
         <Button type="submit" variant="primary">
           Create
         </Button>
