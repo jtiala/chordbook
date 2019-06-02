@@ -8,6 +8,7 @@ import Button from "./Button";
 import Form from "./Form";
 import Heading from "./Heading";
 import Input from "./Input";
+import Label from "./Label";
 import Message from "./Message";
 import Page from "./Page";
 import Pulse from "./Pulse";
@@ -61,18 +62,17 @@ const LoginPage: React.SFC = () => {
         <Pulse />
       ) : (
         <Form onSubmit={handleSubmit}>
-          <Input
-            type="email"
-            placeholder="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <Input
-            type="password"
-            placeholder="password"
-            defaultValue={password}
-            onChange={handlePasswordChange}
-          />
+          <Label label="Email">
+            <Input type="email" value={email} onChange={handleEmailChange} />
+          </Label>
+          <Label label="Password">
+            <Input
+              type="password"
+              placeholder="password"
+              defaultValue={password}
+              onChange={handlePasswordChange}
+            />
+          </Label>
           <Button type="submit" variant="primary">
             Login
           </Button>
