@@ -11,6 +11,9 @@ const StyledForm = styled.form<IProps>`
   display: flex;
   flex-direction: column;
   width: ${props => (props.variant === "stretch" ? "100%" : "480px")};
+  > :not(:last-child) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Form: React.SFC<IProps> = ({ children, onSubmit, variant }) => (

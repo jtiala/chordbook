@@ -14,11 +14,22 @@ interface IProps {
 }
 
 const CommonStyles = css<IProps>`
-  flex-grow: 1;
-  margin: 10px;
-  padding: 10px;
-  background-color: ${props =>
-    props.variant === "primary" ? "tomato" : "dimgray"};
+  background-color: ${props => {
+    switch (props.variant) {
+      case "error":
+      case "delete":
+        return "red";
+      case "success":
+        return "green";
+      case "danger":
+        return "orange";
+      case "primary":
+        return "tomato";
+      default:
+        return "dimgray";
+    }
+  }};
+  padding: 12px 14px;
   border: none;
   color: white;
   text-align: center;
@@ -28,8 +39,22 @@ const CommonStyles = css<IProps>`
   cursor: pointer;
 
   :focus {
-    outline: ${props => (props.variant === "primary" ? "tomato" : "dimgray")}
-      auto 5px;
+    outline: ${props => {
+        switch (props.variant) {
+          case "error":
+          case "delete":
+            return "red";
+          case "success":
+            return "green";
+          case "danger":
+            return "orange";
+          case "primary":
+            return "tomato";
+          default:
+            return "dimgray";
+        }
+      }}
+      auto 3px;
   }
 
   :hover,

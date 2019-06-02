@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const H1 = styled.h1<IProps>`
-  margin: 10px auto 28px auto;
+  margin: 0;
   font-size: 28px;
   font-family: "Caveat Brush", cursive;
   text-align: center;
@@ -16,7 +16,7 @@ const H1 = styled.h1<IProps>`
 `;
 
 const H2 = styled.h2<IProps>`
-  margin: 10px auto 20px auto;
+  margin: 0;
   font-size: 20px;
   font-family: "Caveat Brush", cursive;
   text-align: center;
@@ -24,7 +24,7 @@ const H2 = styled.h2<IProps>`
 `;
 
 const H3 = styled.h3<IProps>`
-  margin: 0 0 10px 0;
+  margin: 0;
   font-size: 14px;
   font-family: "Ubuntu Mono", monospace;
   font-weight: 400;

@@ -68,7 +68,6 @@ const LoginPage: React.SFC = () => {
           <Label label="Password">
             <Input
               type="password"
-              placeholder="password"
               defaultValue={password}
               onChange={handlePasswordChange}
             />

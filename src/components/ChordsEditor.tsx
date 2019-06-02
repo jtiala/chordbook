@@ -18,15 +18,29 @@ interface IProps {
 
 const LineElemsContainer = styled.div`
   margin-bottom: 10px;
-  padding: 5px;
+  padding: 10px;
   background-color: gainsboro;
+
+  > :not(:last-child) {
+    margin-bottom: 10px;
+  }
 `;
 
 const LineElemInputsContainer = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: end;
+
+  > * {
+    flex-grow: 1;
+  }
+
+  > button {
+    flex-grow: 0;
+  }
+
   > :not(:last-child) {
-    margin-right: 3px;
+    margin-right: 5px;
   }
 `;
 
@@ -115,15 +129,15 @@ const ChordsEditor: React.SFC<IProps> = ({ chords, onChange }) => {
           <ChordLine {...line} />
           <LineElemInputsContainer>
             {barElems}
+            <Button onClick={addBar} value={lineIndex}>
+              Add bar
+            </Button>
             <RepeatEditor
               repeat={line.repeat}
               lineIndex={lineIndex}
               onChange={handleRepeatChange}
             />
           </LineElemInputsContainer>
-          <Button onClick={addBar} value={lineIndex}>
-            Add bar
-          </Button>
         </LineElemsContainer>
       );
     });

@@ -13,9 +13,7 @@ interface IProps {
 
 const StyledInput = styled.input`
   display: block;
-  flex-grow: 1;
   padding: 10px;
-  margin-bottom: 10px;
   border: 2px solid;
   border-color: dimgray;
   width: auto;
@@ -25,7 +23,7 @@ const StyledInput = styled.input`
   -webkit-tap-highlight-color: transparent;
 
   :focus {
-    outline: dimgray auto 5px;
+    outline: dimgray auto 3px;
   }
 
   :hover,

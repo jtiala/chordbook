@@ -13,6 +13,10 @@ const StyledPage = styled.section<IProps>`
   flex-direction: column;
   flex-wrap: wrap;
   align-items: ${props => (props.variant === "stretch" ? "stretch" : "center")};
+
+  > :not(:last-child) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Page: React.SFC<IProps> = ({ children, variant }) => (

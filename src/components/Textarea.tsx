@@ -10,7 +10,6 @@ interface IProps {
 const StyledTextarea = styled.textarea`
   flex-grow: 1;
   padding: 10px;
-  margin-bottom: 10px;
   border: 2px solid;
   border-color: dimgray;
   color: dimgray;
@@ -18,7 +17,7 @@ const StyledTextarea = styled.textarea`
   -webkit-tap-highlight-color: transparent;
 
   :focus {
-    outline: dimgray auto 5px;
+    outline: dimgray auto 3px;
   }
 
   :hover,

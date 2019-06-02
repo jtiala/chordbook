@@ -11,7 +11,6 @@ interface IProps {
 const StyledLabel = styled.label`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   font-size: 14px;
   font-family: "Ubuntu Mono", monospace;
   text-transform: uppercase;

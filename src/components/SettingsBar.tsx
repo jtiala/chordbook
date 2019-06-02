@@ -12,6 +12,13 @@ const StyledSettingsBar = styled.div`
   justify-items: space-between;
   margin: 10px 0;
   background: whitesmoke;
+  > * {
+    margin: 10px 0 10px 10px;
+    flex-grow: 1;
+  }
+  > :last-child {
+    margin-right: 10px;
+  }
 `;
 
 const SettingsBar: React.SFC = () => {

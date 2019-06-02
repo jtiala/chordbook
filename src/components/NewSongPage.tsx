@@ -49,6 +49,10 @@ const NewSongPage: React.SFC = () => {
     );
   };
 
+  const handleSectionDelete = (index: number) => {
+    setSections(sections.filter((section, i) => i !== index));
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -100,16 +104,17 @@ const NewSongPage: React.SFC = () => {
         section={section}
         index={index}
         onChange={handleSectionChange}
+        onDelete={handleSectionDelete}
       />
     );
   });
 
   return (
     <AuthenticatedPage variant="stretch">
+      <Heading level={1} variant="primary">
+        Create Song
+      </Heading>
       <Form onSubmit={handleSubmit} variant="stretch">
-        <Heading level={1} variant="primary">
-          Create Song
-        </Heading>
         {error && <Message variant="error">error</Message>}
         <Heading level={2}>Details</Heading>
         <Label label="Artist">

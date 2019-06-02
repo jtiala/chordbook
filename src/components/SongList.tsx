@@ -41,7 +41,7 @@ const StyledLink = styled(Link)`
   }
 
   :focus {
-    outline: tomato auto 5px;
+    outline: tomato auto 3px;
   }
 `;
 
