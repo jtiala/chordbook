@@ -9,6 +9,7 @@ import ChordLine from "./ChordLine";
 import Heading from "./Heading";
 import Input from "./Input";
 import Label from "./Label";
+import Message from "./Message";
 import RepeatEditor from "./RepeatEditor";
 
 interface IProps {
@@ -205,7 +206,7 @@ const ChordsEditor: React.SFC<IProps> = ({
   return (
     <React.Fragment>
       <Heading level={3}>Chords</Heading>
-      {lineElems}
+      {lineElems.length > 0 ? lineElems : <Message>No chords.</Message>}
     </React.Fragment>
   );
 };
