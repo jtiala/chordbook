@@ -31,6 +31,7 @@ const Message = styled.div<IProps>`
   }};
   max-width: 480px;
   box-sizing: border-box;
+  text-align: center;
 `;
 
 export default Message;
