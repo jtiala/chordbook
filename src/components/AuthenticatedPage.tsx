@@ -10,9 +10,10 @@ import Pulse from "./Pulse";
 
 interface IProps {
   children?: React.ReactNode;
+  variant?: string;
 }
 
-const AuthenticatedPage: React.SFC<IProps> = ({ children }) => {
+const AuthenticatedPage: React.SFC<IProps> = ({ children, variant }) => {
   const [user, loading, error] = useAuthState(auth);
 
   if (!loading && !error && !user) {
@@ -35,7 +36,7 @@ const AuthenticatedPage: React.SFC<IProps> = ({ children }) => {
     );
   }
 
-  return <Page>{children}</Page>;
+  return <Page variant={variant}>{children}</Page>;
 };
 
 export default AuthenticatedPage;
