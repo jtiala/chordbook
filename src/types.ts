@@ -1,7 +1,8 @@
+export interface IBars {
+  [key: string]: string[];
+}
 export interface IChordLine {
-  bars?: {
-    [key: string]: string[];
-  };
+  bars?: IBars;
   repeat?: number;
 }
 
