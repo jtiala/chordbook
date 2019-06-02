@@ -21,7 +21,9 @@ const Chord = styled.span`
 const ChordBar: React.SFC<IProps> = ({ chords, barCount }) => (
   <StyledChordBar barCount={barCount}>
     {chords &&
-      chords.map((chord, i) => <Chord key={`Chord-${i}`}>{chord}</Chord>)}
+      chords
+        .filter(chord => chord.length > 0)
+        .map((chord, i) => <Chord key={`Chord-${i}`}>{chord}</Chord>)}
   </StyledChordBar>
 );
 
