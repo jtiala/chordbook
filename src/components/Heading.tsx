@@ -27,6 +27,7 @@ const H3 = styled.h3<IProps>`
   margin: 0 0 10px 0;
   font-size: 14px;
   font-family: "Ubuntu Mono", monospace;
+  font-weight: 400;
   text-transform: uppercase;
   text-align: left;
   color: ${props => (props.variant === "primary" ? "tomato" : "black")};
