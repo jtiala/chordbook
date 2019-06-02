@@ -4,19 +4,24 @@ import styled from "styled-components";
 interface IProps {
   type?: string;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
   defaultValue?: string;
+  min?: number;
+  max?: number;
   onChange?: (e: React.FormEvent) => void;
 }
 
 const StyledInput = styled.input`
+  display: block;
   flex-grow: 1;
-  margin: 10px;
   padding: 10px;
+  margin-bottom: 10px;
   border: 2px solid;
   border-color: dimgray;
+  width: auto;
   color: dimgray;
   font-size: 12px;
+  font-weight: 400;
   -webkit-tap-highlight-color: transparent;
 
   :focus {
