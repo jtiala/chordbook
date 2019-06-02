@@ -11,6 +11,7 @@ interface IProps {
   onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   type?: "button" | "reset" | "submit";
   value?: string | number;
+  disabled?: boolean;
 }
 
 const CommonStyles = css<IProps>`
@@ -57,14 +58,18 @@ const CommonStyles = css<IProps>`
       auto 3px;
   }
 
-  :hover,
-  :active {
+  :hover:not(:disabled),
+  :active:not(:disabled) {
     background-color: #ff8d79;
   }
 
   :hover:focus,
   :active:focus {
     outline-color: #ff8d79;
+  }
+
+  :disabled {
+    opacity: 0.5;
   }
 `;
 
@@ -88,7 +93,8 @@ const Button: React.SFC<IProps> = ({
   to,
   onClick,
   type,
-  value
+  value,
+  disabled
 }) => {
   switch (as) {
     case "a":
@@ -110,6 +116,7 @@ const Button: React.SFC<IProps> = ({
           onClick={onClick}
           type={type ? type : "button"}
           value={value}
+          disabled={disabled}
         >
           {children}
         </StyledButton>

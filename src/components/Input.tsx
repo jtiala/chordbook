@@ -6,17 +6,19 @@ interface IProps {
   placeholder?: string;
   value?: string | number;
   defaultValue?: string;
+  size?: number;
   min?: number;
   max?: number;
+  width?: string;
   onChange?: (e: React.FormEvent) => void;
 }
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<IProps>`
   display: block;
   padding: 10px;
   border: 2px solid;
   border-color: dimgray;
-  width: auto;
+  width: ${props => (props.width ? props.width : "auto")};
   color: dimgray;
   font-size: 12px;
   font-weight: 400;

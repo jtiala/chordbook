@@ -14,9 +14,12 @@ import RepeatEditor from "./RepeatEditor";
 interface IProps {
   chords: IChords;
   onChange: (chords: IChords) => void;
+  onChordLineDelete: (index: number) => void;
 }
 
-const LineElemsContainer = styled.div`
+const ChordLineContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
   padding: 10px;
   background-color: gainsboro;
@@ -26,7 +29,21 @@ const LineElemsContainer = styled.div`
   }
 `;
 
-const LineElemInputsContainer = styled.div`
+const ChordLineNameAndButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+
+  > :not(:last-child) {
+    margin-right: 10px;
+  }
+
+  > :not(button) {
+    flex-grow: 1;
+  }
+`;
+
+const ChordLineInputsContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: end;
@@ -40,18 +57,36 @@ const LineElemInputsContainer = styled.div`
   }
 
   > :not(:last-child) {
-    margin-right: 5px;
+    margin-right: 10px;
   }
 `;
 
-const ChordsEditor: React.SFC<IProps> = ({ chords, onChange }) => {
+const ChordsEditor: React.SFC<IProps> = ({
+  chords,
+  onChange,
+  onChordLineDelete
+}) => {
   const { lines } = chords;
 
-  const parseNewBars = (bars: IBars, barIndex: number, newBar: string[]) => {
+  const parseNewBarsAfterAdd = (
+    bars: IBars,
+    barIndex: number,
+    newBar: string[]
+  ) => {
     const newBars: IBars = {};
 
     Object.keys(bars).map((key: string, barI: number) =>
       barI === barIndex ? (newBars[key] = newBar) : (newBars[key] = bars[key])
+    );
+
+    return newBars;
+  };
+
+  const parseNewBarsAfterDelete = (bars: IBars, barIndex: number) => {
+    const newBars: IBars = {};
+
+    Object.keys(bars).map((key: string, barI: number) =>
+      barI !== barIndex ? (newBars[key] = bars[key]) : undefined
     );
 
     return newBars;
@@ -65,31 +100,14 @@ const ChordsEditor: React.SFC<IProps> = ({ chords, onChange }) => {
     const newChordLines: IChordLine[] = chords.lines.map(
       (line: IChordLine, lineI: number) =>
         lineI === lineIndex
-          ? { ...line, bars: parseNewBars(line.bars, barIndex, newBar) }
+          ? { ...line, bars: parseNewBarsAfterAdd(line.bars, barIndex, newBar) }
           : line
     );
 
     onChange({ ...chords, lines: newChordLines });
   };
 
-  const handleRepeatChange = (newRepeat: number, lineIndex: number) => {
-    const newChordLines: IChordLine[] = chords.lines.map(
-      (line: IChordLine, lineI: number) =>
-        lineI === lineIndex ? { ...line, repeat: newRepeat } : line
-    );
-
-    onChange({ ...chords, lines: newChordLines });
-  };
-
-  const addChordLine = () => {
-    const newChordLine: IChordLine = {
-      repeat: 1,
-      bars: { "1": ["A", "Bm"], "2": ["C#", "Dsus4"] }
-    };
-    onChange({ ...chords, lines: [...chords.lines, newChordLine] });
-  };
-
-  const addBar = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleBarAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
     const lineIndex = parseInt(e.currentTarget.value, 10);
     const keys = Object.keys(lines[lineIndex].bars);
     const lastKey = parseInt(keys[keys.length - 1], 10);
@@ -102,6 +120,33 @@ const ChordsEditor: React.SFC<IProps> = ({ chords, onChange }) => {
           : line
     );
     onChange({ ...chords, lines: newChordLines });
+  };
+
+  const handleBarDelete = (lineIndex: number, barIndex: number) => {
+    const newChordLines: IChordLine[] = chords.lines.map(
+      (line: IChordLine, lineI: number) =>
+        lineI === lineIndex
+          ? {
+              ...line,
+              bars: parseNewBarsAfterDelete(line.bars, barIndex)
+            }
+          : line
+    );
+    onChange({ ...chords, lines: newChordLines });
+  };
+
+  const handleRepeatChange = (newRepeat: number, lineIndex: number) => {
+    const newChordLines: IChordLine[] = chords.lines.map(
+      (line: IChordLine, lineI: number) =>
+        lineI === lineIndex ? { ...line, repeat: newRepeat } : line
+    );
+
+    onChange({ ...chords, lines: newChordLines });
+  };
+
+  const handleChordLineDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const lineIndex = parseInt(e.currentTarget.value, 10);
+    onChordLineDelete(lineIndex);
   };
 
   const lineElems: React.ReactElement[] = [];
@@ -119,26 +164,36 @@ const ChordsEditor: React.SFC<IProps> = ({ chords, onChange }) => {
               lineIndex={lineIndex}
               barIndex={barIndex}
               onChange={handleBarChange}
+              onDelete={handleBarDelete}
+              allowDelete={Object.keys(line.bars).length > 1}
             />
           );
         });
       }
 
       lineElems.push(
-        <LineElemsContainer key={`line-${lineIndex}`}>
+        <ChordLineContainer key={`line-${lineIndex}`}>
+          <Heading level={3}>Chord Line {lineIndex + 1}</Heading>
           <ChordLine {...line} />
-          <LineElemInputsContainer>
-            {barElems}
-            <Button onClick={addBar} value={lineIndex}>
-              Add bar
-            </Button>
+          <ChordLineInputsContainer>{barElems}</ChordLineInputsContainer>
+          <ChordLineNameAndButtonsContainer>
             <RepeatEditor
               repeat={line.repeat}
               lineIndex={lineIndex}
               onChange={handleRepeatChange}
             />
-          </LineElemInputsContainer>
-        </LineElemsContainer>
+            <Button
+              variant="delete"
+              onClick={handleChordLineDelete}
+              value={lineIndex}
+            >
+              Delete chord line
+            </Button>
+            <Button onClick={handleBarAdd} value={lineIndex}>
+              Add bar
+            </Button>
+          </ChordLineNameAndButtonsContainer>
+        </ChordLineContainer>
       );
     });
   }
@@ -147,7 +202,6 @@ const ChordsEditor: React.SFC<IProps> = ({ chords, onChange }) => {
     <React.Fragment>
       <Heading level={3}>Chords</Heading>
       {lineElems}
-      <Button onClick={addChordLine}>Add chord line</Button>
     </React.Fragment>
   );
 };

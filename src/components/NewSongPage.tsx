@@ -49,6 +49,23 @@ const NewSongPage: React.SFC = () => {
     );
   };
 
+  const handleSectionAdd = () => {
+    const newSection: ISection = {
+      name: "Chorus",
+      chords: {
+        lines: [
+          {
+            repeat: 1,
+            bars: { "1": ["A", "Bm"], "2": ["C#", "Dsus4"] }
+          }
+        ]
+      },
+      lyrics: { lines: [] }
+    };
+
+    setSections([...sections, newSection]);
+  };
+
   const handleSectionDelete = (index: number) => {
     setSections(sections.filter((section, i) => i !== index));
   };
@@ -72,23 +89,6 @@ const NewSongPage: React.SFC = () => {
       .catch((err: string) => {
         setError(err);
       });
-  };
-
-  const addSection = () => {
-    const newSection: ISection = {
-      name: "Chorus",
-      chords: {
-        lines: [
-          {
-            repeat: 1,
-            bars: { "1": ["A", "Bm"], "2": ["C#", "Dsus4"] }
-          }
-        ]
-      },
-      lyrics: { lines: [] }
-    };
-
-    setSections([...sections, newSection]);
   };
 
   if (redirect) {
@@ -125,7 +125,7 @@ const NewSongPage: React.SFC = () => {
         </Label>
         <Heading level={2}>Sections</Heading>
         {sectionEditors}
-        <Button onClick={addSection}>Add section</Button>
+        <Button onClick={handleSectionAdd}>Add section</Button>
         <Button type="submit" variant="primary">
           Create
         </Button>

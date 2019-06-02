@@ -1,7 +1,9 @@
 import * as React from "react";
+import styled from "styled-components";
 
 import { IChords } from "../types";
 
+import Button from "./Button";
 import Input from "./Input";
 import Label from "./Label";
 
@@ -10,13 +12,27 @@ interface IProps {
   lineIndex: number;
   barIndex: number;
   onChange: (bar: string[], lineIndex: number, barIndex: number) => void;
+  onDelete: (lineIndex: number, barIndex: number) => void;
+  allowDelete: boolean;
 }
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  > input {
+    flex-grow: 1;
+    margin-right: 5px;
+  }
+`;
 
 const BarEditor: React.SFC<IProps> = ({
   bar,
   lineIndex,
   barIndex,
-  onChange
+  onChange,
+  onDelete,
+  allowDelete
 }) => {
   const value = bar.join(", ");
 
@@ -31,9 +47,23 @@ const BarEditor: React.SFC<IProps> = ({
     onChange(newBar, lineIndex, barIndex);
   };
 
+  const handleDelete = () => {
+    onDelete(lineIndex, barIndex);
+  };
+
   return (
     <Label label={`Bar ${barIndex + 1}`}>
-      <Input onChange={handleChange} value={value} />
+      <InputContainer>
+        <Input onChange={handleChange} value={value} size={5} />
+        <Button
+          as="span"
+          variant="delete"
+          onClick={handleDelete}
+          disabled={!allowDelete}
+        >
+          Delete
+        </Button>
+      </InputContainer>
     </Label>
   );
 };

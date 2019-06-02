@@ -22,6 +22,7 @@ const RepeatEditor: React.SFC<IProps> = ({ repeat, lineIndex, onChange }) => {
         min={1}
         value={repeat ? repeat : 1}
         onChange={handleChange}
+        width="3em"
       />
     </Label>
   );

@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { IChords, ILyrics, ISection } from "../types";
+import { IChordLine, IChords, ILyrics, ISection } from "../types";
 
 import Button from "./Button";
 import ChordsEditor from "./ChordsEditor";
@@ -59,7 +59,32 @@ const SectionEditor: React.SFC<IProps> = ({
     onChange(index, { ...section, lyrics });
   };
 
-  const handleDelete = () => {
+  const handleChordLineAdd = () => {
+    const newChordLine: IChordLine = {
+      repeat: 1,
+      bars: { "1": ["A", "Bm"], "2": ["C#", "Dsus4"] }
+    };
+
+    onChange(index, {
+      ...section,
+      chords: {
+        ...section.chords,
+        lines: [...section.chords.lines, newChordLine]
+      }
+    });
+  };
+
+  const handleChordLineDelete = (i: number) => {
+    onChange(index, {
+      ...section,
+      chords: {
+        ...section.chords,
+        lines: section.chords.lines.filter((line, lineI) => lineI !== i)
+      }
+    });
+  };
+
+  const handleSectionDelete = () => {
     onDelete(index);
   };
 
@@ -69,11 +94,16 @@ const SectionEditor: React.SFC<IProps> = ({
         <Label label="Name">
           <Input value={section.name} onChange={handleNameChange} />
         </Label>
-        <Button variant="delete" onClick={handleDelete}>
-          Delete
+        <Button variant="delete" onClick={handleSectionDelete}>
+          Delete section
         </Button>
+        <Button onClick={handleChordLineAdd}>Add chord line</Button>
       </NameAndButtonsContainer>
-      <ChordsEditor chords={section.chords} onChange={handleChordsChange} />
+      <ChordsEditor
+        chords={section.chords}
+        onChange={handleChordsChange}
+        onChordLineDelete={handleChordLineDelete}
+      />
       <LyricsEditor lyrics={section.lyrics} onChange={handleLyricsChange} />
     </StyledSectionEditor>
   );
