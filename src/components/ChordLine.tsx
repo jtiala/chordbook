@@ -1,12 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import ChordBar from "./ChordBar";
+import { IChordLine } from "../types";
 
-interface IProps {
-  bars?: string[][];
-  repeat?: number;
-}
+import ChordBar from "./ChordBar";
 
 const StyledChordLine = styled.div`
   display: flex;
@@ -21,7 +18,7 @@ const BarLine = styled.span`
   color: tomato;
 `;
 
-const ChordLine: React.SFC<IProps> = ({ bars, repeat }) => {
+const ChordLine: React.SFC<IChordLine> = ({ bars, repeat }) => {
   const barKeys = Object.keys(bars)
     .map(key => parseInt(key, 10))
     .sort((a: any, b: any) => a - b);
@@ -29,7 +26,7 @@ const ChordLine: React.SFC<IProps> = ({ bars, repeat }) => {
 
   return (
     <StyledChordLine>
-      {barCount &&
+      {barCount > 0 &&
         barKeys.map((key: number, i: number) => {
           const bar = bars[key];
           const elems = [];

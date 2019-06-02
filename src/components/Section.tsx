@@ -2,16 +2,11 @@ import * as React from "react";
 import styled from "styled-components";
 
 import SettingsContext from "../contexts/Settings";
+import { ISection } from "../types";
 
 import Chords from "./Chords";
 import Heading from "./Heading";
 import Lyrics from "./Lyrics";
-
-interface IProps {
-  name?: string;
-  chords?: any;
-  lyrics?: any;
-}
 
 const StyledSection = styled.div`
   display: flex;
@@ -21,7 +16,7 @@ const StyledSection = styled.div`
   background: whitesmoke;
 `;
 
-const Section: React.SFC<IProps> = ({ name, chords, lyrics }) => {
+const Section: React.SFC<ISection> = ({ name, chords, lyrics }) => {
   const { lyricsVisible, chordsVisible } = React.useContext(SettingsContext);
 
   return (

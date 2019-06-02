@@ -1,12 +1,10 @@
 import * as React from "react";
 
+import { IChords } from "../types";
+
 import ChordLine from "./ChordLine";
 
-interface IProps {
-  lines?: any[];
-}
-
-const Chords: React.SFC<IProps> = ({ lines }) => (
+const Chords: React.SFC<IChords> = ({ lines }) => (
   <div>
     {lines &&
       lines.map((line: any, i: number) => (
