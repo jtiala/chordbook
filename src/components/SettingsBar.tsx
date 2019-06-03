@@ -10,7 +10,6 @@ const StyledSettingsBar = styled.div`
   display: flex;
   flex-direction: row;
   justify-items: space-between;
-  margin: 10px 0;
   background: whitesmoke;
   > * {
     margin: 10px 0 10px 10px;

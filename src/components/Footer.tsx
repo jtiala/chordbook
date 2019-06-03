@@ -2,18 +2,20 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const List = styled.ul`
-  display: flex;
-  flex-direction: row;
+const StyledFooter = styled.footer`
   margin: 20px 0 0 0;
-  padding: 3px 0 0 0;
-  list-style: none;
-  justify-content: right;
   border-top: 1px solid whitesmoke;
 `;
 
-const ListItem = styled.li`
-  margin: 0 10px 0 0;
+const LinkList = styled.ul`
+  display: flex;
+  flex-direction: row;
+  padding: 3px 0 0 0;
+  list-style: none;
+  justify-content: right;
+  > :not(:last-child) {
+    margin: 0 10px 0 0;
+  }
 `;
 
 const A = styled.a`
@@ -36,21 +38,21 @@ const StyledLink = styled(Link)`
 
 const Footer: React.SFC = () => {
   return (
-    <footer>
-      <List>
-        <ListItem>
+    <StyledFooter>
+      <LinkList>
+        <li>
           <StyledLink to="/">Home</StyledLink>
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <StyledLink to="/admin">Admin</StyledLink>
-        </ListItem>
-        <ListItem>
+        </li>
+        <li>
           <A href="https://github.com/jtiala/chordbook" target="_blank">
             GitHub
           </A>
-        </ListItem>
-      </List>
-    </footer>
+        </li>
+      </LinkList>
+    </StyledFooter>
   );
 };
 

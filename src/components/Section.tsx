@@ -11,9 +11,11 @@ import Lyrics from "./Lyrics";
 const StyledSection = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px 0;
   padding: 10px;
   background: whitesmoke;
+  > :not(:last-child) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Section: React.SFC<ISection> = ({ name, chords, lyrics }) => {

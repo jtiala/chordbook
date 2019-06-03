@@ -34,7 +34,7 @@ const ChordLine: React.SFC<IChordLine> = ({ bars, repeat }) => {
           if (i === 0 && repeat > 1) {
             elems.push(<BarLine key={`BarLine-${i}-0`}>|:</BarLine>);
           } else if (i === 0) {
-            elems.push(<BarLine key={`BarLine-${i}-0`}>|&nbsp;</BarLine>);
+            elems.push(<BarLine key={`BarLine-${i}-0`}>|</BarLine>);
           }
 
           elems.push(
