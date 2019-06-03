@@ -1,10 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
 
+import { IBreadcrumb } from "../types";
+
 import Footer from "./Footer";
+import Header from "./Header";
 
 interface IProps {
   children?: React.ReactNode;
+  title?: string;
+  breadcrumbs?: IBreadcrumb[];
 }
 
 const StyledPage = styled.section`
@@ -18,11 +23,18 @@ const StyledPage = styled.section`
   }
 `;
 
-const Page: React.SFC<IProps> = ({ children }) => (
-  <StyledPage>
-    {children}
-    <Footer />
-  </StyledPage>
-);
+const Page: React.SFC<IProps> = ({ children, title, breadcrumbs }) => {
+  React.useEffect(() => {
+    document.title = `Chordbook${title ? ` / ${title}` : ""}`;
+  });
+
+  return (
+    <StyledPage>
+      <Header title={title} breadcrumbs={breadcrumbs} />
+      {children}
+      <Footer />
+    </StyledPage>
+  );
+};
 
 export default Page;

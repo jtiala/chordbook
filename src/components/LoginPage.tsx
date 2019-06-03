@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 import { auth, IAuthError } from "../firebase";
+import { IBreadcrumb } from "../types";
 
 import Button from "./Button";
 import Form from "./Form";
@@ -50,12 +51,11 @@ const LoginPage: React.SFC = () => {
     return <Redirect to="/admin" />;
   }
 
-  return (
-    <Page>
-      <Heading level={1} variant="primary">
-        Login
-      </Heading>
+  const title = "Login";
+  const breadcrumbs: IBreadcrumb[] = [{ title, link: "/login" }];
 
+  return (
+    <Page title={title} breadcrumbs={breadcrumbs}>
       {error !== null && <Message variant="error">{error}</Message>}
 
       {loading ? (

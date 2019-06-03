@@ -5,10 +5,7 @@ import Page from "./Page";
 import SongList from "./SongList";
 
 const HomePage: React.SFC = () => (
-  <Page>
-    <Heading level={1} variant="primary">
-      Chordbook
-    </Heading>
+  <Page title="Home">
     <SongList />
   </Page>
 );

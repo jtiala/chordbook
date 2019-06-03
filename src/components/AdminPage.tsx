@@ -12,10 +12,7 @@ const AdminPage: React.SFC = () => {
   };
 
   return (
-    <AuthenticatedPage>
-      <Heading level={1} variant="primary">
-        Admin
-      </Heading>
+    <AuthenticatedPage title="Admin">
       <React.Fragment>
         <Button as="Link" variant="primary" to="/songs/new">
           Create song

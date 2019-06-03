@@ -3,6 +3,7 @@ import { useDocumentData } from "react-firebase-hooks/firestore";
 import { Redirect } from "react-router-dom";
 
 import { firestore } from "../firebase";
+import { IBreadcrumb } from "../types";
 
 import AuthenticatedPage from "./AuthenticatedPage";
 import Heading from "./Heading";
@@ -21,12 +22,16 @@ const EditSongPage: React.SFC<IProps> = ({ songId }) => {
 
   if (data) {
     const { artist, title, sections } = data;
+    const songName = `${artist} - ${title}`;
+    const songLink = `/songs/${songId}`;
+    const editLink = `${songLink}/edit`;
+    const breadcrumbs: IBreadcrumb[] = [
+      { title: songName, link: songLink },
+      { title: "Edit", link: editLink }
+    ];
 
     return (
-      <AuthenticatedPage>
-        <Heading level={1} variant="primary">
-          Edit Song
-        </Heading>
+      <AuthenticatedPage title={`${songName} / Edit`} breadcrumbs={breadcrumbs}>
         <SongEditor
           id={songId}
           artist={artist}
@@ -39,7 +44,7 @@ const EditSongPage: React.SFC<IProps> = ({ songId }) => {
 
   if (loading) {
     return (
-      <AuthenticatedPage>
+      <AuthenticatedPage title="Loading">
         <Pulse />
       </AuthenticatedPage>
     );
@@ -47,7 +52,7 @@ const EditSongPage: React.SFC<IProps> = ({ songId }) => {
 
   if (error) {
     return (
-      <AuthenticatedPage>
+      <AuthenticatedPage title="Error">
         <Message variant="error">Error: {error}</Message>
       </AuthenticatedPage>
     );

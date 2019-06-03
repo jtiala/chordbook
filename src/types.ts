@@ -25,3 +25,8 @@ export interface ISong {
   title?: string;
   sections?: ISection[];
 }
+
+export interface IBreadcrumb {
+  title: string;
+  link?: string;
+}

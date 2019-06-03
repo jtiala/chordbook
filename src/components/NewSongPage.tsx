@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { firestore } from "../firebase";
-import { ISection } from "../types";
+import { IBreadcrumb, ISection } from "../types";
 
 import AuthenticatedPage from "./AuthenticatedPage";
 import Heading from "./Heading";
@@ -25,11 +25,11 @@ const NewSongPage: React.SFC = () => {
     }
   ];
 
+  const title = "New Song";
+  const breadcrumbs: IBreadcrumb[] = [{ title, link: `/songs/new` }];
+
   return (
-    <AuthenticatedPage>
-      <Heading level={1} variant="primary">
-        New Song
-      </Heading>
+    <AuthenticatedPage title={title} breadcrumbs={breadcrumbs}>
       <SongEditor artist={""} title={""} sections={sections} />
     </AuthenticatedPage>
   );

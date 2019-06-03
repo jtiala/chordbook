@@ -124,7 +124,7 @@ const SongEditor: React.SFC<IProps> = ({
   });
 
   return (
-    <Form onSubmit={handleSubmit} variant="stretch">
+    <Form onSubmit={handleSubmit}>
       {error && <Message variant="error">Error: {error}</Message>}
       <Heading level={2}>Details</Heading>
       <Label label="Artist">

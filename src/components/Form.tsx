@@ -4,22 +4,18 @@ import styled from "styled-components";
 interface IProps {
   children?: React.ReactNode;
   onSubmit?: (e: React.FormEvent) => void;
-  variant?: string;
 }
 
-const StyledForm = styled.form<IProps>`
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: ${props => (props.variant === "stretch" ? "100%" : "480px")};
   > :not(:last-child) {
     margin-bottom: 10px;
   }
 `;
 
-const Form: React.SFC<IProps> = ({ children, onSubmit, variant }) => (
-  <StyledForm onSubmit={onSubmit} variant={variant}>
-    {children}
-  </StyledForm>
+const Form: React.SFC<IProps> = ({ children, onSubmit }) => (
+  <StyledForm onSubmit={onSubmit}>{children}</StyledForm>
 );
 
 export default Form;

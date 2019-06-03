@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import SettingsContext from "../contexts/Settings";
 import { firestore } from "../firebase";
+import { IBreadcrumb } from "../types";
 
 import ActionsBar from "./ActionsBar";
 import AuthenticatedComponent from "./AuthenticatedComponent";
@@ -37,7 +38,7 @@ const SongPage: React.SFC<IProps> = ({ songId }) => {
 
   if (loading) {
     return (
-      <Page>
+      <Page title="Loading">
         <Pulse />
       </Page>
     );
@@ -45,19 +46,14 @@ const SongPage: React.SFC<IProps> = ({ songId }) => {
 
   if (data) {
     const { artist, title, sections } = data;
+    const songName = `${artist} - ${title}`;
+    const breadcrumbs: IBreadcrumb[] = [
+      { title: songName, link: `/songs/${songId}` }
+    ];
 
     return (
-      <Page>
-        <Heading level={1} variant="primary">
-          {artist && artist}
-          <Separator> - </Separator>
-          {title && title}
-        </Heading>
-
+      <Page title={songName} breadcrumbs={breadcrumbs}>
         <ActionsBar>
-          <Button as="Link" to="/" variant="primary">
-            &#9668; Back to song list
-          </Button>
           <Button onClick={toggleLyrics}>
             {lyricsVisible ? "Hide lyrics" : "Show lyrics"}
           </Button>
@@ -81,7 +77,7 @@ const SongPage: React.SFC<IProps> = ({ songId }) => {
 
   if (error) {
     return (
-      <Page>
+      <Page title="Error">
         <Message variant="error">Error: {error}</Message>
       </Page>
     );
