@@ -2,14 +2,17 @@ import * as React from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
 
+import SettingsContext from "../contexts/Settings";
 import { firestore } from "../firebase";
 
+import ActionsBar from "./ActionsBar";
+import AuthenticatedComponent from "./AuthenticatedComponent";
+import Button from "./Button";
 import Heading from "./Heading";
 import Message from "./Message";
 import Page from "./Page";
 import Pulse from "./Pulse";
 import Section from "./Section";
-import SettingsBar from "./SettingsBar";
 
 interface IProps {
   songId: string;
@@ -21,6 +24,13 @@ const Separator = styled.span`
 
 const SongPage: React.SFC<IProps> = ({ songId }) => {
   const [value, loading, error] = useDocument(firestore.doc(`songs/${songId}`));
+
+  const {
+    lyricsVisible,
+    chordsVisible,
+    toggleLyrics,
+    toggleChords
+  } = React.useContext(SettingsContext);
 
   if (loading) {
     return (
@@ -41,7 +51,22 @@ const SongPage: React.SFC<IProps> = ({ songId }) => {
           {title && title}
         </Heading>
 
-        <SettingsBar />
+        <ActionsBar>
+          <Button as="Link" to="/" variant="primary">
+            &#9668; Back to song list
+          </Button>
+          <Button onClick={toggleLyrics}>
+            {lyricsVisible ? "Hide lyrics" : "Show lyrics"}
+          </Button>
+          <Button onClick={toggleChords}>
+            {chordsVisible ? "Hide chords" : "Show chords"}
+          </Button>
+          <AuthenticatedComponent>
+            <Button as="Link" to={`/songs/${songId}/edit`}>
+              Edit
+            </Button>
+          </AuthenticatedComponent>
+        </ActionsBar>
 
         {sections &&
           sections.map((section: any, i: number) => (
