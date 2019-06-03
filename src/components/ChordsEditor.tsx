@@ -9,11 +9,10 @@ import ChordLine from "./ChordLine";
 import Heading from "./Heading";
 import Input from "./Input";
 import Label from "./Label";
-import Message from "./Message";
 import RepeatEditor from "./RepeatEditor";
 
 interface IProps {
-  chords: IChords;
+  chords?: IChords;
   onChange: (chords: IChords) => void;
   onChordLineDelete: (index: number) => void;
 }
@@ -67,7 +66,7 @@ const ChordsEditor: React.SFC<IProps> = ({
   onChange,
   onChordLineDelete
 }) => {
-  const { lines } = chords;
+  const lines: IChordLine[] = chords ? chords.lines : [];
 
   const parseNewBarsAfterAdd = (
     bars: IBars,
@@ -203,10 +202,14 @@ const ChordsEditor: React.SFC<IProps> = ({
     });
   }
 
+  if (lineElems.length < 1) {
+    return null;
+  }
+
   return (
     <React.Fragment>
       <Heading level={3}>Chords</Heading>
-      {lineElems.length > 0 ? lineElems : <Message>No chords.</Message>}
+      {lineElems}
     </React.Fragment>
   );
 };

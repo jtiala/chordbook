@@ -46,17 +46,18 @@ const SectionEditor: React.SFC<IProps> = ({
   onChange,
   onDelete
 }) => {
+  const { name, chords, lyrics } = section;
+
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.value;
-    onChange(index, { ...section, name });
+    onChange(index, { ...section, name: e.target.value });
   };
 
-  const handleChordsChange = (chords: IChords) => {
-    onChange(index, { ...section, chords });
+  const handleChordsChange = (newChords: IChords) => {
+    onChange(index, { ...section, chords: newChords });
   };
 
-  const handleLyricsChange = (lyrics: ILyrics) => {
-    onChange(index, { ...section, lyrics });
+  const handleLyricsChange = (newLyrics: ILyrics) => {
+    onChange(index, { ...section, lyrics: newLyrics });
   };
 
   const handleChordLineAdd = () => {
@@ -65,12 +66,16 @@ const SectionEditor: React.SFC<IProps> = ({
       bars: { "1": ["A", "Bm"], "2": ["C#", "Dsus4"] }
     };
 
+    const newChords = chords
+      ? {
+          ...chords,
+          lines: [...chords.lines, newChordLine]
+        }
+      : { lines: [newChordLine] };
+
     onChange(index, {
       ...section,
-      chords: {
-        ...section.chords,
-        lines: [...section.chords.lines, newChordLine]
-      }
+      chords: newChords
     });
   };
 
@@ -78,7 +83,7 @@ const SectionEditor: React.SFC<IProps> = ({
     onChange(index, {
       ...section,
       chords: {
-        ...section.chords,
+        ...chords,
         lines: section.chords.lines.filter((line, lineI) => lineI !== i)
       }
     });
@@ -96,7 +101,7 @@ const SectionEditor: React.SFC<IProps> = ({
     <StyledSectionEditor>
       <NameAndButtonsContainer>
         <Label label="Name">
-          <Input value={section.name} onChange={handleNameChange} />
+          <Input value={name} onChange={handleNameChange} />
         </Label>
         <Button variant="delete" onClick={handleSectionDelete}>
           Delete section
@@ -104,11 +109,11 @@ const SectionEditor: React.SFC<IProps> = ({
         <Button onClick={handleChordLineAdd}>Add chord line</Button>
       </NameAndButtonsContainer>
       <ChordsEditor
-        chords={section.chords}
+        chords={chords}
         onChange={handleChordsChange}
         onChordLineDelete={handleChordLineDelete}
       />
-      <LyricsEditor lyrics={section.lyrics} onChange={handleLyricsChange} />
+      <LyricsEditor lyrics={lyrics} onChange={handleLyricsChange} />
     </StyledSectionEditor>
   );
 };

@@ -18,7 +18,7 @@ const AdminPage: React.SFC = () => {
         Admin
       </Heading>
       <React.Fragment>
-        <Button as="Link" variant="primary" to="/admin/createSong">
+        <Button as="Link" variant="primary" to="/songs/new">
           Create song
         </Button>
         <Button onClick={logout}>Logout</Button>

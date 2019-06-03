@@ -2,11 +2,13 @@ import * as React from "react";
 import {
   BrowserRouter as Router,
   Route,
-  RouteComponentProps
+  RouteComponentProps,
+  Switch
 } from "react-router-dom";
 import styled from "styled-components";
 
 import AdminPage from "./AdminPage";
+import EditSongPage from "./EditSongPage";
 import HomePage from "./HomePage";
 import LoginPage from "./LoginPage";
 import NewSongPage from "./NewSongPage";
@@ -27,14 +29,25 @@ const renderSongPage = (
   props: RouteComponentProps<IRenderSongIdMatchParams>
 ) => <SongPage songId={props.match.params.songId} />;
 
+const renderEditSongPage = (
+  props: RouteComponentProps<IRenderSongIdMatchParams>
+) => <EditSongPage songId={props.match.params.songId} />;
+
 const App: React.SFC = () => (
   <StyledApp>
     <Router basename={process.env.PUBLIC_PATH}>
-      <Route path="/" exact={true} component={HomePage} />
-      <Route path="/login" exact={true} component={LoginPage} />
-      <Route path="/admin" exact={true} component={AdminPage} />
-      <Route path="/songs/:songId" render={renderSongPage} />
-      <Route path="/admin/createSong" exact={true} component={NewSongPage} />
+      <Switch>
+        <Route path="/" exact={true} component={HomePage} />
+        <Route path="/login" exact={true} component={LoginPage} />
+        <Route path="/admin" exact={true} component={AdminPage} />
+        <Route path="/songs/new" exact={true} component={NewSongPage} />
+        <Route path="/songs/:songId" exact={true} render={renderSongPage} />
+        <Route
+          path="/songs/:songId/edit"
+          exact={true}
+          render={renderEditSongPage}
+        />
+      </Switch>
     </Router>
   </StyledApp>
 );
