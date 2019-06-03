@@ -5,22 +5,21 @@ import Footer from "./Footer";
 
 interface IProps {
   children?: React.ReactNode;
-  variant?: string;
 }
 
-const StyledPage = styled.section<IProps>`
+const StyledPage = styled.section`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: ${props => (props.variant === "stretch" ? "stretch" : "center")};
+  align-items: stretch;
 
   > :not(:last-child) {
     margin-bottom: 10px;
   }
 `;
 
-const Page: React.SFC<IProps> = ({ children, variant }) => (
-  <StyledPage variant={variant}>
+const Page: React.SFC<IProps> = ({ children }) => (
+  <StyledPage>
     {children}
     <Footer />
   </StyledPage>

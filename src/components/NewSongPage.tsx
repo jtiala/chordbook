@@ -26,7 +26,7 @@ const NewSongPage: React.SFC = () => {
   ];
 
   return (
-    <AuthenticatedPage variant="stretch">
+    <AuthenticatedPage>
       <Heading level={1} variant="primary">
         New Song
       </Heading>

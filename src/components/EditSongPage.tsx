@@ -23,7 +23,7 @@ const EditSongPage: React.SFC<IProps> = ({ songId }) => {
     const { artist, title, sections } = data;
 
     return (
-      <AuthenticatedPage variant="stretch">
+      <AuthenticatedPage>
         <Heading level={1} variant="primary">
           Edit Song
         </Heading>

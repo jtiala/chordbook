@@ -47,7 +47,7 @@ const SongPage: React.SFC<IProps> = ({ songId }) => {
     const { artist, title, sections } = data;
 
     return (
-      <Page variant="stretch">
+      <Page>
         <Heading level={1} variant="primary">
           {artist && artist}
           <Separator> - </Separator>
