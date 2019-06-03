@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useDocument } from "react-firebase-hooks/firestore";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 import SettingsContext from "../contexts/Settings";
@@ -23,7 +24,9 @@ const Separator = styled.span`
 `;
 
 const SongPage: React.SFC<IProps> = ({ songId }) => {
-  const [value, loading, error] = useDocument(firestore.doc(`songs/${songId}`));
+  const [data, loading, error] = useDocumentData(
+    firestore.doc(`songs/${songId}`)
+  );
 
   const {
     lyricsVisible,
@@ -40,8 +43,8 @@ const SongPage: React.SFC<IProps> = ({ songId }) => {
     );
   }
 
-  if (value) {
-    const { artist, title, sections } = value.data();
+  if (data) {
+    const { artist, title, sections } = data;
 
     return (
       <Page variant="stretch">
@@ -76,11 +79,15 @@ const SongPage: React.SFC<IProps> = ({ songId }) => {
     );
   }
 
-  return (
-    <Page>
-      <Message variant="error">Error{error && `: ${error}`}</Message>
-    </Page>
-  );
+  if (error) {
+    return (
+      <Page>
+        <Message variant="error">Error: {error}</Message>
+      </Page>
+    );
+  }
+
+  return <Redirect to="/" />;
 };
 
 export default SongPage;

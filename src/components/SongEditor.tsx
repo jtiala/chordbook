@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useDocument } from "react-firebase-hooks/firestore";
 import { Redirect } from "react-router-dom";
 
 import { firestore } from "../firebase";
@@ -69,6 +68,22 @@ const SongEditor: React.SFC<IProps> = ({
     setSections(sections.filter((section, i) => i !== index));
   };
 
+  const handleSongDelete = () => {
+    const confirmed = confirm("Really?");
+
+    if (confirmed) {
+      const songId = id ? id : songIdFromArtistAndTitle(artist, title);
+
+      firestore
+        .collection("songs")
+        .doc(songId)
+        .delete()
+        .catch((err: string) => {
+          setError(err);
+        });
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -121,6 +136,9 @@ const SongEditor: React.SFC<IProps> = ({
       <Heading level={2}>Sections</Heading>
       {sectionEditors}
       <Button onClick={handleSectionAdd}>Add section</Button>
+      <Button onClick={handleSongDelete} variant="delete">
+        Delete Song
+      </Button>
       <Button type="submit" variant="primary">
         Submit
       </Button>

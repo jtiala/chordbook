@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useDocument } from "react-firebase-hooks/firestore";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { Redirect } from "react-router-dom";
 
 import { firestore } from "../firebase";
 
@@ -14,12 +15,13 @@ interface IProps {
 }
 
 const EditSongPage: React.SFC<IProps> = ({ songId }) => {
-  const [value, fetching, error] = useDocument(
+  const [data, loading, error] = useDocumentData(
     firestore.doc(`songs/${songId}`)
   );
 
-  if (value) {
-    const { artist, title, sections } = value.data();
+  if (data) {
+    const { artist, title, sections } = data;
+
     return (
       <AuthenticatedPage variant="stretch">
         <Heading level={1} variant="primary">
@@ -35,7 +37,7 @@ const EditSongPage: React.SFC<IProps> = ({ songId }) => {
     );
   }
 
-  if (fetching) {
+  if (loading) {
     return (
       <AuthenticatedPage>
         <Pulse />
@@ -43,13 +45,15 @@ const EditSongPage: React.SFC<IProps> = ({ songId }) => {
     );
   }
 
-  return (
-    <AuthenticatedPage>
-      <Message variant="error">
-        {`Error: ${error ? error : "Unknown error while fetching data"}`}
-      </Message>
-    </AuthenticatedPage>
-  );
+  if (error) {
+    return (
+      <AuthenticatedPage>
+        <Message variant="error">Error: {error}</Message>
+      </AuthenticatedPage>
+    );
+  }
+
+  return <Redirect to="/" />;
 };
 
 export default EditSongPage;

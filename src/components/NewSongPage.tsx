@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useDocument } from "react-firebase-hooks/firestore";
 
 import { firestore } from "../firebase";
 import { ISection } from "../types";
