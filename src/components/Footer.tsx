@@ -1,25 +1,28 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import AuthenticatedComponent from "./AuthenticatedComponent";
 
 const StyledFooter = styled.footer`
-  margin: 20px 0 0 0;
-  border-top: 1px solid whitesmoke;
-`;
-
-const LinkList = styled.ul`
   display: flex;
   flex-direction: row;
-  padding: 3px 0 0 0;
-  list-style: none;
-  justify-content: right;
-  > :not(:last-child) {
-    margin: 0 10px 0 0;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0 0 0;
+  padding-top: 3px;
+  border-top: 1px solid whitesmoke;
+
+  > * {
+    max-width: 50%;
+  }
+
+  > :last-child {
+    text-align: right;
   }
 `;
 
 const A = styled.a`
-  color: black;
+  color: dimgray;
   text-decoration: none;
 
   :hover {
@@ -37,21 +40,36 @@ const StyledLink = styled(Link)`
 `;
 
 const Footer: React.SFC = () => {
+  const LoginLogoutLink = (
+    <AuthenticatedComponent
+      fallback={<StyledLink to="/login">Login</StyledLink>}
+    >
+      <StyledLink to="/logout">Logout</StyledLink>
+    </AuthenticatedComponent>
+  );
+
+  const CreatorLink = (
+    <A href="https://jtia.la" target="_blank">
+      jtiala
+    </A>
+  );
+
+  const RepositoryLink = (
+    <A href="https://github.com/jtiala/chordbook" target="_blank">
+      GitHub
+    </A>
+  );
+
   return (
     <StyledFooter>
-      <LinkList>
-        <li>
-          <StyledLink to="/">Home</StyledLink>
-        </li>
-        <li>
-          <StyledLink to="/admin">Admin</StyledLink>
-        </li>
-        <li>
-          <A href="https://github.com/jtiala/chordbook" target="_blank">
-            GitHub
-          </A>
-        </li>
-      </LinkList>
+      <span>{LoginLogoutLink}</span>
+      <span>
+        {"OSS by "}
+        {CreatorLink}
+        {", available at "}
+        {RepositoryLink}
+        {"."}
+      </span>
     </StyledFooter>
   );
 };

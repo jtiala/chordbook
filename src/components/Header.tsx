@@ -13,21 +13,36 @@ interface IProps {
 
 const StyledHeader = styled.header`
   border-bottom: 2px solid dimgray;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 `;
 
 const LinkList = styled.ul`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin: 0;
-  padding: 3px 0 0 0;
+  padding: 0;
   list-style: none;
   justify-content: left;
 
+  > * {
+    padding-bottom: 3px;
+  }
+
   > :not(:last-child) {
     margin: 0 10px 0 0;
+
     :after {
-      content: " / ";
+      content: " ";
+    }
+  }
+
+  > :not(:first-child) {
+    margin: 0 10px 0 0;
+
+    :before {
+      content: "/ ";
+      color: dimgray;
     }
   }
 `;
