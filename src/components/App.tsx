@@ -11,6 +11,7 @@ import AdminPage from "./AdminPage";
 import EditSongPage from "./EditSongPage";
 import HomePage from "./HomePage";
 import LoginPage from "./LoginPage";
+import LogoutPage from "./LogoutPage";
 import NewSongPage from "./NewSongPage";
 import SongPage from "./SongPage";
 
@@ -39,6 +40,7 @@ const App: React.SFC = () => (
       <Switch>
         <Route path="/" exact={true} component={HomePage} />
         <Route path="/login" exact={true} component={LoginPage} />
+        <Route path="/logout" exact={true} component={LogoutPage} />
         <Route path="/admin" exact={true} component={AdminPage} />
         <Route path="/songs/new" exact={true} component={NewSongPage} />
         <Route path="/songs/:songId" exact={true} render={renderSongPage} />
