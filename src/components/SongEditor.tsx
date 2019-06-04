@@ -1,18 +1,17 @@
-import * as React from "react";
-import { Redirect } from "react-router-dom";
+import * as React from 'react';
+import { Redirect } from 'react-router-dom';
 
-import { firestore } from "../firebase";
-import { ISection } from "../types";
-import { songIdFromArtistAndTitle } from "../utils";
+import { firestore } from '../firebase';
+import { ISection } from '../types';
+import { songIdFromArtistAndTitle } from '../utils';
 
-import Button from "./Button";
-import Form from "./Form";
-import Heading from "./Heading";
-import Input from "./Input";
-import Label from "./Label";
-import Message from "./Message";
-import Pulse from "./Pulse";
-import SectionEditor from "./SectionEditor";
+import Button from './Button';
+import Form from './Form';
+import Heading from './Heading';
+import Input from './Input';
+import Label from './Label';
+import Message from './Message';
+import SectionEditor from './SectionEditor';
 
 interface IProps {
   id?: string;
@@ -25,7 +24,7 @@ const SongEditor: React.SFC<IProps> = ({
   id,
   artist: initialArtist,
   title: initialTitle,
-  sections: initialSections
+  sections: initialSections,
 }) => {
   const [error, setError] = React.useState(null);
   const [redirect, setRedirect] = React.useState(null);
@@ -33,49 +32,47 @@ const SongEditor: React.SFC<IProps> = ({
   const [title, setTitle] = React.useState(initialTitle);
   const [sections, setSections] = React.useState<ISection[]>(initialSections);
 
-  const handleArtistChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleArtistChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setArtist(e.target.value);
   };
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
   };
 
-  const handleSectionChange = (index: number, newSection: ISection) => {
-    setSections(
-      sections.map((section, i) => (i === index ? newSection : sections[i]))
-    );
+  const handleSectionChange = (index: number, newSection: ISection): void => {
+    setSections(sections.map((section, i) => (i === index ? newSection : sections[i])));
   };
 
-  const handleSectionAdd = () => {
+  const handleSectionAdd = (): void => {
     const newSection: ISection = {
-      name: "Chorus",
+      name: 'Chorus',
       chords: {
         lines: [
           {
             repeat: 1,
-            bars: { "1": ["A", "Bm"], "2": ["C#", "Dsus4"] }
-          }
-        ]
+            bars: { '1': ['A', 'Bm'], '2': ['C#', 'Dsus4'] },
+          },
+        ],
       },
-      lyrics: { lines: [] }
+      lyrics: { lines: [] },
     };
 
     setSections([...sections, newSection]);
   };
 
-  const handleSectionDelete = (index: number) => {
+  const handleSectionDelete = (index: number): void => {
     setSections(sections.filter((section, i) => i !== index));
   };
 
-  const handleSongDelete = () => {
-    const confirmed = confirm("Really?");
+  const handleSongDelete = (): void => {
+    const confirmed = confirm('Really?');
 
     if (confirmed) {
       const songId = id ? id : songIdFromArtistAndTitle(artist, title);
 
       firestore
-        .collection("songs")
+        .collection('songs')
         .doc(songId)
         .delete()
         .catch((err: string) => {
@@ -84,18 +81,18 @@ const SongEditor: React.SFC<IProps> = ({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     const songId = id ? id : songIdFromArtistAndTitle(artist, title);
 
     firestore
-      .collection("songs")
+      .collection('songs')
       .doc(songId)
       .set({
         artist,
         title,
-        sections
+        sections,
       })
       .then(() => {
         setRedirect(`/songs/${songId}`);
@@ -119,7 +116,7 @@ const SongEditor: React.SFC<IProps> = ({
         index={index}
         onChange={handleSectionChange}
         onDelete={handleSectionDelete}
-      />
+      />,
     );
   });
 

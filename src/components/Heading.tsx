@@ -1,5 +1,5 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
 interface IProps {
   level?: number;
@@ -10,27 +10,27 @@ interface IProps {
 const H1 = styled.h1<IProps>`
   margin: 0;
   font-size: 28px;
-  font-family: "Caveat Brush", cursive;
+  font-family: 'Caveat Brush', cursive;
   text-align: center;
-  color: ${props => (props.variant === "primary" ? "tomato" : "black")};
+  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
 `;
 
 const H2 = styled.h2<IProps>`
   margin: 0;
   font-size: 20px;
-  font-family: "Caveat Brush", cursive;
+  font-family: 'Caveat Brush', cursive;
   text-align: center;
-  color: ${props => (props.variant === "primary" ? "tomato" : "black")};
+  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
 `;
 
 const H3 = styled.h3<IProps>`
   margin: 0;
   font-size: 14px;
-  font-family: "Ubuntu Mono", monospace;
+  font-family: 'Ubuntu Mono', monospace;
   font-weight: 400;
   text-transform: uppercase;
   text-align: left;
-  color: ${props => (props.variant === "primary" ? "tomato" : "black")};
+  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
 `;
 
 const Heading: React.SFC<IProps> = ({ level, variant, children }) => {

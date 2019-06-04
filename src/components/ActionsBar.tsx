@@ -1,6 +1,5 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
 interface IProps {
   children?: React.ReactNode;
@@ -22,7 +21,7 @@ const StyledActionsBar = styled.div`
   }
 `;
 
-const ActionsBar: React.SFC = ({ children }) => {
+const ActionsBar: React.SFC<IProps> = ({ children }) => {
   return <StyledActionsBar>{children}</StyledActionsBar>;
 };
 

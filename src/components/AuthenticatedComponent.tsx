@@ -1,12 +1,7 @@
-import * as React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Redirect } from "react-router-dom";
+import * as React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { auth } from "../firebase";
-
-import Message from "./Message";
-import Page from "./Page";
-import Pulse from "./Pulse";
+import { auth } from '../firebase';
 
 interface IProps {
   children?: React.ReactNode;
@@ -14,7 +9,7 @@ interface IProps {
 }
 
 const AuthenticatedComponent: React.SFC<IProps> = ({ children, fallback }) => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   if (user) {
     return <React.Fragment>{children}</React.Fragment>;

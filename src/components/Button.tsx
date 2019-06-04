@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import styled, { css } from "styled-components";
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
 interface IProps {
   as?: string;
@@ -9,25 +9,25 @@ interface IProps {
   href?: string;
   to?: string;
   onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  type?: "button" | "reset" | "submit";
+  type?: 'button' | 'reset' | 'submit';
   value?: string | number;
   disabled?: boolean;
 }
 
 const CommonStyles = css<IProps>`
-  background-color: ${props => {
+  background-color: ${(props) => {
     switch (props.variant) {
-      case "error":
-      case "delete":
-        return "red";
-      case "success":
-        return "green";
-      case "danger":
-        return "orange";
-      case "primary":
-        return "tomato";
+      case 'error':
+      case 'delete':
+        return 'red';
+      case 'success':
+        return 'green';
+      case 'danger':
+        return 'orange';
+      case 'primary':
+        return 'tomato';
       default:
-        return "dimgray";
+        return 'dimgray';
     }
   }};
   padding: 12px 14px;
@@ -40,19 +40,19 @@ const CommonStyles = css<IProps>`
   cursor: pointer;
 
   :focus {
-    outline: ${props => {
+    outline: ${(props) => {
         switch (props.variant) {
-          case "error":
-          case "delete":
-            return "red";
-          case "success":
-            return "green";
-          case "danger":
-            return "orange";
-          case "primary":
-            return "tomato";
+          case 'error':
+          case 'delete':
+            return 'red';
+          case 'success':
+            return 'green';
+          case 'danger':
+            return 'orange';
+          case 'primary':
+            return 'tomato';
           default:
-            return "dimgray";
+            return 'dimgray';
         }
       }}
       auto 3px;
@@ -85,25 +85,15 @@ const StyledButton = styled.button`
   ${CommonStyles}
 `;
 
-const Button: React.SFC<IProps> = ({
-  as,
-  variant,
-  children,
-  href,
-  to,
-  onClick,
-  type,
-  value,
-  disabled
-}) => {
+const Button: React.SFC<IProps> = ({ as, variant, children, href, to, onClick, type, value, disabled }) => {
   switch (as) {
-    case "a":
+    case 'a':
       return (
         <StyledA variant={variant} href={href}>
           {children}
         </StyledA>
       );
-    case "Link":
+    case 'Link':
       return (
         <StyledLink variant={variant} to={to}>
           {children}
@@ -114,7 +104,7 @@ const Button: React.SFC<IProps> = ({
         <StyledButton
           variant={variant}
           onClick={onClick}
-          type={type ? type : "button"}
+          type={type ? type : 'button'}
           value={value}
           disabled={disabled}
         >

@@ -1,12 +1,12 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
-import SettingsContext from "../contexts/Settings";
-import { ISection } from "../types";
+import SettingsContext from '../contexts/Settings';
+import { ISection } from '../types';
 
-import Chords from "./Chords";
-import Heading from "./Heading";
-import Lyrics from "./Lyrics";
+import Chords from './Chords';
+import Heading from './Heading';
+import Lyrics from './Lyrics';
 
 const StyledSection = styled.div`
   display: flex;

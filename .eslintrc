@@ -17,5 +17,17 @@
     "react": {
       "version": "detect"
     }
+  },
+  "rules": {
+    "react/prop-types": "off",
+
+    "@typescript-eslint/interface-name-prefix": "always",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true
+      }
+    ]
   }
 }

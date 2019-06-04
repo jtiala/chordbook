@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 const SettingsContext = React.createContext(null);
 
@@ -14,14 +14,14 @@ interface IState {
 }
 
 export class SettingsProvider extends React.Component<IProps, IState> {
-  constructor(props: any) {
+  public constructor(props: IProps) {
     super(props);
 
     this.state = {
       lyricsVisible: true,
       chordsVisible: true,
       toggleLyrics: this.toggleLyrics,
-      toggleChords: this.toggleChords
+      toggleChords: this.toggleChords,
     };
   }
 
@@ -33,12 +33,8 @@ export class SettingsProvider extends React.Component<IProps, IState> {
     this.setState({ chordsVisible: !this.state.chordsVisible });
   };
 
-  public render() {
-    return (
-      <SettingsContext.Provider value={this.state}>
-        {this.props.children}
-      </SettingsContext.Provider>
-    );
+  public render(): React.ReactElement {
+    return <SettingsContext.Provider value={this.state}>{this.props.children}</SettingsContext.Provider>;
   }
 }
 

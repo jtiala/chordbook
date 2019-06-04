@@ -33,3 +33,6 @@ coverage
 .vscode
 .idea
 *.swp
+
+# Data folder
+data

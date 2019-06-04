@@ -1,10 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
-import AuthenticatedComponent from "./AuthenticatedComponent";
-import Button from "./Button";
-import Heading from "./Heading";
-import Page from "./Page";
-import SongList from "./SongList";
+import AuthenticatedComponent from './AuthenticatedComponent';
+import Button from './Button';
+import Page from './Page';
+import SongList from './SongList';
 
 const HomePage: React.SFC = () => (
   <Page title="Home">

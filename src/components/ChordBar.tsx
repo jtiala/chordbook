@@ -1,5 +1,5 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
 interface IProps {
   chords?: string[];
@@ -10,7 +10,7 @@ const StyledChordBar = styled.div<IProps>`
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  flex-basis: ${props => 100 / props.barCount}%;
+  flex-basis: ${(props) => 100 / props.barCount}%;
   justify-content: space-around;
 `;
 
@@ -20,10 +20,7 @@ const Chord = styled.span`
 
 const ChordBar: React.SFC<IProps> = ({ chords, barCount }) => (
   <StyledChordBar barCount={barCount}>
-    {chords &&
-      chords
-        .filter(chord => chord.length > 0)
-        .map((chord, i) => <Chord key={`Chord-${i}`}>{chord}</Chord>)}
+    {chords && chords.filter((chord) => chord.length > 0).map((chord, i) => <Chord key={`Chord-${i}`}>{chord}</Chord>)}
   </StyledChordBar>
 );
 

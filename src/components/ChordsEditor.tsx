@@ -1,15 +1,13 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
-import { IBars, IChordLine, IChords } from "../types";
+import { IBars, IChordLine, IChords } from '../types';
 
-import BarEditor from "./BarEditor";
-import Button from "./Button";
-import ChordLine from "./ChordLine";
-import Heading from "./Heading";
-import Input from "./Input";
-import Label from "./Label";
-import RepeatEditor from "./RepeatEditor";
+import BarEditor from './BarEditor';
+import Button from './Button';
+import ChordLine from './ChordLine';
+import Heading from './Heading';
+import RepeatEditor from './RepeatEditor';
 
 interface IProps {
   chords?: IChords;
@@ -61,91 +59,69 @@ const ChordLineInputsContainer = styled.div`
   }
 `;
 
-const ChordsEditor: React.SFC<IProps> = ({
-  chords,
-  onChange,
-  onChordLineDelete
-}) => {
+const ChordsEditor: React.SFC<IProps> = ({ chords, onChange, onChordLineDelete }) => {
   const lines: IChordLine[] = chords ? chords.lines : [];
 
-  const parseNewBarsAfterAdd = (
-    bars: IBars,
-    barIndex: number,
-    newBar: string[]
-  ) => {
+  const parseNewBarsAfterAdd = (bars: IBars, barIndex: number, newBar: string[]): IBars => {
     const newBars: IBars = {};
 
     Object.keys(bars).map((key: string, barI: number) =>
-      barI === barIndex ? (newBars[key] = newBar) : (newBars[key] = bars[key])
+      barI === barIndex ? (newBars[key] = newBar) : (newBars[key] = bars[key]),
     );
 
     return newBars;
   };
 
-  const parseNewBarsAfterDelete = (bars: IBars, barIndex: number) => {
+  const parseNewBarsAfterDelete = (bars: IBars, barIndex: number): IBars => {
     const newBars: IBars = {};
 
-    Object.keys(bars).map((key: string, barI: number) =>
-      barI !== barIndex ? (newBars[key] = bars[key]) : undefined
-    );
+    Object.keys(bars).map((key: string, barI: number) => (barI !== barIndex ? (newBars[key] = bars[key]) : undefined));
 
     return newBars;
   };
 
-  const handleBarChange = (
-    newBar: string[],
-    lineIndex: number,
-    barIndex: number
-  ) => {
-    const newChordLines: IChordLine[] = chords.lines.map(
-      (line: IChordLine, lineI: number) =>
-        lineI === lineIndex
-          ? { ...line, bars: parseNewBarsAfterAdd(line.bars, barIndex, newBar) }
-          : line
+  const handleBarChange = (newBar: string[], lineIndex: number, barIndex: number): void => {
+    const newChordLines: IChordLine[] = chords.lines.map((line: IChordLine, lineI: number) =>
+      lineI === lineIndex ? { ...line, bars: parseNewBarsAfterAdd(line.bars, barIndex, newBar) } : line,
     );
 
     onChange({ ...chords, lines: newChordLines });
   };
 
-  const handleBarAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleBarAdd = (e: React.MouseEvent<HTMLButtonElement>): void => {
     const lineIndex = parseInt(e.currentTarget.value, 10);
     const keys = Object.keys(lines[lineIndex].bars);
     const lastKey = parseInt(keys[keys.length - 1], 10);
     const newKey = lastKey + 1;
-    const newBar: string[] = ["A", "Bm"];
-    const newChordLines: IChordLine[] = chords.lines.map(
-      (line: IChordLine, lineI: number) =>
-        lineI === lineIndex
-          ? { ...line, bars: { ...line.bars, [newKey]: newBar } }
-          : line
+    const newBar: string[] = ['A', 'Bm'];
+    const newChordLines: IChordLine[] = chords.lines.map((line: IChordLine, lineI: number) =>
+      lineI === lineIndex ? { ...line, bars: { ...line.bars, [newKey]: newBar } } : line,
     );
     onChange({ ...chords, lines: newChordLines });
   };
 
-  const handleBarDelete = (lineIndex: number, barIndex: number) => {
-    const newChordLines: IChordLine[] = chords.lines.map(
-      (line: IChordLine, lineI: number) =>
-        lineI === lineIndex
-          ? {
-              ...line,
-              bars: parseNewBarsAfterDelete(line.bars, barIndex)
-            }
-          : line
+  const handleBarDelete = (lineIndex: number, barIndex: number): void => {
+    const newChordLines: IChordLine[] = chords.lines.map((line: IChordLine, lineI: number) =>
+      lineI === lineIndex
+        ? {
+            ...line,
+            bars: parseNewBarsAfterDelete(line.bars, barIndex),
+          }
+        : line,
     );
     onChange({ ...chords, lines: newChordLines });
   };
 
-  const handleRepeatChange = (newRepeat: number, lineIndex: number) => {
-    const newChordLines: IChordLine[] = chords.lines.map(
-      (line: IChordLine, lineI: number) =>
-        lineI === lineIndex ? { ...line, repeat: newRepeat } : line
+  const handleRepeatChange = (newRepeat: number, lineIndex: number): void => {
+    const newChordLines: IChordLine[] = chords.lines.map((line: IChordLine, lineI: number) =>
+      lineI === lineIndex ? { ...line, repeat: newRepeat } : line,
     );
 
     onChange({ ...chords, lines: newChordLines });
   };
 
-  const handleChordLineDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const confirmed = confirm("Really?");
+  const handleChordLineDelete = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    const confirmed = confirm('Really?');
 
     if (confirmed) {
       const lineIndex = parseInt(e.currentTarget.value, 10);
@@ -170,7 +146,7 @@ const ChordsEditor: React.SFC<IProps> = ({
               onChange={handleBarChange}
               onDelete={handleBarDelete}
               allowDelete={Object.keys(line.bars).length > 1}
-            />
+            />,
           );
         });
       }
@@ -181,23 +157,15 @@ const ChordsEditor: React.SFC<IProps> = ({
           <ChordLine {...line} />
           <ChordLineInputsContainer>{barElems}</ChordLineInputsContainer>
           <ChordLineNameAndButtonsContainer>
-            <RepeatEditor
-              repeat={line.repeat}
-              lineIndex={lineIndex}
-              onChange={handleRepeatChange}
-            />
-            <Button
-              variant="delete"
-              onClick={handleChordLineDelete}
-              value={lineIndex}
-            >
+            <RepeatEditor repeat={line.repeat} lineIndex={lineIndex} onChange={handleRepeatChange} />
+            <Button variant="delete" onClick={handleChordLineDelete} value={lineIndex}>
               Delete chord line
             </Button>
             <Button onClick={handleBarAdd} value={lineIndex}>
               Add bar
             </Button>
           </ChordLineNameAndButtonsContainer>
-        </ChordLineContainer>
+        </ChordLineContainer>,
       );
     });
   }

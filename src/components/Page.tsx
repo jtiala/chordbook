@@ -1,10 +1,10 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
-import { IBreadcrumb } from "../types";
+import { IBreadcrumb } from '../types';
 
-import Footer from "./Footer";
-import Header from "./Header";
+import Footer from './Footer';
+import Header from './Header';
 
 interface IProps {
   children?: React.ReactNode;
@@ -25,12 +25,12 @@ const StyledPage = styled.section`
 
 const Page: React.SFC<IProps> = ({ children, title, breadcrumbs }) => {
   React.useEffect(() => {
-    document.title = `Chordbook${title ? ` / ${title}` : ""}`;
+    document.title = `Chordbook${title ? ` / ${title}` : ''}`;
   });
 
   return (
     <StyledPage>
-      <Header title={title} breadcrumbs={breadcrumbs} />
+      <Header breadcrumbs={breadcrumbs} />
       {children}
       <Footer />
     </StyledPage>

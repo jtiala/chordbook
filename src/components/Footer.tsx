@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import AuthenticatedComponent from "./AuthenticatedComponent";
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import AuthenticatedComponent from './AuthenticatedComponent';
 
 const StyledFooter = styled.footer`
   display: flex;
@@ -41,9 +41,7 @@ const StyledLink = styled(Link)`
 
 const Footer: React.SFC = () => {
   const LoginLogoutLink = (
-    <AuthenticatedComponent
-      fallback={<StyledLink to="/login">Login</StyledLink>}
-    >
+    <AuthenticatedComponent fallback={<StyledLink to="/login">Login</StyledLink>}>
       <StyledLink to="/logout">Logout</StyledLink>
     </AuthenticatedComponent>
   );
@@ -64,11 +62,11 @@ const Footer: React.SFC = () => {
     <StyledFooter>
       <span>{LoginLogoutLink}</span>
       <span>
-        {"OSS by "}
+        {'OSS by '}
         {CreatorLink}
-        {", available at "}
+        {', available at '}
         {RepositoryLink}
-        {"."}
+        {'.'}
       </span>
     </StyledFooter>
   );

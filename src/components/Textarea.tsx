@@ -1,5 +1,5 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
 interface IProps {
   value?: string;
@@ -43,6 +43,6 @@ interface IProps {
   rows?: number;
 }
 
-const Textarea: React.SFC<IProps> = props => <StyledTextarea {...props} />;
+const Textarea: React.SFC<IProps> = (props) => <StyledTextarea {...props} />;
 
 export default Textarea;

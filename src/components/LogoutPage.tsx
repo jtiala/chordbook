@@ -1,9 +1,7 @@
-import * as React from "react";
-import { Redirect } from "react-router-dom";
-import styled from "styled-components";
+import * as React from 'react';
+import { Redirect } from 'react-router-dom';
 
-import { auth, IAuthError } from "../firebase";
-import { IBreadcrumb } from "../types";
+import { auth } from '../firebase';
 
 const LoginPage: React.SFC = () => {
   React.useEffect(() => {

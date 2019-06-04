@@ -1,12 +1,12 @@
-import * as React from "react";
-import { useCollection } from "react-firebase-hooks/firestore";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import * as React from 'react';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { firestore } from "../firebase";
+import { firestore } from '../firebase';
 
-import Message from "./Message";
-import Pulse from "./Pulse";
+import Message from './Message';
+import Pulse from './Pulse';
 
 const List = styled.ul`
   display: flex;
@@ -46,7 +46,7 @@ const StyledLink = styled(Link)`
 `;
 
 const SongList: React.SFC = () => {
-  const [value, loading, error] = useCollection(firestore.collection("songs"));
+  const [value, loading, error] = useCollection(firestore.collection('songs'));
 
   if (loading) {
     return <Pulse />;
@@ -55,7 +55,7 @@ const SongList: React.SFC = () => {
   if (value) {
     return (
       <List>
-        {value.docs.map(doc => (
+        {value.docs.map((doc) => (
           <ListItem key={`Song-${doc.id}`}>
             <StyledLink to={`/songs/${doc.id}`}>
               {doc.data().artist} - {doc.data().title}

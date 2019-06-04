@@ -1,16 +1,16 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
-import { IChordLine } from "../types";
+import { IChordLine } from '../types';
 
-import ChordBar from "./ChordBar";
+import ChordBar from './ChordBar';
 
 const StyledChordLine = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 0 10px 0;
   font-size: 28px;
-  font-family: "Caveat Brush", cursive;
+  font-family: 'Caveat Brush', cursive;
 `;
 
 const BarLine = styled.span`
@@ -20,8 +20,8 @@ const BarLine = styled.span`
 
 const ChordLine: React.SFC<IChordLine> = ({ bars, repeat }) => {
   const barKeys = Object.keys(bars)
-    .map(key => parseInt(key, 10))
-    .sort((a: any, b: any) => a - b);
+    .map((key) => parseInt(key, 10))
+    .sort((a: number, b: number) => a - b);
   const barCount = barKeys.length;
 
   return (
@@ -37,21 +37,19 @@ const ChordLine: React.SFC<IChordLine> = ({ bars, repeat }) => {
             elems.push(<BarLine key={`BarLine-${i}-0`}>|</BarLine>);
           }
 
-          elems.push(
-            <ChordBar key={`ChordBar-${i}`} chords={bar} barCount={barCount} />
-          );
+          elems.push(<ChordBar key={`ChordBar-${i}`} chords={bar} barCount={barCount} />);
 
           if (i === barCount - 1 && repeat > 1) {
             elems.push(
               <BarLine key={`BarLine-${i}-1`}>
                 :|<sup>{repeat}</sup>
-              </BarLine>
+              </BarLine>,
             );
           } else {
             elems.push(
               <BarLine key={`BarLine-${i}-1`}>
                 &nbsp;|<sup>&nbsp;</sup>
-              </BarLine>
+              </BarLine>,
             );
           }
 

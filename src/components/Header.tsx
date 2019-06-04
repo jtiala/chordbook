@@ -1,13 +1,12 @@
-import * as React from "react";
-import { Link, NavLink } from "react-router-dom";
-import styled from "styled-components";
+import * as React from 'react';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { IBreadcrumb } from "../types";
+import { IBreadcrumb } from '../types';
 
-const activeClassName = "active";
+const activeClassName = 'active';
 
 interface IProps {
-  title?: string;
   breadcrumbs?: IBreadcrumb[];
 }
 
@@ -33,7 +32,7 @@ const LinkList = styled.ul`
     margin: 0 10px 0 0;
 
     :after {
-      content: " ";
+      content: ' ';
     }
   }
 
@@ -41,14 +40,14 @@ const LinkList = styled.ul`
     margin: 0 10px 0 0;
 
     :before {
-      content: "/ ";
+      content: '/ ';
       color: dimgray;
     }
   }
 `;
 
 const StyledNavLink = styled(NavLink).attrs({
-  activeClassName
+  activeClassName,
 })`
   color: black;
   text-decoration: none;
@@ -62,20 +61,16 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `;
 
-const Header: React.SFC<IProps> = ({ title, breadcrumbs }) => {
+const Header: React.SFC<IProps> = ({ breadcrumbs }) => {
   const breadcrumbLinks: React.ReactNode[] = [];
 
   if (breadcrumbs) {
-    breadcrumbs.forEach(item => {
+    breadcrumbs.forEach((item) => {
       if (item.link) {
         breadcrumbLinks.push(
-          <StyledNavLink
-            to={item.link}
-            activeClassName={activeClassName}
-            exact={true}
-          >
+          <StyledNavLink to={item.link} activeClassName={activeClassName} exact={true}>
             {item.title}
-          </StyledNavLink>
+          </StyledNavLink>,
         );
       } else {
         breadcrumbLinks.push(<span>{item.title}</span>);

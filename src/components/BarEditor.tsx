@@ -1,11 +1,9 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
 
-import { IChords } from "../types";
-
-import Button from "./Button";
-import Input from "./Input";
-import Label from "./Label";
+import Button from './Button';
+import Input from './Input';
+import Label from './Label';
 
 interface IProps {
   bar: string[];
@@ -26,29 +24,22 @@ const InputContainer = styled.div`
   }
 `;
 
-const BarEditor: React.SFC<IProps> = ({
-  bar,
-  lineIndex,
-  barIndex,
-  onChange,
-  onDelete,
-  allowDelete
-}) => {
-  const value = bar.join(", ");
+const BarEditor: React.SFC<IProps> = ({ bar, lineIndex, barIndex, onChange, onDelete, allowDelete }) => {
+  const value = bar.join(', ');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const trimmedValue =
       value.length < e.target.value.length
-        ? e.target.value.replace(/[, ]+/g, ", ")
-        : e.target.value.replace(/[, ]+$/g, "").replace(/[, ]+/g, ", ");
+        ? e.target.value.replace(/[, ]+/g, ', ')
+        : e.target.value.replace(/[, ]+$/g, '').replace(/[, ]+/g, ', ');
 
-    const newBar = trimmedValue.split(",").map(chord => chord.trim());
+    const newBar = trimmedValue.split(',').map((chord) => chord.trim());
 
     onChange(newBar, lineIndex, barIndex);
   };
 
-  const handleDelete = () => {
-    const confirmed = confirm("Really?");
+  const handleDelete = (): void => {
+    const confirmed = confirm('Really?');
 
     if (confirmed) {
       onDelete(lineIndex, barIndex);
@@ -59,12 +50,7 @@ const BarEditor: React.SFC<IProps> = ({
     <Label label={`Bar ${barIndex + 1}`}>
       <InputContainer>
         <Input onChange={handleChange} value={value} size={5} />
-        <Button
-          as="span"
-          variant="delete"
-          onClick={handleDelete}
-          disabled={!allowDelete}
-        >
+        <Button as="span" variant="delete" onClick={handleDelete} disabled={!allowDelete}>
           Delete
         </Button>
       </InputContainer>

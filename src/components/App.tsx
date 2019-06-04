@@ -1,37 +1,32 @@
-import * as React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  RouteComponentProps,
-  Switch
-} from "react-router-dom";
-import styled from "styled-components";
+import * as React from 'react';
+import { BrowserRouter as Router, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import styled from 'styled-components';
 
-import EditSongPage from "./EditSongPage";
-import HomePage from "./HomePage";
-import LoginPage from "./LoginPage";
-import LogoutPage from "./LogoutPage";
-import NewSongPage from "./NewSongPage";
-import SongPage from "./SongPage";
+import EditSongPage from './EditSongPage';
+import HomePage from './HomePage';
+import LoginPage from './LoginPage';
+import LogoutPage from './LogoutPage';
+import NewSongPage from './NewSongPage';
+import SongPage from './SongPage';
 
 const StyledApp = styled.div`
   width: 90%;
   max-width: 768px;
   margin: 10px auto;
-  font-family: "Ubuntu Mono", monospace;
+  font-family: 'Ubuntu Mono', monospace;
 `;
 
 interface IRenderSongIdMatchParams {
   songId: string;
 }
 
-const renderSongPage = (
-  props: RouteComponentProps<IRenderSongIdMatchParams>
-) => <SongPage songId={props.match.params.songId} />;
+const renderSongPage = (props: RouteComponentProps<IRenderSongIdMatchParams>): React.ReactElement => (
+  <SongPage songId={props.match.params.songId} />
+);
 
-const renderEditSongPage = (
-  props: RouteComponentProps<IRenderSongIdMatchParams>
-) => <EditSongPage songId={props.match.params.songId} />;
+const renderEditSongPage = (props: RouteComponentProps<IRenderSongIdMatchParams>): React.ReactElement => (
+  <EditSongPage songId={props.match.params.songId} />
+);
 
 const App: React.SFC = () => (
   <StyledApp>
@@ -42,11 +37,7 @@ const App: React.SFC = () => (
         <Route path="/logout" exact={true} component={LogoutPage} />
         <Route path="/songs/new" exact={true} component={NewSongPage} />
         <Route path="/songs/:songId" exact={true} render={renderSongPage} />
-        <Route
-          path="/songs/:songId/edit"
-          exact={true}
-          render={renderEditSongPage}
-        />
+        <Route path="/songs/:songId/edit" exact={true} render={renderEditSongPage} />
       </Switch>
     </Router>
   </StyledApp>
