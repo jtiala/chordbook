@@ -48,7 +48,7 @@ const LoginPage: React.SFC = () => {
   };
 
   if (loggedIn) {
-    return <Redirect to="/admin" />;
+    return <Redirect to="/" />;
   }
 
   const title = "Login";

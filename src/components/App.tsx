@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 
-import AdminPage from "./AdminPage";
 import EditSongPage from "./EditSongPage";
 import HomePage from "./HomePage";
 import LoginPage from "./LoginPage";
@@ -41,7 +40,6 @@ const App: React.SFC = () => (
         <Route path="/" exact={true} component={HomePage} />
         <Route path="/login" exact={true} component={LoginPage} />
         <Route path="/logout" exact={true} component={LogoutPage} />
-        <Route path="/admin" exact={true} component={AdminPage} />
         <Route path="/songs/new" exact={true} component={NewSongPage} />
         <Route path="/songs/:songId" exact={true} render={renderSongPage} />
         <Route
