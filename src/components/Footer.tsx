@@ -64,7 +64,7 @@ const Footer: React.SFC = () => {
       <span>
         {'OSS by '}
         {CreatorLink}
-        {', available at '}
+        {', contribute at '}
         {RepositoryLink}
         {'.'}
       </span>
