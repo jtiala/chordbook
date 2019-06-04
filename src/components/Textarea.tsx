@@ -16,6 +16,12 @@ const StyledTextarea = styled.textarea`
   font-size: 12px;
   -webkit-tap-highlight-color: transparent;
 
+  :invalid {
+    border-color: red;
+    box-shadow: none;
+    outline-color: red;
+  }
+
   :focus {
     outline: dimgray auto 3px;
   }
@@ -28,12 +34,6 @@ const StyledTextarea = styled.textarea`
   :hover:focus,
   :active:focus {
     outline-color: #ff8d79;
-  }
-
-  :invalid {
-    border-color: red;
-    outline-color: red;
-    box-shadow: none;
   }
 `;
 

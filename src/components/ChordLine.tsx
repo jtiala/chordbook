@@ -9,8 +9,8 @@ const StyledChordLine = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 0 10px 0;
-  font-size: 28px;
   font-family: 'Caveat Brush', cursive;
+  font-size: 28px;
 `;
 
 const BarLine = styled.span`

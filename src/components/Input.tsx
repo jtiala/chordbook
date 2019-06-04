@@ -15,14 +15,20 @@ interface IProps {
 
 const StyledInput = styled.input<IProps>`
   display: block;
+  width: ${(props) => (props.width ? props.width : 'auto')};
   padding: 10px;
   border: 2px solid;
   border-color: dimgray;
-  width: ${(props) => (props.width ? props.width : 'auto')};
   color: dimgray;
   font-size: 12px;
   font-weight: 400;
   -webkit-tap-highlight-color: transparent;
+
+  :invalid {
+    border-color: red;
+    box-shadow: none;
+    outline-color: red;
+  }
 
   :focus {
     outline: dimgray auto 3px;
@@ -36,12 +42,6 @@ const StyledInput = styled.input<IProps>`
   :hover:focus,
   :active:focus {
     outline-color: #ff8d79;
-  }
-
-  :invalid {
-    border-color: red;
-    outline-color: red;
-    box-shadow: none;
   }
 `;
 

@@ -15,29 +15,17 @@ interface IProps {
   onChordLineDelete: (index: number) => void;
 }
 
-const ChordLineContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: gainsboro;
-
-  > :not(:last-child) {
-    margin-bottom: 10px;
-  }
-`;
-
 const ChordLineNameAndButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: end;
 
-  > :not(:last-child) {
-    margin-right: 10px;
-  }
-
   > :not(button) {
     flex-grow: 1;
+  }
+
+  > :not(:last-child) {
+    margin-right: 10px;
   }
 `;
 
@@ -56,6 +44,18 @@ const ChordLineInputsContainer = styled.div`
 
   > :not(:last-child) {
     margin-right: 10px;
+  }
+`;
+
+const ChordLineContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: gainsboro;
+
+  > :not(:last-child) {
+    margin-bottom: 10px;
   }
 `;
 

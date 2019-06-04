@@ -5,6 +5,8 @@ interface IProps {
 }
 
 const Message = styled.div<IProps>`
+  max-width: 480px;
+  box-sizing: border-box;
   padding: 10px;
   margin: 10px auto;
   background-color: ${(props) => {
@@ -29,8 +31,6 @@ const Message = styled.div<IProps>`
         return 'black';
     }
   }};
-  max-width: 480px;
-  box-sizing: border-box;
   text-align: center;
 `;
 

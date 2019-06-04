@@ -8,9 +8,9 @@ interface IProps {
 
 const StyledChordBar = styled.div<IProps>`
   display: flex;
+  flex-basis: ${(props) => 100 / props.barCount}%;
   flex-direction: row;
   flex-grow: 1;
-  flex-basis: ${(props) => 100 / props.barCount}%;
   justify-content: space-around;
 `;
 

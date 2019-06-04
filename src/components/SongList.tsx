@@ -11,8 +11,8 @@ import Pulse from './Pulse';
 const List = styled.ul`
   display: flex;
   flex-direction: column;
-  margin: 0;
   padding: 0;
+  margin: 0;
   list-style: none;
 `;
 
@@ -28,16 +28,16 @@ const StyledLink = styled(Link)`
   display: block;
   padding: 10px 5px;
   color: black;
-  text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
 
   :hover {
     color: tomato;
   }
 
   :active {
-    color: tomato;
     background-color: #ffe2dd;
+    color: tomato;
   }
 
   :focus {

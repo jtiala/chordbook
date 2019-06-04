@@ -15,6 +15,9 @@ interface IProps {
 }
 
 const CommonStyles = css<IProps>`
+  padding: 12px 14px;
+  border: none;
+
   background-color: ${(props) => {
     switch (props.variant) {
       case 'error':
@@ -30,14 +33,16 @@ const CommonStyles = css<IProps>`
         return 'dimgray';
     }
   }};
-  padding: 12px 14px;
-  border: none;
   color: white;
-  text-align: center;
-  text-decoration: none;
+  cursor: pointer;
   font-size: 12px;
   -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+
+  :disabled {
+    opacity: 0.5;
+  }
 
   :focus {
     outline: ${(props) => {
@@ -66,10 +71,6 @@ const CommonStyles = css<IProps>`
   :hover:focus,
   :active:focus {
     outline-color: #ff8d79;
-  }
-
-  :disabled {
-    opacity: 0.5;
   }
 `;
 

@@ -8,9 +8,9 @@ interface IProps {
 const StyledActionsBar = styled.div`
   display: flex;
   flex-direction: row;
-  justify-items: space-between;
-  background: whitesmoke;
   padding: 10px;
+  background: whitesmoke;
+  justify-items: space-between;
 
   > * {
     flex-grow: 1;

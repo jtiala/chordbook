@@ -6,11 +6,11 @@ import AuthenticatedComponent from './AuthenticatedComponent';
 const StyledFooter = styled.footer`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  margin: 20px 0 0 0;
+  justify-content: space-between;
   padding-top: 3px;
   border-top: 1px solid whitesmoke;
+  margin: 20px 0 0 0;
 
   > * {
     max-width: 50%;

@@ -16,27 +16,27 @@ interface IProps {
   onDelete: (index: number) => void;
 }
 
-const StyledSectionEditor = styled.div`
-  margin: 10px 0;
-  padding: 10px;
-  background-color: whitesmoke;
-
-  > :not(:last-child) {
-    margin-bottom: 10px;
-  }
-`;
-
 const NameAndButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: end;
 
+  > :not(button) {
+    flex-grow: 1;
+  }
+
   > :not(:last-child) {
     margin-right: 10px;
   }
+`;
 
-  > :not(button) {
-    flex-grow: 1;
+const StyledSectionEditor = styled.div`
+  padding: 10px;
+  margin: 10px 0;
+  background-color: whitesmoke;
+
+  > :not(:last-child) {
+    margin-bottom: 10px;
   }
 `;
 

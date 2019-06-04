@@ -11,18 +11,18 @@ interface IProps {
 }
 
 const StyledHeader = styled.header`
-  border-bottom: 2px solid dimgray;
   padding-bottom: 5px;
+  border-bottom: 2px solid dimgray;
 `;
 
 const LinkList = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  list-style: none;
   justify-content: left;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 
   > * {
     padding-bottom: 3px;
@@ -40,8 +40,8 @@ const LinkList = styled.ul`
     margin: 0 10px 0 0;
 
     :before {
-      content: '/ ';
       color: dimgray;
+      content: '/ ';
     }
   }
 `;

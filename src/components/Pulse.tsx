@@ -11,12 +11,12 @@ const scaleOut = keyframes`
 `;
 
 const Pulse = styled.div`
-  height: 40px;
   width: 40px;
+  height: 40px;
   margin: 10px auto;
+  animation: ${scaleOut} 1s ease-in-out infinite;
   background-color: tomato;
   border-radius: 100%;
-  animation: ${scaleOut} 1s ease-in-out infinite;
 `;
 
 export default Pulse;
