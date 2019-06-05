@@ -16,7 +16,7 @@ const StyledChordsEditor = styled.div`
   flex-direction: column;
 
   > button {
-    align-self: end;
+    align-self: flex-end;
   }
 `;
 

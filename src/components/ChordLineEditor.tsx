@@ -19,7 +19,7 @@ interface IProps {
 const ChordLineBarEditorsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: end;
+  align-items: flex-end;
 
   > * {
     flex-grow: 1;

@@ -42,7 +42,7 @@ const StyledSongEditor = styled.div`
   flex-direction: column;
 
   > form > button {
-    align-self: end;
+    align-self: flex-end;
   }
 `;
 
