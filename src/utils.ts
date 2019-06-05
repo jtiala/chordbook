@@ -10,4 +10,6 @@ const slugify = (text: string): string =>
 
 const songIdFromArtistAndTitle = (artist: string, title: string): string => `${slugify(artist)}-${slugify(title)}`;
 
-export { slugify, songIdFromArtistAndTitle };
+const countRows = (str: string): number => str.split(/\r\n|\r|\n/).length;
+
+export { slugify, songIdFromArtistAndTitle, countRows };

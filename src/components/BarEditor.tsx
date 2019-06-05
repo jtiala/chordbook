@@ -50,7 +50,7 @@ const BarEditor: React.SFC<IProps> = ({ bar, lineIndex, barIndex, onChange, onDe
     <Label label={`Bar ${barIndex + 1}`}>
       <InputContainer>
         <Input onChange={handleChange} value={value} size={5} />
-        <Button as="span" variant="delete" onClick={handleDelete} disabled={!allowDelete}>
+        <Button variant="delete" onClick={handleDelete} disabled={!allowDelete}>
           Delete
         </Button>
       </InputContainer>

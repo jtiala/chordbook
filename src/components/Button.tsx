@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 interface IProps {
-  as?: string;
+  as?: 'a' | 'span' | 'Link';
   variant?: string;
   children?: React.ReactNode;
   href?: string;
@@ -13,6 +13,30 @@ interface IProps {
   value?: string | number;
   disabled?: boolean;
 }
+
+const StyledSpan = styled.span<IProps>`
+  color: ${(props) => {
+    switch (props.variant) {
+      case 'error':
+      case 'delete':
+        return 'red';
+      case 'success':
+        return 'green';
+      case 'danger':
+        return 'orange';
+      case 'primary':
+        return 'tomato';
+      default:
+        return 'dimgray';
+    }
+  }};
+  cursor: pointer;
+
+  :hover,
+  :active {
+    color: #ff8d79;
+  }
+`;
 
 const CommonStyles = css<IProps>`
   padding: 12px 14px;
@@ -93,6 +117,12 @@ const Button: React.SFC<IProps> = ({ as, variant, children, href, to, onClick, t
         <StyledA variant={variant} href={href}>
           {children}
         </StyledA>
+      );
+    case 'span':
+      return (
+        <StyledSpan variant={variant} onClick={onClick} role="button">
+          {children}
+        </StyledSpan>
       );
     case 'Link':
       return (

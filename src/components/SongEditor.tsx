@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { firestore } from '../firebase';
-import { ISection } from '../types';
+import { ISection, ISong } from '../types';
 import { songIdFromArtistAndTitle } from '../utils';
 
 import Button from './Button';
@@ -12,6 +12,7 @@ import Input from './Input';
 import Label from './Label';
 import Message from './Message';
 import SectionEditor from './SectionEditor';
+import JSONEditor from './JSONEditor';
 
 interface IProps {
   id?: string;
@@ -81,6 +82,34 @@ const SongEditor: React.SFC<IProps> = ({
     }
   };
 
+  const parseSongData = (data: string): ISong => {
+    try {
+      const songData: ISong = JSON.parse(data);
+      return songData;
+    } catch (error) {
+      alert(`Song data parsing failed\n\n${error.message}`);
+      return undefined;
+    }
+  };
+
+  const handleJSONChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    const songData = parseSongData(e.target.value);
+
+    if (songData) {
+      const newArtist = songData.artist;
+      const newTitle = songData.title;
+      const newSections = songData.sections;
+
+      if (newArtist !== artist) {
+        setArtist(newArtist);
+      } else if (newTitle !== title) {
+        setTitle(newTitle);
+      } else {
+        setSections(newSections);
+      }
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
@@ -132,12 +161,13 @@ const SongEditor: React.SFC<IProps> = ({
       </Label>
       <Heading level={2}>Sections</Heading>
       {sectionEditors}
+      <JSONEditor artist={artist} title={title} sections={sections} onChange={handleJSONChange} />
       <Button onClick={handleSectionAdd}>Add section</Button>
       <Button onClick={handleSongDelete} variant="delete">
         Delete Song
       </Button>
       <Button type="submit" variant="primary">
-        Submit
+        Save
       </Button>
     </Form>
   );
