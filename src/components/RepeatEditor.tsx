@@ -5,14 +5,13 @@ import Label from './Label';
 
 interface IProps {
   repeat: number;
-  lineIndex: number;
-  onChange: (repeat: number, lineIndex: number) => void;
+  onChange: (newRepeat: number) => void;
 }
 
-const RepeatEditor: React.SFC<IProps> = ({ repeat, lineIndex, onChange }) => {
+const RepeatEditor: React.SFC<IProps> = ({ repeat, onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newRepeat = parseInt(e.target.value, 10);
-    onChange(newRepeat, lineIndex);
+    onChange(newRepeat);
   };
 
   return (

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface IProps {
-  variant?: string;
+  variant?: 'error' | 'danger' | 'success';
 }
 
 const Message = styled.div<IProps>`

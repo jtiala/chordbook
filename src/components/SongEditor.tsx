@@ -170,8 +170,8 @@ const SongEditor: React.SFC<IProps> = ({
       </Label>
       <Heading level={2}>Sections</Heading>
       {sectionEditors}
+      <Button onClick={handleSectionAdd}>+ Add section</Button>
       <JSONEditor artist={artist} title={title} sections={sections} onChange={handleJSONChange} />
-      <Button onClick={handleSectionAdd}>Add section</Button>
       <Button onClick={handleSongDelete} variant="delete">
         Delete Song
       </Button>

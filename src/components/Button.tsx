@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 interface IProps {
   as?: 'a' | 'span' | 'Link';
-  variant?: string;
+  variant?: 'error' | 'delete' | 'success' | 'danger' | 'primary';
   children?: React.ReactNode;
   href?: string;
   to?: string;
@@ -12,6 +12,7 @@ interface IProps {
   type?: 'button' | 'reset' | 'submit';
   value?: string | number;
   disabled?: boolean;
+  tabindex?: number;
 }
 
 const StyledSpan = styled.span<IProps>`
@@ -34,14 +35,20 @@ const StyledSpan = styled.span<IProps>`
 
   :hover,
   :active {
-    color: #ff8d79;
+    color: ${(props) => {
+      switch (props.variant) {
+        case 'primary':
+          return '#ff8d79';
+        default:
+          return 'black';
+      }
+    }};
   }
 `;
 
 const CommonStyles = css<IProps>`
   padding: 12px 14px;
   border: none;
-
   background-color: ${(props) => {
     switch (props.variant) {
       case 'error':
@@ -89,12 +96,7 @@ const CommonStyles = css<IProps>`
 
   :hover:not(:disabled),
   :active:not(:disabled) {
-    background-color: #ff8d79;
-  }
-
-  :hover:focus,
-  :active:focus {
-    outline-color: #ff8d79;
+    opacity: 0.7;
   }
 `;
 
@@ -120,7 +122,7 @@ const Button: React.SFC<IProps> = ({ as, variant, children, href, to, onClick, t
       );
     case 'span':
       return (
-        <StyledSpan variant={variant} onClick={onClick} role="button">
+        <StyledSpan variant={variant} onClick={onClick} role="button" tabindex={0}>
           {children}
         </StyledSpan>
       );

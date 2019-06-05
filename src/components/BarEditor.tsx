@@ -2,21 +2,53 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import Button from './Button';
+import Heading from './Heading';
 import Input from './Input';
-import Label from './Label';
 
 interface IProps {
   bar: string[];
-  lineIndex: number;
-  barIndex: number;
-  onChange: (bar: string[], lineIndex: number, barIndex: number) => void;
-  onDelete: (lineIndex: number, barIndex: number) => void;
+  index: number;
+  onChange: (index: number, bar: string[]) => void;
+  onDelete: (index: number) => void;
   allowDelete: boolean;
 }
 
-const InputContainer = styled.div`
+const BarContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: silver;
+`;
+
+const BarHeader = styled.header`
   display: flex;
   flex-direction: row;
+  justify-content: left;
+  font-size: 12px;
+
+  > * {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: silver;
+  }
+
+  > :not(:last-child) {
+    margin-right: 5px;
+  }
+
+  > :not(:first-child) {
+    opacity: 0.5;
+
+    :hover {
+      opacity: 1;
+    }
+  }
+`;
+
+const StyledBarEditor = styled.div`
+  display: flex;
+  flex-direction: column;
 
   > input {
     flex-grow: 1;
@@ -24,7 +56,7 @@ const InputContainer = styled.div`
   }
 `;
 
-const BarEditor: React.SFC<IProps> = ({ bar, lineIndex, barIndex, onChange, onDelete, allowDelete }) => {
+const BarEditor: React.SFC<IProps> = ({ bar, index, onChange, onDelete, allowDelete }) => {
   const value = bar.join(', ');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -35,26 +67,29 @@ const BarEditor: React.SFC<IProps> = ({ bar, lineIndex, barIndex, onChange, onDe
 
     const newBar = trimmedValue.split(',').map((chord) => chord.trim());
 
-    onChange(newBar, lineIndex, barIndex);
+    onChange(index, newBar);
   };
 
   const handleDelete = (): void => {
     const confirmed = confirm('Really?');
 
     if (confirmed) {
-      onDelete(lineIndex, barIndex);
+      onDelete(index);
     }
   };
 
   return (
-    <Label label={`Bar ${barIndex + 1}`}>
-      <InputContainer>
-        <Input onChange={handleChange} value={value} size={5} />
-        <Button variant="delete" onClick={handleDelete} disabled={!allowDelete}>
+    <StyledBarEditor>
+      <BarHeader>
+        <Heading level={5}>{`Bar ${index + 1}`}</Heading>
+        <Button as="span" onClick={handleDelete} disabled={!allowDelete}>
           Delete
         </Button>
-      </InputContainer>
-    </Label>
+      </BarHeader>
+      <BarContent>
+        <Input onChange={handleChange} value={value} size={5} />
+      </BarContent>
+    </StyledBarEditor>
   );
 };
 

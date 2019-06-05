@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface IProps {
   level?: number;
-  variant?: string;
+  variant?: 'primary';
   children?: React.ReactNode;
 }
 
@@ -27,7 +27,27 @@ const H3 = styled.h3<IProps>`
   margin: 0;
   color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
   font-family: 'Ubuntu Mono', monospace;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  text-transform: uppercase;
+`;
+
+const H4 = styled.h3<IProps>`
+  margin: 0;
+  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
+  font-family: 'Ubuntu Mono', monospace;
   font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  text-transform: uppercase;
+`;
+
+const H5 = styled.h3<IProps>`
+  margin: 0;
+  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: 12px;
   font-weight: 400;
   text-align: left;
   text-transform: uppercase;
@@ -35,6 +55,10 @@ const H3 = styled.h3<IProps>`
 
 const Heading: React.SFC<IProps> = ({ level, variant, children }) => {
   switch (level) {
+    case 5:
+      return <H5 variant={variant}>{children}</H5>;
+    case 4:
+      return <H4 variant={variant}>{children}</H4>;
     case 3:
       return <H3 variant={variant}>{children}</H3>;
     case 2:
