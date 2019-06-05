@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 interface IProps {
   as?: 'a' | 'span' | 'Link';
-  variant?: 'error' | 'delete' | 'success' | 'danger' | 'primary';
+  variant?: 'error' | 'success' | 'danger' | 'primary';
   children?: React.ReactNode;
   href?: string;
   to?: string;
@@ -19,7 +19,6 @@ const StyledSpan = styled.span<IProps>`
   color: ${(props) => {
     switch (props.variant) {
       case 'error':
-      case 'delete':
         return 'red';
       case 'success':
         return 'green';
@@ -52,7 +51,6 @@ const CommonStyles = css<IProps>`
   background-color: ${(props) => {
     switch (props.variant) {
       case 'error':
-      case 'delete':
         return 'red';
       case 'success':
         return 'green';
@@ -79,7 +77,6 @@ const CommonStyles = css<IProps>`
     outline: ${(props) => {
         switch (props.variant) {
           case 'error':
-          case 'delete':
             return 'red';
           case 'success':
             return 'green';

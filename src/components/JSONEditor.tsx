@@ -19,7 +19,7 @@ const StyledJSONEditor = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
-  margin: 10px 0;
+  margin-top: 40px;
   background-color: whitesmoke;
 
   > :not(:last-child) {

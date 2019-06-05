@@ -14,6 +14,10 @@ interface IProps {
 const StyledChordsEditor = styled.div`
   display: flex;
   flex-direction: column;
+
+  > button {
+    align-self: end;
+  }
 `;
 
 const ChordsEditor: React.SFC<IProps> = ({ chords, onChange }) => {

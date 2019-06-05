@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Ajv from 'ajv';
 import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { firestore } from '../firebase';
 import { ISection, ISong } from '../types';
@@ -22,6 +23,28 @@ interface IProps {
   title: string;
   sections: ISection[];
 }
+
+const ActionsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  > * {
+    flex-grow: 1;
+  }
+
+  > :not(:last-child) {
+    margin-right: 10px;
+  }
+`;
+
+const StyledSongEditor = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > form > button {
+    align-self: end;
+  }
+`;
 
 const SongEditor: React.SFC<IProps> = ({
   id,
@@ -159,26 +182,28 @@ const SongEditor: React.SFC<IProps> = ({
   });
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {error && <Message variant="error">Error: {error}</Message>}
-      <Heading level={2}>Details</Heading>
-      <Label label="Artist">
-        <Input type="text" onChange={handleArtistChange} value={artist} />
-      </Label>
-      <Label label="Title">
-        <Input type="text" onChange={handleTitleChange} value={title} />
-      </Label>
-      <Heading level={2}>Sections</Heading>
-      {sectionEditors}
-      <Button onClick={handleSectionAdd}>+ Add section</Button>
-      <JSONEditor artist={artist} title={title} sections={sections} onChange={handleJSONChange} />
-      <Button onClick={handleSongDelete} variant="delete">
-        Delete Song
-      </Button>
-      <Button type="submit" variant="primary">
-        Save
-      </Button>
-    </Form>
+    <StyledSongEditor>
+      <Form onSubmit={handleSubmit}>
+        {error && <Message variant="error">Error: {error}</Message>}
+        <Heading level={2}>Details</Heading>
+        <Label label="Artist">
+          <Input type="text" onChange={handleArtistChange} value={artist} />
+        </Label>
+        <Label label="Title">
+          <Input type="text" onChange={handleTitleChange} value={title} />
+        </Label>
+        <Heading level={2}>Sections</Heading>
+        {sectionEditors}
+        <Button onClick={handleSectionAdd}>+ Add section</Button>
+        <JSONEditor artist={artist} title={title} sections={sections} onChange={handleJSONChange} />
+        <ActionsContainer>
+          <Button onClick={handleSongDelete}>Delete Song</Button>
+          <Button type="submit" variant="primary">
+            Save
+          </Button>
+        </ActionsContainer>
+      </Form>
+    </StyledSongEditor>
   );
 };
 
