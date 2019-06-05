@@ -1,9 +1,11 @@
 import * as React from 'react';
+import Ajv from 'ajv';
 import { Redirect } from 'react-router-dom';
 
 import { firestore } from '../firebase';
 import { ISection, ISong } from '../types';
 import { songIdFromArtistAndTitle } from '../utils';
+import schema from '../song-schema.json';
 
 import Button from './Button';
 import Form from './Form';
@@ -85,6 +87,13 @@ const SongEditor: React.SFC<IProps> = ({
   const parseSongData = (data: string): ISong => {
     try {
       const songData: ISong = JSON.parse(data);
+      const ajv = new Ajv();
+      const valid = ajv.validate(schema, songData);
+
+      if (!valid) {
+        throw new Error('Validation error.');
+      }
+
       return songData;
     } catch (error) {
       alert(`Song data parsing failed\n\n${error.message}`);
