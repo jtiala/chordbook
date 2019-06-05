@@ -16,24 +16,24 @@ const StyledTextarea = styled.textarea`
   font-size: 12px;
   -webkit-tap-highlight-color: transparent;
 
+  :focus {
+    outline: dimgray solid 3px;
+  }
+
   :invalid {
     border-color: red;
     box-shadow: none;
     outline-color: red;
   }
 
-  :focus {
-    outline: dimgray auto 3px;
-  }
-
   :hover,
   :active {
-    border-color: #ff8d79;
+    border-color: tomato;
   }
 
   :hover:focus,
   :active:focus {
-    outline-color: #ff8d79;
+    outline-color: tomato;
   }
 `;
 

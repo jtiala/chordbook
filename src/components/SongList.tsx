@@ -25,6 +25,8 @@ const ListItem = styled.li`
 `;
 
 const StyledLink = styled(Link)`
+  position: relative;
+  z-index: 5;
   display: block;
   padding: 10px 5px;
   color: black;
@@ -41,7 +43,8 @@ const StyledLink = styled(Link)`
   }
 
   :focus {
-    outline: tomato auto 3px;
+    z-index: 10;
+    outline: tomato solid 3px;
   }
 `;
 

@@ -12,7 +12,7 @@ interface IProps {
   type?: 'button' | 'reset' | 'submit';
   value?: string | number;
   disabled?: boolean;
-  tabindex?: number;
+  tabindex?: string;
 }
 
 const StyledSpan = styled.span<IProps>`
@@ -88,7 +88,7 @@ const CommonStyles = css<IProps>`
             return 'dimgray';
         }
       }}
-      auto 3px;
+      solid 3px;
   }
 
   :hover:not(:disabled),
@@ -119,7 +119,7 @@ const Button: React.SFC<IProps> = ({ as, variant, children, href, to, onClick, t
       );
     case 'span':
       return (
-        <StyledSpan variant={variant} onClick={onClick} role="button" tabindex={0}>
+        <StyledSpan variant={variant} onClick={onClick} role="button" tabindex="0">
           {children}
         </StyledSpan>
       );

@@ -24,24 +24,28 @@ const StyledInput = styled.input<IProps>`
   font-weight: 400;
   -webkit-tap-highlight-color: transparent;
 
+  :focus {
+    outline: dimgray solid 3px;
+  }
+
+  :hover,
+  :active {
+    border-color: tomato;
+  }
+
   :invalid {
     border-color: red;
     box-shadow: none;
     outline-color: red;
   }
 
-  :focus {
-    outline: dimgray auto 3px;
-  }
-
-  :hover,
-  :active {
-    border-color: #ff8d79;
-  }
-
   :hover:focus,
   :active:focus {
-    outline-color: #ff8d79;
+    outline-color: tomato;
+  }
+
+  :invalid:focus {
+    outline-color: red;
   }
 `;
 

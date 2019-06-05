@@ -52,12 +52,25 @@ const StyledNavLink = styled(NavLink).attrs({
   color: black;
   text-decoration: none;
 
+  :focus {
+    outline: black dashed 2px;
+    outline-offset: 2px;
+  }
+
   :hover {
     color: tomato;
+
+    :focus {
+      outline-color: tomato;
+    }
   }
 
   &.${activeClassName} {
     color: tomato;
+
+    :focus {
+      outline-color: tomato;
+    }
   }
 `;
 

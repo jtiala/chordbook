@@ -21,21 +21,41 @@ const StyledFooter = styled.footer`
   }
 `;
 
-const A = styled.a`
-  color: dimgray;
-  text-decoration: none;
-
-  :hover {
-    color: tomato;
-  }
-`;
-
 const StyledLink = styled(Link)`
   color: black;
   text-decoration: none;
 
+  :focus {
+    outline: black dashed 2px;
+    outline-offset: 3px;
+  }
+
   :hover {
     color: tomato;
+
+    :focus {
+      outline-color: tomato;
+    }
+  }
+`;
+
+const A = styled.a`
+  color: dimgray;
+  text-decoration: none;
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  :focus {
+    outline: dimgray dashed 2px;
+    outline-offset: 2px;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  :hover {
+    color: tomato;
+
+    :focus {
+      outline-color: tomato;
+    }
   }
 `;
 
