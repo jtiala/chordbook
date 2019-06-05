@@ -65,12 +65,14 @@ const Header: React.SFC<IProps> = ({ breadcrumbs }) => {
   const breadcrumbLinks: React.ReactNode[] = [];
 
   if (breadcrumbs) {
-    breadcrumbs.forEach((item) => {
+    breadcrumbs.forEach((item, i) => {
       if (item.link) {
         breadcrumbLinks.push(
-          <StyledNavLink to={item.link} activeClassName={activeClassName} exact={true}>
-            {item.title}
-          </StyledNavLink>,
+          <li key={`breadcrumb-${i}`}>
+            <StyledNavLink to={item.link} activeClassName={activeClassName} exact={true}>
+              {item.title}
+            </StyledNavLink>
+          </li>,
         );
       } else {
         breadcrumbLinks.push(<span>{item.title}</span>);
@@ -79,7 +81,7 @@ const Header: React.SFC<IProps> = ({ breadcrumbs }) => {
   }
 
   const homeLink = (
-    <li>
+    <li key={'breadcrumb-home'}>
       <StyledNavLink to="/" activeClassName={activeClassName} exact={true}>
         Chordbook
       </StyledNavLink>
