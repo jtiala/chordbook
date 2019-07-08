@@ -50,16 +50,21 @@ const StyledLink = styled(Link)`
 `;
 
 const SongList: React.SFC = () => {
-  const [value, loading, error] = useCollection(firestore.collection('songs'));
+  const [snapshot, loading, error] = useCollection(
+    firestore
+      .collection('songs')
+      .orderBy('artist')
+      .orderBy('title'),
+  );
 
   if (loading) {
     return <Pulse />;
   }
 
-  if (value) {
+  if (snapshot) {
     return (
       <List>
-        {value.docs.map((doc) => {
+        {snapshot.docs.map((doc) => {
           const slug = slugFromArtistAndTitle(doc.data().artist, doc.data().title);
 
           return (
