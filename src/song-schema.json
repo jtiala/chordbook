@@ -13,6 +13,9 @@
     "sections": {
       "type": "array",
       "items": { "$ref": "#/definitions/section" }
+    },
+    "uid": {
+      "type": "string"
     }
   },
   "definitions": {

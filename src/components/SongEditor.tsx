@@ -2,8 +2,9 @@ import * as React from 'react';
 import Ajv from 'ajv';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { firestore } from '../firebase';
+import { auth, firestore } from '../firebase';
 import { ISection, ISong } from '../types';
 import { slugFromArtistAndTitle } from '../utils';
 import schema from '../song-schema.json';
@@ -57,6 +58,7 @@ const SongEditor: React.SFC<IProps> = ({
   const [artist, setArtist] = React.useState(initialArtist);
   const [title, setTitle] = React.useState(initialTitle);
   const [sections, setSections] = React.useState<ISection[]>(initialSections);
+  const [user] = useAuthState(auth);
 
   const handleArtistChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setArtist(e.target.value);
@@ -147,20 +149,23 @@ const SongEditor: React.SFC<IProps> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    firestore
-      .collection('songs')
-      .add({
-        artist,
-        title,
-        sections,
-      })
-      .then((documentReference) => {
-        const slug = slugFromArtistAndTitle(artist, title);
-        setRedirect(`/songs/${documentReference.id}/${slug}`);
-      })
-      .catch((err: string) => {
-        setError(err);
-      });
+    if (user) {
+      firestore
+        .collection('songs')
+        .add({
+          artist,
+          title,
+          sections,
+          uid: user.uid,
+        })
+        .then((documentReference) => {
+          const slug = slugFromArtistAndTitle(artist, title);
+          setRedirect(`/songs/${documentReference.id}/${slug}`);
+        })
+        .catch((err: string) => {
+          setError(err);
+        });
+    }
   };
 
   if (redirect) {

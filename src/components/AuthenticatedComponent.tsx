@@ -12,11 +12,11 @@ const AuthenticatedComponent: React.SFC<IProps> = ({ children, fallback }) => {
   const [user] = useAuthState(auth);
 
   if (user) {
-    return <React.Fragment>{children}</React.Fragment>;
+    return <>{children}</>;
   }
 
   if (fallback) {
-    return <React.Fragment>{fallback}</React.Fragment>;
+    return <>{fallback}</>;
   }
 
   return null;
