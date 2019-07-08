@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { firestore } from '../firebase';
 import { ISection, ISong } from '../types';
-import { songIdFromArtistAndTitle } from '../utils';
+import { slugFromArtistAndTitle } from '../utils';
 import schema from '../song-schema.json';
 
 import Button from './Button';
@@ -95,15 +95,17 @@ const SongEditor: React.SFC<IProps> = ({
     const confirmed = confirm('Really?');
 
     if (confirmed) {
-      const songId = id ? id : songIdFromArtistAndTitle(artist, title);
+      if (id) {
+        firestore
+          .collection('songs')
+          .doc(id)
+          .delete()
+          .catch((err: string) => {
+            setError(err);
+          });
+      }
 
-      firestore
-        .collection('songs')
-        .doc(songId)
-        .delete()
-        .catch((err: string) => {
-          setError(err);
-        });
+      setRedirect('/');
     }
   };
 
@@ -145,18 +147,16 @@ const SongEditor: React.SFC<IProps> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    const songId = id ? id : songIdFromArtistAndTitle(artist, title);
-
     firestore
       .collection('songs')
-      .doc(songId)
-      .set({
+      .add({
         artist,
         title,
         sections,
       })
-      .then(() => {
-        setRedirect(`/songs/${songId}`);
+      .then((documentReference) => {
+        const slug = slugFromArtistAndTitle(artist, title);
+        setRedirect(`/songs/${documentReference.id}/${slug}`);
       })
       .catch((err: string) => {
         setError(err);

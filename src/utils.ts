@@ -8,8 +8,8 @@ const slugify = (text: string): string =>
     .replace(/^-+/, '') // Trim - from start of text
     .replace(/-+$/, ''); // Trim - from end of text
 
-const songIdFromArtistAndTitle = (artist: string, title: string): string => `${slugify(artist)}-${slugify(title)}`;
+const slugFromArtistAndTitle = (artist: string, title: string): string => `${slugify(artist)}-${slugify(title)}`;
 
 const countRows = (str: string): number => str.split(/\r\n|\r|\n/).length;
 
-export { slugify, songIdFromArtistAndTitle, countRows };
+export { slugify, slugFromArtistAndTitle, countRows };

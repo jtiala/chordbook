@@ -16,16 +16,17 @@ const StyledApp = styled.div`
   font-family: 'Ubuntu Mono', monospace;
 `;
 
-interface IRenderSongIdMatchParams {
-  songId: string;
+interface IRenderSongMatchParams {
+  id: string;
+  slug: string;
 }
 
-const renderSongPage = (props: RouteComponentProps<IRenderSongIdMatchParams>): React.ReactElement => (
-  <SongPage songId={props.match.params.songId} />
+const renderSongPage = (props: RouteComponentProps<IRenderSongMatchParams>): React.ReactElement => (
+  <SongPage id={props.match.params.id} />
 );
 
-const renderEditSongPage = (props: RouteComponentProps<IRenderSongIdMatchParams>): React.ReactElement => (
-  <EditSongPage songId={props.match.params.songId} />
+const renderEditSongPage = (props: RouteComponentProps<IRenderSongMatchParams>): React.ReactElement => (
+  <EditSongPage id={props.match.params.id} />
 );
 
 const App: React.SFC = () => (
@@ -36,8 +37,8 @@ const App: React.SFC = () => (
         <Route path="/login" exact={true} component={LoginPage} />
         <Route path="/logout" exact={true} component={LogoutPage} />
         <Route path="/songs/new" exact={true} component={NewSongPage} />
-        <Route path="/songs/:songId" exact={true} render={renderSongPage} />
-        <Route path="/songs/:songId/edit" exact={true} render={renderEditSongPage} />
+        <Route path="/songs/:id/:slug" exact={true} render={renderSongPage} />
+        <Route path="/songs/:id/:slug/edit" exact={true} render={renderEditSongPage} />
       </Switch>
     </Router>
   </StyledApp>

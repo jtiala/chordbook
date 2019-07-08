@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import SettingsContext from '../contexts/Settings';
 import { firestore } from '../firebase';
 import { IBreadcrumb, ISection } from '../types';
+import { slugFromArtistAndTitle } from '../utils';
 
 import ActionsBar from './ActionsBar';
 import AuthenticatedComponent from './AuthenticatedComponent';
@@ -15,11 +16,11 @@ import Pulse from './Pulse';
 import Section from './Section';
 
 interface IProps {
-  songId: string;
+  id: string;
 }
 
-const SongPage: React.SFC<IProps> = ({ songId }) => {
-  const [data, loading, error] = useDocumentData(firestore.doc(`songs/${songId}`));
+const SongPage: React.SFC<IProps> = ({ id }) => {
+  const [data, loading, error] = useDocumentData(firestore.doc(`songs/${id}`));
 
   const { lyricsVisible, chordsVisible, toggleLyrics, toggleChords } = React.useContext(SettingsContext);
 
@@ -33,16 +34,17 @@ const SongPage: React.SFC<IProps> = ({ songId }) => {
 
   if (data) {
     const { artist, title, sections } = data;
-    const songName = `${artist} - ${title}`;
-    const breadcrumbs: IBreadcrumb[] = [{ title: songName, link: `/songs/${songId}` }];
+    const slug = slugFromArtistAndTitle(artist, title);
+    const name = `${artist} - ${title}`;
+    const breadcrumbs: IBreadcrumb[] = [{ title: name, link: `/songs/${id}/${slug}` }];
 
     return (
-      <Page title={songName} breadcrumbs={breadcrumbs}>
+      <Page title={name} breadcrumbs={breadcrumbs}>
         <ActionsBar>
           <Button onClick={toggleLyrics}>{lyricsVisible ? 'Hide lyrics' : 'Show lyrics'}</Button>
           <Button onClick={toggleChords}>{chordsVisible ? 'Hide chords' : 'Show chords'}</Button>
           <AuthenticatedComponent>
-            <Button as="Link" to={`/songs/${songId}/edit`}>
+            <Button as="Link" to={`/songs/${id}/${slug}/edit`}>
               Edit
             </Button>
           </AuthenticatedComponent>

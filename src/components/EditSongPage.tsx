@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { firestore } from '../firebase';
 import { IBreadcrumb } from '../types';
+import { slugFromArtistAndTitle } from '../utils';
 
 import AuthenticatedPage from './AuthenticatedPage';
 import Message from './Message';
@@ -11,22 +12,23 @@ import Pulse from './Pulse';
 import SongEditor from './SongEditor';
 
 interface IProps {
-  songId?: string;
+  id?: string;
 }
 
-const EditSongPage: React.SFC<IProps> = ({ songId }) => {
-  const [data, loading, error] = useDocumentData(firestore.doc(`songs/${songId}`));
+const EditSongPage: React.SFC<IProps> = ({ id }) => {
+  const [data, loading, error] = useDocumentData(firestore.doc(`songs/${id}`));
 
   if (data) {
     const { artist, title, sections } = data;
-    const songName = `${artist} - ${title}`;
-    const songLink = `/songs/${songId}`;
-    const editLink = `${songLink}/edit`;
-    const breadcrumbs: IBreadcrumb[] = [{ title: songName, link: songLink }, { title: 'Edit', link: editLink }];
+    const slug = slugFromArtistAndTitle(artist, title);
+    const name = `${artist} - ${title}`;
+    const link = `/songs/${id}/${slug}`;
+    const editLink = `${link}/edit`;
+    const breadcrumbs: IBreadcrumb[] = [{ title: name, link }, { title: 'Edit', link: editLink }];
 
     return (
-      <AuthenticatedPage title={`${songName} / Edit`} breadcrumbs={breadcrumbs}>
-        <SongEditor id={songId} artist={artist} title={title} sections={sections} />
+      <AuthenticatedPage title={`${name} / Edit`} breadcrumbs={breadcrumbs}>
+        <SongEditor id={id} artist={artist} title={title} sections={sections} />
       </AuthenticatedPage>
     );
   }

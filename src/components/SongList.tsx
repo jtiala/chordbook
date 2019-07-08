@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { firestore } from '../firebase';
+import { slugFromArtistAndTitle } from '../utils';
 
 import Message from './Message';
 import Pulse from './Pulse';
@@ -58,13 +59,17 @@ const SongList: React.SFC = () => {
   if (value) {
     return (
       <List>
-        {value.docs.map((doc) => (
-          <ListItem key={`Song-${doc.id}`}>
-            <StyledLink to={`/songs/${doc.id}`}>
-              {doc.data().artist} - {doc.data().title}
-            </StyledLink>
-          </ListItem>
-        ))}
+        {value.docs.map((doc) => {
+          const slug = slugFromArtistAndTitle(doc.data().artist, doc.data().title);
+
+          return (
+            <ListItem key={`Song-${doc.id}`}>
+              <StyledLink to={`/songs/${doc.id}/${slug}`}>
+                {doc.data().artist} - {doc.data().title}
+              </StyledLink>
+            </ListItem>
+          );
+        })}
       </List>
     );
   }
