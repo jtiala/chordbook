@@ -1,25 +1,19 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Normalize } from 'styled-normalize';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Normalize } from "styled-normalize";
 
-import { SettingsProvider } from './contexts/Settings';
+import { SettingsProvider } from "./contexts/Settings";
 
-import App from './components/App';
+import App from "./components/App";
+
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <SettingsProvider>
     <Normalize />
     <App />
   </SettingsProvider>,
-  document.getElementById('root'),
+  document.getElementById("root")
 );
 
-if (module.hot) {
-  module.hot.accept();
-}
-
-if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register(`${process.env.PUBLIC_PATH}sw.js`);
-  });
-}
+serviceWorker.register();

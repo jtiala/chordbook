@@ -1,18 +1,18 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
-import { ISection } from '../types';
-import { countRows } from '../utils';
+import { ISection } from "../types";
+import { countRows } from "../utils";
 
-import Textarea from './Textarea';
-import Button from './Button';
-import Heading from './Heading';
+import Textarea from "./Textarea";
+import Button from "./Button";
+import Heading from "./Heading";
 
 interface IProps {
   artist?: string;
   title?: string;
   sections?: ISection[];
-  onChange: (e: React.FormEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const StyledJSONEditor = styled.div`
@@ -27,7 +27,12 @@ const StyledJSONEditor = styled.div`
   }
 `;
 
-const JSONEditor: React.SFC<IProps> = ({ artist, title, sections, onChange }) => {
+const JSONEditor: React.SFC<IProps> = ({
+  artist,
+  title,
+  sections,
+  onChange
+}) => {
   const [visible, setVisible] = React.useState(false);
 
   const toggleVisibility = (): void => {
@@ -41,10 +46,12 @@ const JSONEditor: React.SFC<IProps> = ({ artist, title, sections, onChange }) =>
     <StyledJSONEditor>
       <Heading level={3}>
         <Button as="span" onClick={toggleVisibility}>
-          {visible ? 'Hide full song JSON ▲' : 'Show full song JSON ▼'}
+          {visible ? "Hide full song JSON ▲" : "Show full song JSON ▼"}
         </Button>
       </Heading>
-      {visible && <Textarea rows={rows} value={parsedJSON} onChange={onChange} />}
+      {visible && (
+        <Textarea rows={rows} value={parsedJSON} onChange={onChange} />
+      )}
     </StyledJSONEditor>
   );
 };

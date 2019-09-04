@@ -1,29 +1,32 @@
-import * as React from 'react';
-import { Redirect } from 'react-router-dom';
+import * as React from "react";
+import { Redirect } from "react-router-dom";
 
-import { auth, IAuthError } from '../firebase';
-import { IBreadcrumb } from '../types';
+import { auth } from "../firebase";
+import { Error as IAuthError } from "@firebase/auth-types";
+import { IBreadcrumb } from "../types";
 
-import Button from './Button';
-import Form from './Form';
-import Input from './Input';
-import Label from './Label';
-import Message from './Message';
-import Page from './Page';
-import Pulse from './Pulse';
+import Button from "./Button";
+import Form from "./Form";
+import Input from "./Input";
+import Label from "./Label";
+import Message from "./Message";
+import Page from "./Page";
+import Pulse from "./Pulse";
 
 const LoginPage: React.SFC = () => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [error, setError] = React.useState("");
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handlePasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     setPassword(e.target.value);
   };
 
@@ -31,7 +34,7 @@ const LoginPage: React.SFC = () => {
     e.preventDefault();
 
     setLoading(true);
-    setError(null);
+    setError("");
 
     auth
       .signInWithEmailAndPassword(email, password)
@@ -49,12 +52,12 @@ const LoginPage: React.SFC = () => {
     return <Redirect to="/" />;
   }
 
-  const title = 'Login';
-  const breadcrumbs: IBreadcrumb[] = [{ title, link: '/login' }];
+  const title = "Login";
+  const breadcrumbs: IBreadcrumb[] = [{ title, link: "/login" }];
 
   return (
     <Page title={title} breadcrumbs={breadcrumbs}>
-      {error !== null && <Message variant="error">{error}</Message>}
+      {error.length > 0 && <Message variant="error">{error}</Message>}
 
       {loading ? (
         <Pulse />
@@ -64,7 +67,11 @@ const LoginPage: React.SFC = () => {
             <Input type="email" value={email} onChange={handleEmailChange} />
           </Label>
           <Label label="Password">
-            <Input type="password" defaultValue={password} onChange={handlePasswordChange} />
+            <Input
+              type="password"
+              defaultValue={password}
+              onChange={handlePasswordChange}
+            />
           </Label>
           <Button type="submit" variant="primary">
             Login

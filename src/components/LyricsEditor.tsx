@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { ILyrics } from '../types';
+import { ILyrics } from "../types";
 
-import Label from './Label';
-import Textarea from './Textarea';
+import Label from "./Label";
+import Textarea from "./Textarea";
 
 interface IProps {
   lyrics?: ILyrics;
@@ -11,15 +11,20 @@ interface IProps {
 }
 
 const LyricsEditor: React.SFC<IProps> = ({ lyrics, onChange }) => {
+  const lines =
+    typeof lyrics === "object" && Array.isArray(lyrics.lines)
+      ? lyrics.lines
+      : [];
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    onChange({ lines: e.target.value.split('\n') });
+    onChange({ lines: e.target.value.split("\n") });
   };
 
   return (
     <Label label="Lyrics">
       <Textarea
-        rows={lyrics && lyrics.lines.length ? lyrics.lines.length + 1 : 2}
-        value={lyrics ? lyrics.lines.join('\n') : ''}
+        rows={lines.length ? lines.length + 1 : 2}
+        value={lines.join("\n")}
         onChange={handleChange}
       />
     </Label>

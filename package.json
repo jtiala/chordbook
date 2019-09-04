@@ -1,10 +1,9 @@
 {
   "name": "chordbook",
   "version": "0.1.0",
-  "description": "Chords, tabs and lyrics viewer ideal for band practices",
+  "description": "Chordbook is a progressive web app (PWA) for viewing and editing chordsheets.",
   "keywords": [
     "chords",
-    "tabs",
     "lyrics"
   ],
   "author": {
@@ -20,62 +19,63 @@
     "url": "https://github.com/jtiala/chordbook/issues"
   },
   "homepage": "https://chordbook.jtia.la/",
-  "main": "src/index.tsx",
+  "private": false,
+  "dependencies": {
+    "@types/jest": "24.0.18",
+    "@types/node": "12.7.4",
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.9.0",
+    "@types/react-router-dom": "^4.3.5",
+    "@types/styled-components": "^4.1.18",
+    "ajv": "^6.10.2",
+    "firebase": "^6.5.0",
+    "firebase-tools": "^7.3.1",
+    "node-firestore-import-export": "^0.14.0",
+    "prettier": "^1.18.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-firebase-hooks": "^2.1.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.1.1",
+    "styled-components": "^4.3.2",
+    "styled-normalize": "^8.0.6",
+    "stylelint": "^10.1.0",
+    "stylelint-config-idiomatic-order": "^7.0.3",
+    "stylelint-config-recommended": "^2.2.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.8.0",
+    "typescript": "3.6.2"
+  },
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --hot --watch --watch-content-base --mode development",
-    "build": "NODE_ENV=production webpack --mode production",
-    "deploy": "yarn firebase deploy --only hosting --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT",
-    "format": "prettier --write '**/*.{js,jsx,ts,tsx,css,scss,html,md,json,yml,yaml}'",
-    "lint:ts": "eslint src/**/*.{ts,tsx,js}",
-    "lint:ts:fix": "eslint src/**/*.{ts,tsx,js} --fix",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "echo \"No tests yet\"",
+    "eject": "react-scripts eject",
+    "deploy": "firebase deploy --only hosting --token $REACT_APP_FIREBASE_TOKEN --project $REACT_APP_FIREBASE_PROJECT",
+    "format": "prettier --write '**/*.{ts,tsx,js,jsx,json,css,scss,html,md,yml,yaml}'",
+    "lint:ts": "eslint src/**/*.{ts,tsx}",
+    "lint:ts:fix": "eslint src/**/*.{ts,tsx} --fix",
     "lint:styles": "stylelint './src/**/*.{ts,tsx,js,jsx,css,scss}'",
-    "lint:other": "prettier --list-different '**/*.{md,json,yml,yaml}'",
-    "lint": "yarn lint:ts && yarn lint:styles && yarn lint:other",
-    "lint:fix": "yarn lint:ts:fix && format",
+    "lint:other": "prettier --list-different '**/*.{json,md,yml,yaml}'",
+    "lint": "npm run lint:ts && npm run lint:styles && npm run lint:other",
+    "lint:fix": "npm run lint:ts:fix && npm run format",
     "data:export": "yarn data:backup ; firestore-export -a ./data/credentials.json -b ./data/songs.json -p",
     "data:import": "yarn data:backup ; firestore-import -a ./data/credentials.json -b ./data/songs.json -y",
     "data:backup": "cp ./data/songs.json ./data/songs.json.backup"
   },
-  "devDependencies": {
-    "@types/webpack-env": "^1.13.9",
-    "@typescript-eslint/eslint-plugin": "^1.9.0",
-    "@typescript-eslint/parser": "^1.9.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^5.0.3",
-    "dotenv": "^8.0.0",
-    "dotenv-webpack": "^1.7.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.13.0",
-    "firebase-tools": "^6.10.0",
-    "html-webpack-plugin": "^3.2.0",
-    "node-firestore-import-export": "^0.13.2",
-    "prettier": "^1.17.1",
-    "serviceworker-webpack-plugin": "^1.0.1",
-    "stylelint": "^10.0.1",
-    "stylelint-config-idiomatic-order": "^7.0.0",
-    "stylelint-config-recommended": "^2.2.0",
-    "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.8.0",
-    "ts-loader": "^6.0.2",
-    "typescript": "^3.5.1",
-    "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.5.1"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "dependencies": {
-    "@types/react": "^16.8.19",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-router-dom": "^4.3.3",
-    "@types/styled-components": "^4.1.15",
-    "ajv": "^6.10.0",
-    "firebase": "^6.1.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-firebase-hooks": "^2.0.0",
-    "react-router-dom": "^5.0.0",
-    "styled-components": "^4.2.1",
-    "styled-normalize": "^8.0.6"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

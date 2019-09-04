@@ -1,22 +1,22 @@
-import * as React from 'react';
-import Ajv from 'ajv';
-import { Redirect } from 'react-router-dom';
-import styled from 'styled-components';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import * as React from "react";
+import Ajv from "ajv";
+import { Redirect } from "react-router-dom";
+import styled from "styled-components";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-import { auth, firestore } from '../firebase';
-import { ISection, ISong } from '../types';
-import { slugFromArtistAndTitle } from '../utils';
-import schema from '../song-schema.json';
+import { auth, firestore } from "../firebase";
+import { ISection, ISong } from "../types";
+import { slugFromArtistAndTitle } from "../utils";
+import schema from "../song-schema.json";
 
-import Button from './Button';
-import Form from './Form';
-import Heading from './Heading';
-import Input from './Input';
-import Label from './Label';
-import Message from './Message';
-import SectionEditor from './SectionEditor';
-import JSONEditor from './JSONEditor';
+import Button from "./Button";
+import Form from "./Form";
+import Heading from "./Heading";
+import Input from "./Input";
+import Label from "./Label";
+import Message from "./Message";
+import SectionEditor from "./SectionEditor";
+import JSONEditor from "./JSONEditor";
 
 interface IProps {
   id?: string;
@@ -51,10 +51,10 @@ const SongEditor: React.SFC<IProps> = ({
   id,
   artist: initialArtist,
   title: initialTitle,
-  sections: initialSections,
+  sections: initialSections
 }) => {
-  const [error, setError] = React.useState(null);
-  const [redirect, setRedirect] = React.useState(null);
+  const [error, setError] = React.useState("");
+  const [redirect, setRedirect] = React.useState("");
   const [artist, setArtist] = React.useState(initialArtist);
   const [title, setTitle] = React.useState(initialTitle);
   const [sections, setSections] = React.useState<ISection[]>(initialSections);
@@ -69,21 +69,23 @@ const SongEditor: React.SFC<IProps> = ({
   };
 
   const handleSectionChange = (index: number, newSection: ISection): void => {
-    setSections(sections.map((section, i) => (i === index ? newSection : sections[i])));
+    setSections(
+      sections.map((section, i) => (i === index ? newSection : sections[i]))
+    );
   };
 
   const handleSectionAdd = (): void => {
     const newSection: ISection = {
-      name: 'Chorus',
+      name: "Chorus",
       chords: {
         lines: [
           {
             repeat: 1,
-            bars: { '1': ['A', 'Bm'], '2': ['C#', 'Dsus4'] },
-          },
-        ],
+            bars: { "1": ["A", "Bm"], "2": ["C#", "Dsus4"] }
+          }
+        ]
       },
-      lyrics: { lines: [] },
+      lyrics: { lines: [] }
     };
 
     setSections([...sections, newSection]);
@@ -94,12 +96,12 @@ const SongEditor: React.SFC<IProps> = ({
   };
 
   const handleSongDelete = (): void => {
-    const confirmed = confirm('Really?');
+    const confirmed = window.confirm("Really?");
 
     if (confirmed) {
       if (id) {
         firestore
-          .collection('songs')
+          .collection("songs")
           .doc(id)
           .delete()
           .catch((err: string) => {
@@ -107,28 +109,29 @@ const SongEditor: React.SFC<IProps> = ({
           });
       }
 
-      setRedirect('/');
+      setRedirect("/");
     }
   };
 
-  const parseSongData = (data: string): ISong => {
+  const parseSongData = (data: string): ISong | void => {
     try {
       const songData: ISong = JSON.parse(data);
       const ajv = new Ajv();
       const valid = ajv.validate(schema, songData);
 
       if (!valid) {
-        throw new Error('Validation error.');
+        throw new Error("Validation error.");
       }
 
       return songData;
     } catch (error) {
       alert(`Song data parsing failed\n\n${error.message}`);
-      return undefined;
     }
   };
 
-  const handleJSONChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const handleJSONChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
     const songData = parseSongData(e.target.value);
 
     if (songData) {
@@ -137,11 +140,11 @@ const SongEditor: React.SFC<IProps> = ({
       const newSections = songData.sections;
 
       if (newArtist !== artist) {
-        setArtist(newArtist);
+        setArtist(newArtist || "");
       } else if (newTitle !== title) {
-        setTitle(newTitle);
+        setTitle(newTitle || "");
       } else {
-        setSections(newSections);
+        setSections(newSections || []);
       }
     }
   };
@@ -151,14 +154,14 @@ const SongEditor: React.SFC<IProps> = ({
 
     if (user) {
       firestore
-        .collection('songs')
+        .collection("songs")
         .add({
           artist,
           title,
           sections,
-          uid: user.uid,
+          uid: user.uid
         })
-        .then((documentReference) => {
+        .then(documentReference => {
           const slug = slugFromArtistAndTitle(artist, title);
           setRedirect(`/songs/${documentReference.id}/${slug}`);
         })
@@ -168,7 +171,7 @@ const SongEditor: React.SFC<IProps> = ({
     }
   };
 
-  if (redirect) {
+  if (redirect.length) {
     return <Redirect to={redirect} />;
   }
 
@@ -182,14 +185,14 @@ const SongEditor: React.SFC<IProps> = ({
         index={index}
         onChange={handleSectionChange}
         onDelete={handleSectionDelete}
-      />,
+      />
     );
   });
 
   return (
     <StyledSongEditor>
       <Form onSubmit={handleSubmit}>
-        {error && <Message variant="error">Error: {error}</Message>}
+        {error.length > 0 && <Message variant="error">Error: {error}</Message>}
         <Heading level={2}>Details</Heading>
         <Label label="Artist">
           <Input type="text" onChange={handleArtistChange} value={artist} />
@@ -200,7 +203,12 @@ const SongEditor: React.SFC<IProps> = ({
         <Heading level={2}>Sections</Heading>
         {sectionEditors}
         <Button onClick={handleSectionAdd}>+ Add section</Button>
-        <JSONEditor artist={artist} title={title} sections={sections} onChange={handleJSONChange} />
+        <JSONEditor
+          artist={artist}
+          title={title}
+          sections={sections}
+          onChange={handleJSONChange}
+        />
         <ActionsContainer>
           <Button onClick={handleSongDelete}>Delete Song</Button>
           <Button type="submit" variant="primary">

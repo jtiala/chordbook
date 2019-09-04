@@ -1,45 +1,49 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
 
 interface IProps {
-  as?: 'a' | 'span' | 'Link';
-  variant?: 'error' | 'success' | 'danger' | 'primary';
+  as?: "a" | "span" | "Link";
+  variant?: "error" | "success" | "danger" | "primary";
   children?: React.ReactNode;
   href?: string;
   to?: string;
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  type?: 'button' | 'reset' | 'submit';
+  onClick?: (
+    e?:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ) => void;
+  type?: "button" | "reset" | "submit";
   value?: string | number;
   disabled?: boolean;
   tabindex?: string;
 }
 
 const StyledSpan = styled.span<IProps>`
-  color: ${(props) => {
+  color: ${props => {
     switch (props.variant) {
-      case 'error':
-        return 'red';
-      case 'success':
-        return 'green';
-      case 'danger':
-        return 'orange';
-      case 'primary':
-        return 'tomato';
+      case "error":
+        return "red";
+      case "success":
+        return "green";
+      case "danger":
+        return "orange";
+      case "primary":
+        return "tomato";
       default:
-        return 'dimgray';
+        return "dimgray";
     }
   }};
   cursor: pointer;
 
   :hover,
   :active {
-    color: ${(props) => {
+    color: ${props => {
       switch (props.variant) {
-        case 'primary':
-          return '#ff8d79';
+        case "primary":
+          return "#ff8d79";
         default:
-          return 'black';
+          return "black";
       }
     }};
   }
@@ -48,18 +52,18 @@ const StyledSpan = styled.span<IProps>`
 const CommonStyles = css<IProps>`
   padding: 12px 14px;
   border: none;
-  background-color: ${(props) => {
+  background-color: ${props => {
     switch (props.variant) {
-      case 'error':
-        return 'red';
-      case 'success':
-        return 'green';
-      case 'danger':
-        return 'orange';
-      case 'primary':
-        return 'tomato';
+      case "error":
+        return "red";
+      case "success":
+        return "green";
+      case "danger":
+        return "orange";
+      case "primary":
+        return "tomato";
       default:
-        return 'dimgray';
+        return "dimgray";
     }
   }};
   color: white;
@@ -74,18 +78,18 @@ const CommonStyles = css<IProps>`
   }
 
   :focus {
-    outline: ${(props) => {
+    outline: ${props => {
         switch (props.variant) {
-          case 'error':
-            return 'red';
-          case 'success':
-            return 'green';
-          case 'danger':
-            return 'orange';
-          case 'primary':
-            return 'tomato';
+          case "error":
+            return "red";
+          case "success":
+            return "green";
+          case "danger":
+            return "orange";
+          case "primary":
+            return "tomato";
           default:
-            return 'dimgray';
+            return "dimgray";
         }
       }}
       solid 3px;
@@ -109,23 +113,38 @@ const StyledButton = styled.button`
   ${CommonStyles}
 `;
 
-const Button: React.SFC<IProps> = ({ as, variant, children, href, to, onClick, type, value, disabled }) => {
+const Button: React.SFC<IProps> = ({
+  as,
+  variant,
+  children,
+  href,
+  to,
+  onClick,
+  type,
+  value,
+  disabled
+}) => {
   switch (as) {
-    case 'a':
+    case "a":
       return (
         <StyledA variant={variant} href={href}>
           {children}
         </StyledA>
       );
-    case 'span':
+    case "span":
       return (
-        <StyledSpan variant={variant} onClick={onClick} role="button" tabindex="0">
+        <StyledSpan
+          variant={variant}
+          onClick={onClick}
+          role="button"
+          tabindex="0"
+        >
           {children}
         </StyledSpan>
       );
-    case 'Link':
+    case "Link":
       return (
-        <StyledLink variant={variant} to={to}>
+        <StyledLink variant={variant} to={to ? to : "/"}>
           {children}
         </StyledLink>
       );
@@ -134,7 +153,7 @@ const Button: React.SFC<IProps> = ({ as, variant, children, href, to, onClick, t
         <StyledButton
           variant={variant}
           onClick={onClick}
-          type={type ? type : 'button'}
+          type={type ? type : "button"}
           value={value}
           disabled={disabled}
         >

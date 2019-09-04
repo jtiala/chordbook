@@ -1,10 +1,10 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
-import AuthenticatedComponent from './AuthenticatedComponent';
-import Button from './Button';
-import Page from './Page';
-import SongList from './SongList';
+import AuthenticatedComponent from "./AuthenticatedComponent";
+import Button from "./Button";
+import Page from "./Page";
+import SongList from "./SongList";
 
 const ButtonContainer = styled.div`
   display: flex;

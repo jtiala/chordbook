@@ -1,10 +1,4 @@
-import * as React from 'react';
-
-const SettingsContext = React.createContext(null);
-
-interface IProps {
-  children?: React.ReactNode;
-}
+import * as React from "react";
 
 interface IState {
   lyricsVisible: boolean;
@@ -12,6 +6,19 @@ interface IState {
   toggleLyrics: () => void;
   toggleChords: () => void;
 }
+
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const intialState: IState = {
+  lyricsVisible: true,
+  chordsVisible: true,
+  toggleLyrics: () => undefined,
+  toggleChords: () => undefined
+};
+
+const SettingsContext = React.createContext(intialState);
 
 export class SettingsProvider extends React.Component<IProps, IState> {
   public constructor(props: IProps) {
@@ -21,7 +28,7 @@ export class SettingsProvider extends React.Component<IProps, IState> {
       lyricsVisible: true,
       chordsVisible: true,
       toggleLyrics: this.toggleLyrics,
-      toggleChords: this.toggleChords,
+      toggleChords: this.toggleChords
     };
   }
 
@@ -34,7 +41,11 @@ export class SettingsProvider extends React.Component<IProps, IState> {
   };
 
   public render(): React.ReactElement {
-    return <SettingsContext.Provider value={this.state}>{this.props.children}</SettingsContext.Provider>;
+    return (
+      <SettingsContext.Provider value={this.state}>
+        {this.props.children}
+      </SettingsContext.Provider>
+    );
   }
 }
 

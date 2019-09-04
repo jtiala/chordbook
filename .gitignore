@@ -1,13 +1,17 @@
 # Build directory
 dist
+build
 
 # Logs
 logs
 *.log
 npm-debug.log*
+webpack-stats.json
 
-# Dependency directories
+# Dependencies
 node_modules
+.pnp
+.pnp.js
 
 # Optional npm cache directory
 .npm
@@ -21,18 +25,24 @@ node_modules
 # Tests
 coverage
 .nyc_output
+junit.xml
 
 # Dotenv configuration
-.env
+.env*
+!.env.example
 
 # macOS system files
 .DS_Store
 ._.DS_Store
 
 # Editors
-.vscode
+.vscode/*
+!.vscode/launch.json
 .idea
 *.swp
+
+# Firebase cache
+.firebase
 
 # Data
 data/credentials.json

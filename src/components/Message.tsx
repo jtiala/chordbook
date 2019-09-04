@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface IProps {
-  variant?: 'error' | 'danger' | 'success';
+  variant?: "error" | "danger" | "success";
 }
 
 const Message = styled.div<IProps>`
@@ -9,26 +9,26 @@ const Message = styled.div<IProps>`
   box-sizing: border-box;
   padding: 10px;
   margin: 10px auto;
-  background-color: ${(props) => {
+  background-color: ${props => {
     switch (props.variant) {
-      case 'error':
-        return 'red';
-      case 'success':
-        return 'green';
-      case 'danger':
-        return 'orange';
+      case "error":
+        return "red";
+      case "success":
+        return "green";
+      case "danger":
+        return "orange";
       default:
-        return 'whitesmoke';
+        return "whitesmoke";
     }
   }};
-  color: ${(props) => {
+  color: ${props => {
     switch (props.variant) {
-      case 'error':
-      case 'success':
-      case 'danger':
-        return 'white';
+      case "error":
+      case "success":
+      case "danger":
+        return "white";
       default:
-        return 'black';
+        return "black";
     }
   }};
   text-align: center;

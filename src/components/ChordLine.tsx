@@ -1,15 +1,15 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
-import { IChordLine } from '../types';
+import { IChordLine } from "../types";
 
-import ChordBar from './ChordBar';
+import ChordBar from "./ChordBar";
 
 const StyledChordLine = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 0 10px 0;
-  font-family: 'Caveat Brush', cursive;
+  font-family: "Caveat Brush", cursive;
   font-size: 28px;
 `;
 
@@ -19,8 +19,12 @@ const BarLine = styled.span`
 `;
 
 const ChordLine: React.SFC<IChordLine> = ({ bars, repeat }) => {
+  if (typeof bars !== "object") {
+    return null;
+  }
+
   const barKeys = Object.keys(bars)
-    .map((key) => parseInt(key, 10))
+    .map(key => parseInt(key, 10))
     .sort((a: number, b: number) => a - b);
   const barCount = barKeys.length;
 
@@ -31,25 +35,27 @@ const ChordLine: React.SFC<IChordLine> = ({ bars, repeat }) => {
           const bar = bars[key];
           const elems = [];
 
-          if (i === 0 && repeat > 1) {
+          if (i === 0 && typeof repeat === "number" && repeat > 1) {
             elems.push(<BarLine key={`BarLine-${i}-0`}>|:</BarLine>);
           } else if (i === 0) {
             elems.push(<BarLine key={`BarLine-${i}-0`}>|</BarLine>);
           }
 
-          elems.push(<ChordBar key={`ChordBar-${i}`} chords={bar} barCount={barCount} />);
+          elems.push(
+            <ChordBar key={`ChordBar-${i}`} chords={bar} barCount={barCount} />
+          );
 
-          if (i === barCount - 1 && repeat > 1) {
+          if (i === barCount - 1 && typeof repeat === "number" && repeat > 1) {
             elems.push(
               <BarLine key={`BarLine-${i}-1`}>
                 :|<sup>{repeat}</sup>
-              </BarLine>,
+              </BarLine>
             );
           } else {
             elems.push(
               <BarLine key={`BarLine-${i}-1`}>
                 &nbsp;|<sup>&nbsp;</sup>
-              </BarLine>,
+              </BarLine>
             );
           }
 

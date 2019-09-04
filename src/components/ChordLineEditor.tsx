@@ -1,13 +1,13 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
-import { IBars, IChordLine } from '../types';
+import { IBars, IChordLine } from "../types";
 
-import BarEditor from './BarEditor';
-import Button from './Button';
-import ChordLine from './ChordLine';
-import Heading from './Heading';
-import RepeatEditor from './RepeatEditor';
+import BarEditor from "./BarEditor";
+import Button from "./Button";
+import ChordLine from "./ChordLine";
+import Heading from "./Heading";
+import RepeatEditor from "./RepeatEditor";
 
 interface IProps {
   line: IChordLine;
@@ -83,12 +83,23 @@ const StyledChordLineEditor = styled.div`
   margin-bottom: 10px;
 `;
 
-const ChordLineEditor: React.SFC<IProps> = ({ line, index, onChange, onDelete }) => {
-  const parseNewBarsAfterChange = (bars: IBars, barIndex: number, newBar: string[]): IBars => {
+const ChordLineEditor: React.SFC<IProps> = ({
+  line,
+  index,
+  onChange,
+  onDelete
+}) => {
+  const bars: IBars = typeof line.bars === "object" ? line.bars : {};
+
+  const parseNewBarsAfterChange = (
+    bars: IBars,
+    barIndex: number,
+    newBar: string[]
+  ): IBars => {
     const newBars: IBars = {};
 
     Object.keys(bars).map((key: string, barI: number) =>
-      barI === barIndex ? (newBars[key] = newBar) : (newBars[key] = bars[key]),
+      barI === barIndex ? (newBars[key] = newBar) : (newBars[key] = bars[key])
     );
 
     return newBars;
@@ -97,30 +108,32 @@ const ChordLineEditor: React.SFC<IProps> = ({ line, index, onChange, onDelete })
   const parseNewBarsAfterDelete = (bars: IBars, barIndex: number): IBars => {
     const newBars: IBars = {};
 
-    Object.keys(bars).map((key: string, i: number) => (i !== barIndex ? (newBars[key] = bars[key]) : undefined));
+    Object.keys(bars).map((key: string, i: number) =>
+      i !== barIndex ? (newBars[key] = bars[key]) : undefined
+    );
 
     return newBars;
   };
 
   const handleBarChange = (barIndex: number, newBar: string[]): void => {
-    const newBars: IBars = parseNewBarsAfterChange(line.bars, barIndex, newBar);
+    const newBars: IBars = parseNewBarsAfterChange(bars, barIndex, newBar);
     const newChordLine: IChordLine = { ...line, bars: newBars };
 
     onChange(index, newChordLine);
   };
 
   const handleBarAdd = (): void => {
-    const keys = Object.keys(line.bars);
+    const keys = Object.keys(bars);
     const lastKey = parseInt(keys[keys.length - 1], 10);
     const newKey = lastKey + 1;
-    const newBars: IBars = { ...line.bars, [newKey]: ['A', 'Bm'] };
+    const newBars: IBars = { ...line.bars, [newKey]: ["A", "Bm"] };
     const newChordLine: IChordLine = { ...line, bars: newBars };
 
     onChange(index, newChordLine);
   };
 
   const handleBarDelete = (barIndex: number): void => {
-    const newBars = parseNewBarsAfterDelete(line.bars, barIndex);
+    const newBars = parseNewBarsAfterDelete(bars, barIndex);
     const newChordLine: IChordLine = { ...line, bars: newBars };
 
     onChange(index, newChordLine);
@@ -132,7 +145,7 @@ const ChordLineEditor: React.SFC<IProps> = ({ line, index, onChange, onDelete })
   };
 
   const handleDelete = (): void => {
-    const confirmed = confirm('Really?');
+    const confirmed = window.confirm("Really?");
 
     if (confirmed) {
       onDelete(index);
@@ -141,24 +154,24 @@ const ChordLineEditor: React.SFC<IProps> = ({ line, index, onChange, onDelete })
 
   const barElems: React.ReactElement[] = [];
 
-  if (line.bars) {
+  if (typeof line.bars === "object") {
     Object.keys(line.bars).forEach((key, barIndex) => {
       barElems.push(
         <BarEditor
           key={`bar-${index}-${barIndex}`}
-          bar={line.bars[key]}
+          bar={bars[key]}
           index={barIndex}
           onChange={handleBarChange}
           onDelete={handleBarDelete}
-          allowDelete={Object.keys(line.bars).length > 1}
-        />,
+          allowDelete={Object.keys(bars).length > 1}
+        />
       );
     });
 
     barElems.push(
       <Button key={`bar-add`} onClick={handleBarAdd}>
         +
-      </Button>,
+      </Button>
     );
   }
 
@@ -173,7 +186,7 @@ const ChordLineEditor: React.SFC<IProps> = ({ line, index, onChange, onDelete })
       <ChordLineContent>
         <ChordLine {...line} />
         <ChordLineBarEditorsContainer>{barElems}</ChordLineBarEditorsContainer>
-        <RepeatEditor repeat={line.repeat} onChange={handleRepeatChange} />
+        <RepeatEditor repeat={line.repeat || 1} onChange={handleRepeatChange} />
       </ChordLineContent>
     </StyledChordLineEditor>
   );

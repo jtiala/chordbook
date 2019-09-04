@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
 interface IProps {
   label?: string;
@@ -11,7 +11,7 @@ interface IProps {
 const StyledLabel = styled.label`
   display: flex;
   flex-direction: column;
-  font-family: 'Ubuntu Mono', monospace;
+  font-family: "Ubuntu Mono", monospace;
   font-size: 14px;
   text-transform: uppercase;
   > span {

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
 interface IProps {
   type?: string;
@@ -10,12 +10,12 @@ interface IProps {
   min?: number;
   max?: number;
   width?: string;
-  onChange?: (e: React.FormEvent) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const StyledInput = styled.input<IProps>`
   display: block;
-  width: ${(props) => (props.width ? props.width : 'auto')};
+  width: ${props => (props.width ? props.width : "auto")};
   padding: 10px;
   border: 2px solid;
   border-color: dimgray;
@@ -49,6 +49,6 @@ const StyledInput = styled.input<IProps>`
   }
 `;
 
-const Input: React.SFC<IProps> = (props) => <StyledInput {...props} />;
+const Input: React.SFC<IProps> = props => <StyledInput {...props} />;
 
 export default Input;

@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Input from './Input';
-import Label from './Label';
+import Input from "./Input";
+import Label from "./Label";
 
 interface IProps {
   repeat: number;
@@ -16,7 +16,13 @@ const RepeatEditor: React.SFC<IProps> = ({ repeat, onChange }) => {
 
   return (
     <Label label="Repeat">
-      <Input type="number" min={1} value={repeat ? repeat : 1} onChange={handleChange} width="3em" />
+      <Input
+        type="number"
+        min={1}
+        value={repeat ? repeat : 1}
+        onChange={handleChange}
+        width="3em"
+      />
     </Label>
   );
 };

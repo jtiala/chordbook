@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { Redirect } from 'react-router-dom';
+import * as React from "react";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { Redirect } from "react-router-dom";
 
-import { firestore } from '../firebase';
-import { IBreadcrumb } from '../types';
-import { slugFromArtistAndTitle } from '../utils';
+import { firestore } from "../firebase";
+import { IBreadcrumb } from "../types";
+import { slugFromArtistAndTitle } from "../utils";
 
-import AuthenticatedPage from './AuthenticatedPage';
-import Message from './Message';
-import Pulse from './Pulse';
-import SongEditor from './SongEditor';
+import AuthenticatedPage from "./AuthenticatedPage";
+import Message from "./Message";
+import Pulse from "./Pulse";
+import SongEditor from "./SongEditor";
 
 interface IProps {
   id?: string;
@@ -24,7 +24,10 @@ const EditSongPage: React.SFC<IProps> = ({ id }) => {
     const name = `${artist} - ${title}`;
     const link = `/songs/${id}/${slug}`;
     const editLink = `${link}/edit`;
-    const breadcrumbs: IBreadcrumb[] = [{ title: name, link }, { title: 'Edit', link: editLink }];
+    const breadcrumbs: IBreadcrumb[] = [
+      { title: name, link },
+      { title: "Edit", link: editLink }
+    ];
 
     return (
       <AuthenticatedPage title={`${name} / Edit`} breadcrumbs={breadcrumbs}>

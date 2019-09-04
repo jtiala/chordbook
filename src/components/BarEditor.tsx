@@ -1,9 +1,9 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
-import Button from './Button';
-import Heading from './Heading';
-import Input from './Input';
+import Button from "./Button";
+import Heading from "./Heading";
+import Input from "./Input";
 
 interface IProps {
   bar: string[];
@@ -56,22 +56,28 @@ const StyledBarEditor = styled.div`
   }
 `;
 
-const BarEditor: React.SFC<IProps> = ({ bar, index, onChange, onDelete, allowDelete }) => {
-  const value = bar.join(', ');
+const BarEditor: React.SFC<IProps> = ({
+  bar,
+  index,
+  onChange,
+  onDelete,
+  allowDelete
+}) => {
+  const value = bar.join(", ");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const trimmedValue =
       value.length < e.target.value.length
-        ? e.target.value.replace(/[, ]+/g, ', ')
-        : e.target.value.replace(/[, ]+$/g, '').replace(/[, ]+/g, ', ');
+        ? e.target.value.replace(/[, ]+/g, ", ")
+        : e.target.value.replace(/[, ]+$/g, "").replace(/[, ]+/g, ", ");
 
-    const newBar = trimmedValue.split(',').map((chord) => chord.trim());
+    const newBar = trimmedValue.split(",").map(chord => chord.trim());
 
     onChange(index, newBar);
   };
 
   const handleDelete = (): void => {
-    const confirmed = confirm('Really?');
+    const confirmed = window.confirm("Really?");
 
     if (confirmed) {
       onDelete(index);

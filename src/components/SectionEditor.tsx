@@ -1,14 +1,14 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
-import { IChords, ILyrics, ISection } from '../types';
+import { IChords, ILyrics, ISection } from "../types";
 
-import Button from './Button';
-import Heading from './Heading';
-import ChordsEditor from './ChordsEditor';
-import Input from './Input';
-import Label from './Label';
-import LyricsEditor from './LyricsEditor';
+import Button from "./Button";
+import Heading from "./Heading";
+import ChordsEditor from "./ChordsEditor";
+import Input from "./Input";
+import Label from "./Label";
+import LyricsEditor from "./LyricsEditor";
 
 interface IProps {
   section: ISection;
@@ -56,7 +56,12 @@ const StyledSectionEditor = styled.div`
   margin: 10px 0;
 `;
 
-const SectionEditor: React.SFC<IProps> = ({ section, index, onChange, onDelete }) => {
+const SectionEditor: React.SFC<IProps> = ({
+  section,
+  index,
+  onChange,
+  onDelete
+}) => {
   const { name, chords, lyrics } = section;
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -72,7 +77,7 @@ const SectionEditor: React.SFC<IProps> = ({ section, index, onChange, onDelete }
   };
 
   const handleSectionDelete = (): void => {
-    const confirmed = confirm('Really?');
+    const confirmed = window.confirm("Really?");
 
     if (confirmed) {
       onDelete(index);

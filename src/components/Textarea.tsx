@@ -1,9 +1,9 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
 interface IProps {
   value?: string;
-  onChange?: (e: React.FormEvent) => void;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   rows?: number;
 }
 
@@ -37,12 +37,6 @@ const StyledTextarea = styled.textarea`
   }
 `;
 
-interface IProps {
-  value?: string;
-  onChange?: (e: React.FormEvent) => void;
-  rows?: number;
-}
-
-const Textarea: React.SFC<IProps> = (props) => <StyledTextarea {...props} />;
+const Textarea: React.SFC<IProps> = props => <StyledTextarea {...props} />;
 
 export default Textarea;

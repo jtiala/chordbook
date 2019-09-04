@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import * as React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-import { auth } from '../firebase';
+import { auth } from "../firebase";
 
 interface IProps {
   children?: React.ReactNode;

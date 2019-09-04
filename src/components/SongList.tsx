@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { useCollection } from 'react-firebase-hooks/firestore';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import * as React from "react";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import { firestore } from '../firebase';
-import { slugFromArtistAndTitle } from '../utils';
+import { firestore } from "../firebase";
+import { slugFromArtistAndTitle } from "../utils";
 
-import Message from './Message';
-import Pulse from './Pulse';
+import Message from "./Message";
+import Pulse from "./Pulse";
 
 const List = styled.ul`
   display: flex;
@@ -52,9 +52,9 @@ const StyledLink = styled(Link)`
 const SongList: React.SFC = () => {
   const [snapshot, loading, error] = useCollection(
     firestore
-      .collection('songs')
-      .orderBy('artist')
-      .orderBy('title'),
+      .collection("songs")
+      .orderBy("artist")
+      .orderBy("title")
   );
 
   if (loading) {
@@ -64,8 +64,11 @@ const SongList: React.SFC = () => {
   if (snapshot) {
     return (
       <List>
-        {snapshot.docs.map((doc) => {
-          const slug = slugFromArtistAndTitle(doc.data().artist, doc.data().title);
+        {snapshot.docs.map(doc => {
+          const slug = slugFromArtistAndTitle(
+            doc.data().artist,
+            doc.data().title
+          );
 
           return (
             <ListItem key={`Song-${doc.id}`}>

@@ -1,32 +1,32 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
 interface IProps {
   level?: number;
-  variant?: 'primary';
+  variant?: "primary";
   children?: React.ReactNode;
 }
 
 const H1 = styled.h1<IProps>`
   margin: 0;
-  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
-  font-family: 'Caveat Brush', cursive;
+  color: ${props => (props.variant === "primary" ? "tomato" : "black")};
+  font-family: "Caveat Brush", cursive;
   font-size: 28px;
   text-align: center;
 `;
 
 const H2 = styled.h2<IProps>`
   margin: 0;
-  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
-  font-family: 'Caveat Brush', cursive;
+  color: ${props => (props.variant === "primary" ? "tomato" : "black")};
+  font-family: "Caveat Brush", cursive;
   font-size: 20px;
   text-align: center;
 `;
 
 const H3 = styled.h3<IProps>`
   margin: 0;
-  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
-  font-family: 'Ubuntu Mono', monospace;
+  color: ${props => (props.variant === "primary" ? "tomato" : "black")};
+  font-family: "Ubuntu Mono", monospace;
   font-size: 16px;
   font-weight: 400;
   text-align: left;
@@ -35,8 +35,8 @@ const H3 = styled.h3<IProps>`
 
 const H4 = styled.h3<IProps>`
   margin: 0;
-  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
-  font-family: 'Ubuntu Mono', monospace;
+  color: ${props => (props.variant === "primary" ? "tomato" : "black")};
+  font-family: "Ubuntu Mono", monospace;
   font-size: 14px;
   font-weight: 400;
   text-align: left;
@@ -45,8 +45,8 @@ const H4 = styled.h3<IProps>`
 
 const H5 = styled.h3<IProps>`
   margin: 0;
-  color: ${(props) => (props.variant === 'primary' ? 'tomato' : 'black')};
-  font-family: 'Ubuntu Mono', monospace;
+  color: ${props => (props.variant === "primary" ? "tomato" : "black")};
+  font-family: "Ubuntu Mono", monospace;
   font-size: 12px;
   font-weight: 400;
   text-align: left;

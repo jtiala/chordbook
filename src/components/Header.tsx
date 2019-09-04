@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import * as React from "react";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
-import { IBreadcrumb } from '../types';
+import { IBreadcrumb } from "../types";
 
-const activeClassName = 'active';
+const activeClassName = "active";
 
 interface IProps {
   breadcrumbs?: IBreadcrumb[];
@@ -32,7 +32,7 @@ const LinkList = styled.ul`
     margin: 0 10px 0 0;
 
     :after {
-      content: ' ';
+      content: " ";
     }
   }
 
@@ -41,13 +41,13 @@ const LinkList = styled.ul`
 
     :before {
       color: dimgray;
-      content: '/ ';
+      content: "/ ";
     }
   }
 `;
 
 const StyledNavLink = styled(NavLink).attrs({
-  activeClassName,
+  activeClassName
 })`
   color: black;
   text-decoration: none;
@@ -82,10 +82,14 @@ const Header: React.SFC<IProps> = ({ breadcrumbs }) => {
       if (item.link) {
         breadcrumbLinks.push(
           <li key={`breadcrumb-${i}`}>
-            <StyledNavLink to={item.link} activeClassName={activeClassName} exact={true}>
+            <StyledNavLink
+              to={item.link}
+              activeClassName={activeClassName}
+              exact={true}
+            >
               {item.title}
             </StyledNavLink>
-          </li>,
+          </li>
         );
       } else {
         breadcrumbLinks.push(<span>{item.title}</span>);
@@ -94,7 +98,7 @@ const Header: React.SFC<IProps> = ({ breadcrumbs }) => {
   }
 
   const homeLink = (
-    <li key={'breadcrumb-home'}>
+    <li key={"breadcrumb-home"}>
       <StyledNavLink to="/" activeClassName={activeClassName} exact={true}>
         Chordbook
       </StyledNavLink>
