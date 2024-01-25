@@ -1,6 +1,6 @@
 # 🎵 Chordbook
 
-[Chordbook][chordbook] is a progressive web app (PWA) for viewing and editing chordsheets.
+Chordbook is a progressive web app (PWA) for viewing and editing chordsheets.
 
 ## Pre-requisites
 
@@ -61,6 +61,5 @@ This project is open source software licensed under the MIT license. For more in
 [git]: https://git-scm.com/
 [node]: https://nodejs.org/
 [issues]: https://github.com/jtiala/chordbook/issues
-[chordbook]: https://chordbook.jtia.la
 [firebase]: https://console.firebase.google.com/
 [license]: https://github.com/jtiala/chordbook/blob/master/LICENSE
