@@ -1,11 +1,5 @@
 # 🎵 Chordbook
 
-[![Actions Status][actions-status-badge]][actions-status]
-[![Dependencies Status][dependencies-status-badge]][dependencies-status]
-[![Dev Dependencies Status][devdependencies-status-badge]][devdependencies-status]
-[![PRs Welcome][prs-badge]][contributing]
-[![License][license-badge]](license)
-
 [Chordbook][chordbook] is a progressive web app (PWA) for viewing and editing chordsheets.
 
 ## Pre-requisites
@@ -64,18 +58,9 @@ Contributions are most welcome! If you would like to contribute to this project,
 
 This project is open source software licensed under the MIT license. For more information see [LICENSE][license].
 
-[actions-status]: https://github.com/jtiala/chordbook/actions
-[actions-status-badge]: https://github.com/jtiala/chordbook/workflows/CI/CD/badge.svg
-[dependencies-status]: https://david-dm.org/jtiala/chordbook
-[dependencies-status-badge]: https://img.shields.io/david/jtiala/chordbook.svg
-[devdependencies-status]: https://david-dm.org/jtiala/chordbook?type=dev
-[devdependencies-status-badge]: https://img.shields.io/david/dev/jtiala/chordbook.svg
-[contributing]: #contributing
-[prs-badge]: https://img.shields.io/badge/prs-welcome-blue.svg
-[license]: https://github.com/jtiala/chordbook/blob/master/LICENSE
-[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [git]: https://git-scm.com/
 [node]: https://nodejs.org/
 [issues]: https://github.com/jtiala/chordbook/issues
 [chordbook]: https://chordbook.jtia.la
 [firebase]: https://console.firebase.google.com/
+[license]: https://github.com/jtiala/chordbook/blob/master/LICENSE
